@@ -7,6 +7,9 @@ using System.Data.SqlClient;
 
 namespace HangzhouPeiXun.DAL
 {
+    /// <summary>
+    /// 登录
+    /// </summary>
     public class Login
     {
         private Login mylogin = new Login();
