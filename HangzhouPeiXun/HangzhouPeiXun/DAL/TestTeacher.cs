@@ -5,6 +5,9 @@ using System.Web;
 
 namespace HangzhouPeiXun.DAL
 {
+    /// <summary>
+    /// 测试教师端DAL
+    /// </summary>
     public class TestTeacher
     {
         private TestTeacher mytestteacher = new TestTeacher();

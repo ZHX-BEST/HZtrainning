@@ -6,7 +6,7 @@ using System.Web;
 namespace HangzhouPeiXun.DAL
 {
     /// <summary>
-    /// 典型行业曲线
+    /// 典型行业曲线DAL
     /// </summary>
     public class Examples
     {

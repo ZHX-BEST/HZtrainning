@@ -6,7 +6,7 @@ using System.Web;
 namespace HangzhouPeiXun.DAL
 {
     /// <summary>
-    /// 典型行业曲线教师端接口
+    /// 典型行业曲线教师端接口DAL
     /// </summary>
     public class ExamplesTeacher
     {
