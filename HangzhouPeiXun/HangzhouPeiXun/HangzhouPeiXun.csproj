@@ -162,6 +162,8 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\ExamplesController.cs" />
+    <Compile Include="Controllers\ExamplesTeacherController.cs" />
     <Compile Include="Controllers\ExerciseController.cs" />
     <Compile Include="Controllers\ExerciseTeacherController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -169,6 +171,8 @@
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\TestTeacherController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="DAL\Examples.cs" />
+    <Compile Include="DAL\ExamplesTeacher.cs" />
     <Compile Include="DAL\Exercise.cs" />
     <Compile Include="DAL\ExerciseTeacher.cs" />
     <Compile Include="DAL\Login.cs" />
