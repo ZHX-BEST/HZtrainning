@@ -10,8 +10,8 @@ namespace HangzhouPeiXun.DAL
     /// </summary>
     public class ExerciseTeacher
     {
-        private ExerciseTeacher myexerciseteacher = new ExerciseTeacher();
-        public ExerciseTeacher MyExerciseTeacher { get { return myexerciseteacher; } }
+        private static  ExerciseTeacher myexerciseteacher = new ExerciseTeacher();
+        public static ExerciseTeacher MyExerciseTeacher { get { return myexerciseteacher; } }
         public ExerciseTeacher() { }
     }
 }

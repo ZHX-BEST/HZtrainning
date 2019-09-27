@@ -10,8 +10,8 @@ namespace HangzhouPeiXun.DAL
     /// </summary>
     public class TestTeacher
     {
-        private TestTeacher mytestteacher = new TestTeacher();
-        public TestTeacher MyTestTeacher { get { return mytestteacher; } }
+        private static TestTeacher mytestteacher = new TestTeacher();
+        public static TestTeacher MyTestTeacher { get { return mytestteacher; } }
         public TestTeacher() { }
     }
 }

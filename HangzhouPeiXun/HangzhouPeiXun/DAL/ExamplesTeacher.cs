@@ -10,8 +10,8 @@ namespace HangzhouPeiXun.DAL
     /// </summary>
     public class ExamplesTeacher
     {
-        private ExamplesTeacher myexampleteacher = new ExamplesTeacher();
-        public ExamplesTeacher MyExampleTeacher { get { return myexampleteacher; } }
+        private static ExamplesTeacher myexampleteacher = new ExamplesTeacher();
+        public static ExamplesTeacher MyExampleTeacher { get { return myexampleteacher; } }
         public ExamplesTeacher() { }
     }
 }

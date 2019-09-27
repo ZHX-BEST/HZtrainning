@@ -167,7 +167,7 @@
     <Compile Include="Controllers\ExerciseController.cs" />
     <Compile Include="Controllers\ExerciseTeacherController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\SLoginController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\TestTeacherController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -175,7 +175,7 @@
     <Compile Include="DAL\ExamplesTeacher.cs" />
     <Compile Include="DAL\Exercise.cs" />
     <Compile Include="DAL\ExerciseTeacher.cs" />
-    <Compile Include="DAL\Login.cs" />
+    <Compile Include="DAL\SLogin.cs" />
     <Compile Include="DAL\Test.cs" />
     <Compile Include="DAL\TestTeacher.cs" />
     <Compile Include="Global.asax.cs">

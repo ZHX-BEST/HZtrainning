@@ -10,8 +10,8 @@ namespace HangzhouPeiXun.DAL
     /// </summary>
     public class Test
     {
-        private Test mytest = new Test();
-        public Test MyTest { get { return mytest; } }
+        private static Test mytest = new Test();
+        public static Test MyTest { get { return mytest; } }
         public Test() { }
     }
 }
