@@ -17,59 +17,21 @@ namespace HangzhouPeiXun.DAL
         public Examples() { }
 
         #region 获取正常数据
-        public DataTable getNormalData(string User_type, string option)
-        {
-            string table = "";
-            string table_id = "";
-            switch (option)
-            {
-                case "I":
-                    table = "TB_I";
-                    table_id = "TB_I.I_DataID";
-                    break;
-                case "U":
-                    table = "TB_U";
-                    table_id = "TB_U.U_DataID";
-                    break;
-                case "W":
-                    table = "TB_W";
-                    table_id = "TB_W.W_DataID";
-                    break;
-            }
-            DataTable dt = new DataTable();
-            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@type", User_type) };
-            // string sqllogin = "select * from TB_I where I_DataID=(select Data_UpperID from TB_Data where Data_UserType=@type and Data_NorID=1)";
-            string sqllogin = "select "+ table +".* from "+ table +" inner join TB_Data on "+ table_id + "=TB_Data.Data_UpperID where Data_UserType=@type and Data_NorID=1";
-            dt = new Helper.SQLHelper().ExcuteQuery(sqllogin, paras, CommandType.Text);
+        public DataTable getNormalData(string NorID, string option)
+        {           
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@type", User_type),new SqlParameter("@NorID", NorID) };
+            string sql = "select * from TB_"+ option +" where "+ option +"_DataID = @NorID";
+            DataTable dt = new Helper.SQLHelper().ExcuteQuery(sqllogin, paras, CommandType.Text);
             return dt;
         }
         #endregion
 
         #region 获取异常数据
-        public DataTable getAbnormalData(string User_type, string option)
-        {
-            string table = "";
-            string table_id = "";
-            switch (option)
-            {
-                case "I":
-                    table = "TB_I";
-                    table_id = "TB_I.I_DataID";
-                    break;
-                case "U":
-                    table = "TB_U";
-                    table_id = "TB_U.U_DataID";
-                    break;
-                case "W":
-                    table = "TB_W";
-                    table_id = "TB_W.W_DataID";
-                    break;
-            }
-            DataTable dt = new DataTable();
-            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@type", User_type) };
-            // string sqllogin = "select * from TB_I where I_DataID=(select Data_UpperID from TB_Data where Data_UserType=@type and Data_NorID=1)";
-            string sqllogin = "select " + table + ".* from " + table + " inner join TB_Data on " + table_id + "=TB_Data.Data_UpperID where Data_UserType=@type and Data_AbID=1";
-            dt = new Helper.SQLHelper().ExcuteQuery(sqllogin, paras, CommandType.Text);
+        public DataTable getAbnormalData(string AbID, string option)
+        {            
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@type", User_type),new SqlParameter("@AbID", AbID) };
+            string sql = "select * from TB_"+ option +" where "+ option +"_DataID = @AbID";
+            DataTable dt = new Helper.SQLHelper().ExcuteQuery(sqllogin, paras, CommandType.Text);
             return dt;
         }
         #endregion

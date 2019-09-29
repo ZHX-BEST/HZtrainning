@@ -10,20 +10,28 @@ namespace HangzhouPeiXun.Controllers
 {
     public class ExamplesController : ApiController
     {
-        public string getNormalData(string User_type, string option)
+        //获取正常数据曲线接口
+        public string getNormalData(string User_type, string option)//注option必须为I，U，W
         {
+            if(option!="I"&&option!="U"&&option!="W")
+                return "FalseOption";//获取选项错误
             string res;
-            DataTable dt = new DataTable();
-            dt = new DAL.Examples().getNormalData(User_type, option);
+            string UpperID = Server.DataSet.MyData.SetNorData(User_type);//获取UpperID，生成数据
+            string NorID = UpperID+"_0";
+            DataTable dt = DAL.Examples.MyExamples.getNormalData(NorID, option);
             res = new Helper.jstodt().ToJson(dt);
             return res;
         }
 
-        public string getAbnormalData(string User_type, string option)
+        //获取异常数据曲线接口
+        public string getAbnormalData(string UpperID,string AbType, string AbTime,string option)
         {
+            if(option!="I"&&option!="U"&&option!="W")
+                return "FalseOption";//获取选项错误
             string res;
-            DataTable dt = new DataTable();
-            dt = new DAL.Examples().getAbnormalData(User_type, option);
+            string flag = Server.DataSet.MyData.SetAbData(UpperID,AbTime,AbType);//设置异常
+            string AbID = UpperID+"_1";
+            DataTable dt = DAL.Examples.MyExamples.getAbnormalData(AbID, option);
             res = new Helper.jstodt().ToJson(dt);
             return res;
         }
