@@ -89,7 +89,6 @@ C:\Users\shen\Documents\GitHub\HZTraining\HangzhouPeiXun\HangzhouPeiXun\bin\zh-H
 C:\Users\shen\Documents\GitHub\HZTraining\HangzhouPeiXun\HangzhouPeiXun\bin\zh-Hans\System.Web.WebPages.resources.dll
 C:\Users\shen\Documents\GitHub\HZTraining\HangzhouPeiXun\HangzhouPeiXun\bin\zh-Hans\System.Web.WebPages.Deployment.resources.dll
 C:\Users\shen\Documents\GitHub\HZTraining\HangzhouPeiXun\HangzhouPeiXun\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll
-C:\Users\shen\Documents\GitHub\HZTraining\HangzhouPeiXun\HangzhouPeiXun\obj\Debug\HangzhouPeiXun.csprojAssemblyReference.cache
 C:\Users\shen\Documents\GitHub\HZTraining\HangzhouPeiXun\HangzhouPeiXun\obj\Debug\HangzhouPeiXun.csproj.CoreCompileInputs.cache
 C:\Users\shen\Documents\GitHub\HZTraining\HangzhouPeiXun\HangzhouPeiXun\obj\Debug\HangzhouPeiXun.csproj.CopyComplete
 C:\Users\shen\Documents\GitHub\HZTraining\HangzhouPeiXun\HangzhouPeiXun\obj\Debug\HangzhouPeiXun.dll

@@ -171,6 +171,8 @@
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\TestTeacherController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="DAL\CreateData.cs" />
+    <Compile Include="DAL\DataSet.cs" />
     <Compile Include="DAL\Examples.cs" />
     <Compile Include="DAL\ExamplesTeacher.cs" />
     <Compile Include="DAL\Exercise.cs" />
@@ -184,6 +186,8 @@
     <Compile Include="Helper\jstodt.cs" />
     <Compile Include="Helper\SqlHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Server\CreateData.cs" />
+    <Compile Include="Server\DataSet.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />

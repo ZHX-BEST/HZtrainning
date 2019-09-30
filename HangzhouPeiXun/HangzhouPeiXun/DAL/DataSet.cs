@@ -25,7 +25,7 @@ namespace HangzhouPeiXun.DAL
             try
             {
                 SqlParameter[] paras = { new SqlParameter("@UserType", UserType)};
-                UpperID =  new Helper.SQLHelper().ExcuteNonQuery(sql, paras, CommandType.StoredProcedure);//使用存储过程
+                DataTable dt =  new Helper.SQLHelper().ExcuteQuery(sql, paras, CommandType.StoredProcedure);//使用存储过程
             }catch{
                 return res;//报错返回False
             }
