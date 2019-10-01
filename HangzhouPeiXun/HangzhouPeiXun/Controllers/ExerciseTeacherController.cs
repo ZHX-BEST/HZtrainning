@@ -35,5 +35,20 @@ namespace HangzhouPeiXun.Controllers
             res = new Helper.jstodt().ToJson(dt);
             return res;
         }
+
+        //出题
+        public string postExercise(string upperID, string userID)
+        {
+            string res = DAL.ExerciseTeacher.MyExerciseTeacher.postExercise(upperID, upperID);
+            return res;
+        }
+
+        //获取课堂测试结果
+        public string getresult(string exeID)
+        {
+            DataTable dt = DAL.ExerciseTeacher.MyExerciseTeacher.getresult(exeID);
+            string res = new Helper.jstodt().ToJson(dt);
+            return res;
+        }
     }
 }
