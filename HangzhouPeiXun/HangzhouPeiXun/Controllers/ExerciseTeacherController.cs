@@ -14,7 +14,7 @@ namespace HangzhouPeiXun.Controllers
         //出题
         public string postExercise(string upperID, string userID)
         {
-            string res = DAL.ExerciseTeacher.MyExerciseTeacher.postExercise(upperID, upperID);
+            string res = DAL.ExerciseTeacher.MyExerciseTeacher.postExercise(upperID, userID);
             return res;
         }
 

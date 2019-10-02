@@ -20,7 +20,7 @@ namespace HangzhouPeiXun.DAL
         {
             string res = "False";
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@upperID", upperID), new SqlParameter("@userID", userID) };
-            string sql = "insert into TB_Exercise (Exe_DataID , Exe_UserID) values (@upperID,@userID)";
+            string sql = "insert into TB_Exercise (Exe_DataID , Exe_UserID) values (@upperID, @userID)";
             int flag = new Helper.SQLHelper().ExecuteNonQuery(sql, paras, CommandType.Text);
             if (flag > 0)
                 res = "True";

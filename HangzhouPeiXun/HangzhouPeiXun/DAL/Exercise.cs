@@ -20,7 +20,7 @@ namespace HangzhouPeiXun.DAL
         public DataTable getExercise(string exeID, string option)
         {
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@exeID", exeID) };
-            string sql = "SELECT TB_" + option + ".* FROM (TB_Exercise INNER JOIN TB_Data ON TB_Exercise.Exe_ID=TB_Data.Data_UpperID) INNER JOIN TB_" + option + " ON TB_Data.Data_AbID=TB_" + option + "." + option + "_DataID WHERE Exe_ID = @exeID";
+            string sql = "SELECT TB_" + option + ".* FROM (TB_Exercise INNER JOIN TB_Data ON TB_Exercise.Exe_DataID=TB_Data.Data_UpperID) INNER JOIN TB_" + option + " ON TB_Data.Data_AbID=TB_" + option + "." + option + "_DataID WHERE Exe_ID = @exeID";
             DataTable dt = new Helper.SQLHelper().ExcuteQuery(sql, paras, CommandType.Text);
             return dt;
         }
