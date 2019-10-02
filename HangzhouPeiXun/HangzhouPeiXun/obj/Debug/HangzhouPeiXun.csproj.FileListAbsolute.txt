@@ -93,3 +93,4 @@ C:\Users\shen\Documents\GitHub\HZTraining\HangzhouPeiXun\HangzhouPeiXun\obj\Debu
 C:\Users\shen\Documents\GitHub\HZTraining\HangzhouPeiXun\HangzhouPeiXun\obj\Debug\HangzhouPeiXun.csproj.CopyComplete
 C:\Users\shen\Documents\GitHub\HZTraining\HangzhouPeiXun\HangzhouPeiXun\obj\Debug\HangzhouPeiXun.dll
 C:\Users\shen\Documents\GitHub\HZTraining\HangzhouPeiXun\HangzhouPeiXun\obj\Debug\HangzhouPeiXun.pdb
+C:\Users\shen\Documents\GitHub\HZTraining\HangzhouPeiXun\HangzhouPeiXun\obj\Debug\HangzhouPeiXun.csprojAssemblyReference.cache
