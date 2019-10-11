@@ -11,10 +11,10 @@ namespace HangzhouPeiXun.Controllers
     public class TestController : ApiController
     {
         //获取试卷信息
-        public string getTestInfo(string textID)
+        public string getTestInfo(string userID)
         {
             string res;
-            DataTable dt = DAL.Test.MyTest.getTestInfo(textID);
+            DataTable dt = DAL.Test.MyTest.getTestInfo(userID);
             res = new Helper.jstodt().ToJson(dt);
             return res;
         }

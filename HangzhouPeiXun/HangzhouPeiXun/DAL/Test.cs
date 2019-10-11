@@ -17,10 +17,10 @@ namespace HangzhouPeiXun.DAL
         public Test() { }
 
         #region 获取试卷信息
-        public DataTable getTestInfo(string testID)
+        public DataTable getTestInfo(string userID)
         {
-            SqlParameter[] para = new SqlParameter[] { new SqlParameter("@testID", testID) };
-            string sql = "select * from TB_Test where Test_ID = @testID";
+            SqlParameter[] para = new SqlParameter[] { new SqlParameter("@userID", userID) };
+            string sql = "SELECT TB_Test.* FROM TB_Test INNER JOIN TB_User ON TB_Test.Test_User=TB_User.User_TeacherID WHERE User_ID=@userID";
             DataTable dt = new Helper.SQLHelper().ExcuteQuery(sql, para, CommandType.Text);
             return dt;
         }

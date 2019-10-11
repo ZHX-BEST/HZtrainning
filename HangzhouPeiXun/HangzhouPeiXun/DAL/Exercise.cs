@@ -16,6 +16,16 @@ namespace HangzhouPeiXun.DAL
         public static Exercise MyExercise { get { return myexercise; } }
         public Exercise() { }
 
+        #region 获取练习题ID
+        public DataTable getExerciseID(string userID)
+        {
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userID", userID) };
+            string sql = "SELECT Exe_ID FROM TB_Exercise INNER JOIN TB_User ON TB_Exercise.Exe_UserID=TB_User.User_TeacherID WHERE User_ID=@userID";
+            DataTable dt = new Helper.SQLHelper().ExcuteQuery(sql, paras, CommandType.Text);
+            return dt;
+        }
+        #endregion
+
         #region 获取练习题
         public DataTable getExercise(string exeID, string option)
         {

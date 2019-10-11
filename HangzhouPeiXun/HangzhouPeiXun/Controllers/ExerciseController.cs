@@ -11,6 +11,15 @@ namespace HangzhouPeiXun.Controllers
     public class ExerciseController : ApiController
     {
 
+        //获取试题数据ID
+        public string getExerciseID(string userID)
+        {
+            string res;
+            DataTable dt = DAL.Exercise.MyExercise.getExerciseID(userID);
+            res = new Helper.jstodt().ToJson(dt);
+            return res;
+        }
+
         //获取试题数据
         public string getExercise(string exeID, string option)//注option必须为I，U，W
         {
