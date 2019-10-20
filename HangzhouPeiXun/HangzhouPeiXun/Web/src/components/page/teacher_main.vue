@@ -6,19 +6,43 @@
         <el-button class="btns" v-for="(btn,bindex) in term.btns" :key="bindex" @click="choose(index,bindex)">{{btn}}</el-button>
       </div>
     </div>
+
     <div class="right">
       <div class="btn" @click="show">出题</div>
-      <p class="tle">正常曲线：</p>
-      <div id="tu1">
-        <!-- <div id="ctable1" style="width: 100%;height: 90%;background-color: #67C23A"></div>
-      <div class="mytitle">正常曲线</div> --></div>
-      <p class="tle">异常曲线：</p>
-      <div id="tu2">
-        <!-- <div id="ctable2" style="width: 100%;height: 90%;background-color:#E6A23C"></div>
-      <div class="mytitle">异常曲线</div> -->
+
+      <div class="showT">
+        <p class="tle" style="color:green">正常曲线：</p>
+        <el-tabs v-model="activeName1" @tab-click="handleClick(1)">
+          <el-tab-pane label="电压" name="first">
+            <div id="normal_voltage" class="chart" style="height:100vw;width:70vw;"></div>
+          </el-tab-pane>
+          <el-tab-pane label="电流" name="second">
+            <div id="normal_current" class="chart" style="height:100vw;width:70vw;"></div>
+          </el-tab-pane>
+          <el-tab-pane label="功率" name="third">
+            <div id="normal_power" class="chart" style="height:100vw;width:70vw;"></div>
+          </el-tab-pane>
+        </el-tabs>
       </div>
+
+      <div class="showT">
+        <p class="tle" style="color:red">异常曲线：</p>
+        <el-tabs v-model="activeName2" @tab-click="handleClick(2)">
+          <el-tab-pane label="电压" name="first">
+            <div id="abnormal_voltage" class="chart"></div>
+          </el-tab-pane>
+          <el-tab-pane label="电流" name="second">
+            <div id="abnormal_current" class="chart"></div>
+          </el-tab-pane>
+          <el-tab-pane label="功率" name="third">
+            <div id="abnormal_power" class="chart"></div>
+          </el-tab-pane>
+        </el-tabs>
+      </div>
+
+      <ErrorC v-if="flag" class="errorC"></ErrorC>
     </div>
-    <ErrorC v-if="flag" class="errorC"></ErrorC>
+
   </div>
 </template>
 <script>
@@ -29,6 +53,8 @@ export default {
   },
   data() {
     return {
+      activeName1: "first",
+      activeName2: "first",
       flag: false,
       left_navs: [
         {
@@ -46,22 +72,48 @@ export default {
       ],
       choice: [9, 9, 9],
       buttons: [[], [], []],
-      myChart1:null,
-      myChart2:null,
+      myChart1_1: null,
+      myChart1_2: null,
+      myChart1_3: null,
+      myChart2_1: null,
+      myChart2_2: null,
+      myChart2_3: null
     };
   },
   methods: {
+    handleClick(index, tab, event) {
+      console.log(index);
+      switch (index) {
+        case 1:
+          console.log(index);
+          // this.closeTu1();
+          this.showTu1();
+          break;
+        case 2:
+          console.log(index);
+          this.closeTu2();
+          this.showTu2();
+          break;
+      }
+    },
     show() {
       this.flag = true;
     },
-    close(){
-      this.flag=false;
+    close() {
+      this.flag = false;
+    },
+    initEchart(){
+      this.myChart1_1 = echarts.init(document.getElementById("normal_voltage"));
+      this.myChart1_2 = echarts.init(document.getElementById("normal_current"));
+      this.myChart1_3 = echarts.init(document.getElementById("normal_power"));
     },
     showTu1() {
-      this.myChart1 = echarts.init(document.getElementById("tu1"));
+      // this.myChart1_1 = echarts.init(document.getElementById("normal_voltage"));
+      // this.myChart1_2 = echarts.init(document.getElementById("normal_current"));
+      // this.myChart1_3 = echarts.init(document.getElementById("normal_power"));
       var option1 = {
         title: {
-          text: "正常曲线",
+          // text: "正常曲线",
           left: "center"
         },
         tooltip: {},
@@ -77,13 +129,17 @@ export default {
           }
         ]
       };
-      this.myChart1.setOption(option1);
+      this.myChart1_1.setOption(option1);
+      this.myChart1_2.setOption(option1);
+      this.myChart1_3.setOption(option1);
     },
     showTu2() {
-      this.myChart2 = echarts.init(document.getElementById("tu2"));
+      this.myChart2_1 = echarts.init(document.getElementById("abnormal_voltage"));
+      this.myChart2_2 = echarts.init(document.getElementById("abnormal_current"));
+      this.myChart2_3 = echarts.init(document.getElementById("abnormal_power"));
       var option2 = {
         title: {
-          text: "异常曲线",
+          // text: "异常曲线",
           left: "center"
         },
         tooltip: {},
@@ -99,14 +155,20 @@ export default {
           }
         ]
       };
-      this.myChart2.setOption(option2);
+      this.myChart2_1.setOption(option2);
+      this.myChart2_2.setOption(option2);
+      this.myChart2_3.setOption(option2);
     },
 
     closeTu1() {
-      this.myChart1.clear();
+      this.myChart1_1.dispose();
+      this.myChart1_2.dispose();
+      this.myChart1_3.dispose();
     },
     closeTu2() {
-      this.myChart2.clear();
+      this.myChart2_1.dispose();
+      this.myChart2_2.dispose();
+      this.myChart2_3.dispose();
     },
     choose(index, bindex) {
       //用choice记录选择的按钮 如果没有选择就是9
@@ -116,8 +178,8 @@ export default {
             this.buttons[0]
               .eq(this.choice[0])
               .css("background-color", "#006869");
-              this.closeTu1();
-          this.closeTu2();
+            this.closeTu1();
+            this.closeTu2();
           }
           if (this.choice[1] != 9) {
             this.buttons[1]
@@ -129,7 +191,7 @@ export default {
               .eq(this.choice[2])
               .css("background-color", "#006869");
           }
-          
+
           this.choice[0] = bindex;
           this.buttons[0].eq(this.choice[0]).css("background-color", "#075176");
           break;
@@ -139,15 +201,15 @@ export default {
               this.buttons[1]
                 .eq(this.choice[1])
                 .css("background-color", "#006869");
-                this.closeTu1();
-            this.closeTu2();
+              this.closeTu1();
+              this.closeTu2();
             }
             if (this.choice[2] != 9) {
               this.buttons[2]
                 .eq(this.choice[2])
                 .css("background-color", "#006869");
             }
-            
+
             this.showTu1();
             this.choice[1] = bindex;
             this.buttons[1]
@@ -162,34 +224,34 @@ export default {
               this.buttons[2]
                 .eq(this.choice[2])
                 .css("background-color", "#006869");
-                this.closeTu2();
+              this.closeTu2();
             }
-              this.showTu2();
+            this.showTu2();
             this.choice[2] = bindex;
             this.buttons[2]
               .eq(this.choice[2])
               .css("background-color", "#075176");
           }
-          
 
-        
           break;
       }
     }
   },
   mounted() {
-    $(".left_nav")
-      .eq(0)
-      .css(
-        "height",
-        $(".main")
-          .eq(0)
-          .css("height")
-      );
+    $(".chart").css(
+      "width",
+      $(".showT")
+        .eq(0)
+        .css("width") * 0.8
+    );
+    // // console.log($(".chart").css("height"));
+    // // console.log($(".showT").css("height"));
+    $(".chart").css("height", "300px");
     let left_one = $(".left_one");
     for (let i = 0; i < 3; i++) {
       this.buttons[i] = left_one.eq(i).find(".btns");
     }
+    this.initEchart()
     console.log(this.buttons);
     // // 生成echart表格;
     // var myChart1 = echarts.init(document.getElementById("tu1"));
@@ -238,6 +300,7 @@ export default {
 <style scoped>
 .main {
   overflow: hidden;
+  height: 100%;
 }
 .left_nav {
   float: left;
@@ -264,6 +327,7 @@ export default {
   float: left;
   overflow: hidden;
   width: 73%;
+  height: 100%;
 }
 .btn {
   height: 40px;
@@ -273,7 +337,8 @@ export default {
   width: 80px;
   text-align: center;
   color: white;
-  float: right;
+  position: absolute;
+  right: 20px;
   z-index: 10;
   margin: 8px;
   cursor: pointer;
@@ -284,17 +349,17 @@ export default {
   color: white;
 }
 .tle {
-  font-size: 1.3em;
+  font-size: 1.2em;
   text-align: left;
-  margin-left: 10px;
+  position: absolute;
+  margin-left: 37%;
 }
-#tu1 {
-  min-width: 800px;
-  height: 40vh;
+.showT {
+  height: 50%;
 }
-#tu2 {
-  min-width: 800px;
-  height: 40vh;
+.chart {
+  /* width: 100px;
+  height: 90px; */
 }
 .errorC {
   /* display: none; */

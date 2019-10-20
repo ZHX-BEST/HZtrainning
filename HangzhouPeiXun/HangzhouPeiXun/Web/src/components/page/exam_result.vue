@@ -11,7 +11,7 @@
                     </el-option>
                 </el-select>
             </div>
-            <el-table :data="ReportData" :cell-style="{padding:'7px'}">
+            <el-table :data="ReportData" :cell-style="{padding:'1.5vh'}" >
                 <el-table-column :prop="Reports[0].prop" :label="Reports[0].label"></el-table-column>
                 <el-table-column :prop="Reports[1].prop" :label="Reports[1].label"></el-table-column>
                 <el-table-column :prop="Reports[2].prop" :label="Reports[2].label"></el-table-column>
@@ -241,6 +241,8 @@ p{
    /* height: 92%; */
    /* background-color: #d3d3d3;  */
    /* background-color: rgb(0,11,31);   */
+   overflow: hidden;
+   /* height: 90%; */
 }
 .School_report {
   width: 66%;
@@ -250,7 +252,7 @@ p{
   background-color: #e7eeed; 
   /* background-color: rgb(34,39,59); */
   /* margin-top: 10px; */
-
+  height: 100%;
 }
 .right {
   width: 28%;
