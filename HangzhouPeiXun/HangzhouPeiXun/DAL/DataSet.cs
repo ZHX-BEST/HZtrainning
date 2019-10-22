@@ -44,8 +44,26 @@ namespace HangzhouPeiXun.DAL
                 default:
                     break;
             }
+            data = new Helper.jstodt().ToJson(dtI);//转换成json字符串
             return data;
         }
+        #endregion
+
+        #region 数据拟合
+        public bool abnoral(string ABType)//异常数据拟合分项处理
+        {
+            bool res = false;           
+            switch (ABType)
+            {
+                case "123":
+                    res = true;
+                    break;
+                default:
+                    break;
+            }            
+            return res;
+        }
+
         #endregion
     }
 }
