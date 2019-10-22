@@ -33,5 +33,19 @@ namespace HangzhouPeiXun.DAL
                 UpperID = res;
             return UpperID;
         }
+
+        #region 数据生成
+        public string create96I(string UserType)
+        {
+            string data = "";
+            DataTable dtI = new DataTable();
+            switch (UserType)
+            {
+                default:
+                    break;
+            }
+            return data;
+        }
+        #endregion
     }
 }
