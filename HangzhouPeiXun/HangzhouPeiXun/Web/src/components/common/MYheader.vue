@@ -70,7 +70,7 @@ export default {
 
 <style>
 .top_nav{
- height: 80px;
+ height: 60px;
  text-align: center;
  background-color: #006869;
  line-height: 100%;

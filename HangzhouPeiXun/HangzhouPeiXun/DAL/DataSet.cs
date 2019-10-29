@@ -35,6 +35,7 @@ namespace HangzhouPeiXun.DAL
             return UpperID;
         }
 
+<<<<<<< HEAD
         //异常数据叠加接口
         public DataTable SetAbData(string UpperID, string AbTime, string AbType)
         {
@@ -44,5 +45,38 @@ namespace HangzhouPeiXun.DAL
             DataTable dt = new Helper.SQLHelper().ExcuteQuery(sql,paras,CommandType.Text);
             return dt;
         }
+=======
+        #region 数据生成
+        public string create96I(string UserType)
+        {
+            string data = "";
+            DataTable dtI = new DataTable();
+            switch (UserType)
+            {
+                default:
+                    break;
+            }
+            data = new Helper.jstodt().ToJson(dtI);//转换成json字符串
+            return data;
+        }
+        #endregion
+
+        #region 数据拟合
+        public bool abnoral(string ABType)//异常数据拟合分项处理
+        {
+            bool res = false;           
+            switch (ABType)
+            {
+                case "123":
+                    res = true;
+                    break;
+                default:
+                    break;
+            }            
+            return res;
+        }
+
+        #endregion
+>>>>>>> fa79032e2ea852b6bc9fabbe4e05617e84e4d6fb
     }
 }
