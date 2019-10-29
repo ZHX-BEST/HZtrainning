@@ -26,12 +26,23 @@ namespace HangzhouPeiXun.DAL
             {
                 SqlParameter[] paras = { new SqlParameter("@UserType", UserType)};
                 DataTable dt =  new Helper.SQLHelper().ExcuteQuery(sql, paras, CommandType.StoredProcedure);//使用存储过程
+                res = dt.Rows[0]["Data_UpperID"].ToString();
             }catch{
                 return res;//报错返回False
             }
             if(UpperID == "")//若为获取UpperID返回False
                 UpperID = res;
             return UpperID;
+        }
+
+        //异常数据叠加接口
+        public DataTable SetAbData(string UpperID, string AbTime, string AbType)
+        {
+           //TODO添加异常数据
+            SqlParameter[] paras = { new SqlParameter("@UpperID", UpperID+"_1") };
+            string sql = "select * from TB_I where I_DataID = @UpperID";
+            DataTable dt = new Helper.SQLHelper().ExcuteQuery(sql,paras,CommandType.Text);
+            return dt;
         }
     }
 }

@@ -41,7 +41,38 @@ namespace HangzhouPeiXun.Server
         {
             string Data = "123";//TODO
             return Data;
-        } 
+        }
+        #endregion
+
+
+        public string CreateabNorData(string abNorID)
+        {
+            #region 生成曲线数据
+            string DataI = CreateI();
+            string DataU = CreateU();
+            string DataW = CreateW();
+            #endregion
+            
+            string flag = DAL.CreateData.MyCreate.InsertIUW(abNorID, DataI, DataU, DataW);
+            return flag;
+        }
+
+        #region 生成曲线数据
+        private string CreateI()
+        {
+            string Data = "123";//TODO
+            return Data;
+        }
+        private string CreateU()
+        {
+            string Data = "123";//TODO
+            return Data;
+        }
+        private string CreateW()
+        {
+            string Data = "123";//TODO
+            return Data;
+        }
         #endregion
     }
 }

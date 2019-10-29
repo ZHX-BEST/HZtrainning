@@ -15,7 +15,7 @@ namespace HangzhouPeiXun.Controllers
             string res = "False";
             DataTable dt = new DAL.SLogin().getlogin(id, pwd);
             if (dt.Rows.Count != 0)
-                res = "Ture";
+                res = "True";
             return res;
         }
 

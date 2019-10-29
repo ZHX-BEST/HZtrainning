@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data;
+using System.Data.SqlClient;
 
 
 namespace HangzhouPeiXun.Server
@@ -27,8 +29,9 @@ namespace HangzhouPeiXun.Server
         //异常数据叠加接口
         public string SetAbData(string UpperID,string AbTime,string AbType)
         {
-        	string flag="";
-
+            string abNorID = UpperID + "_1";//NorID = UpperID+_0; AbID = UpperID + _1;
+            string flag = Server.CreateData.MyCreate.CreateabNorData(abNorID);//生成异常 I，U，W正常数据
+            DAL.DataSet.MyData.SetAbData(UpperID,AbTime,AbType);
         	return flag;
         }
     }
