@@ -35,7 +35,7 @@ namespace HangzhouPeiXun.DAL
             return UpperID;
         }
 
-<<<<<<< HEAD
+
         //异常数据叠加接口
         public DataTable SetAbData(string UpperID, string AbTime, string AbType)
         {
@@ -45,7 +45,7 @@ namespace HangzhouPeiXun.DAL
             DataTable dt = new Helper.SQLHelper().ExcuteQuery(sql,paras,CommandType.Text);
             return dt;
         }
-=======
+
         #region 数据生成
         public string create96I(string UserType)
         {
@@ -77,6 +77,6 @@ namespace HangzhouPeiXun.DAL
         }
 
         #endregion
->>>>>>> fa79032e2ea852b6bc9fabbe4e05617e84e4d6fb
+
     }
 }

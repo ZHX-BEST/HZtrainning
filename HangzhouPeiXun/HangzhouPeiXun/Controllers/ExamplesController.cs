@@ -20,7 +20,7 @@ namespace HangzhouPeiXun.Controllers
             string NorID = UpperID+"_0";
             DataTable dt = DAL.Examples.MyExamples.getNormalData(NorID, option);
             res = new Helper.jstodt().ToJson(dt);
-            return res;
+            return res;//固定死正常数据
         }
 
         //获取异常数据曲线接口
