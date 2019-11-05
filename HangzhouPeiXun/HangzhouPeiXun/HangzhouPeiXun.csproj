@@ -170,7 +170,8 @@
     <Compile Include="Controllers\SLoginController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\TestTeacherController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\VideosController.cs" />
+    <Compile Include="DAL\Videos.cs" />
     <Compile Include="ServerDAL\CreateDataDal.cs" />
     <Compile Include="ServerDAL\DataSetDal.cs" />
     <Compile Include="DAL\Examples.cs" />
@@ -244,6 +245,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Videos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
