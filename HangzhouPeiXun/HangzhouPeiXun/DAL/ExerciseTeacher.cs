@@ -56,6 +56,27 @@ namespace HangzhouPeiXun.DAL
             return res;
         }
 
+        /// <summary>
+        /// 异常存入数据库
+        /// </summary>
+        /// <param name="abID"></param>
+        /// <param name="abI"></param>
+        /// <param name="abU"></param>
+        /// <param name="abW"></param>
+        /// <returns></returns>
+        public string postabdata(string abID,string abI,string abU, string abW)
+        {
+            string res = "false";
+            string sql = "insert into TB_I (I_DataID,I_96Date) values(@id,@I); " +
+                "insert into TB_U (I_DataID,I_96Date) values(@id,@U); " +
+                "insert into TB_I (I_DataID,I_96Date) values(@id,@W); ";
+            SqlParameter[] paras = { new SqlParameter("@id", abID), new SqlParameter("@I", abI), new SqlParameter("@U", abU), new SqlParameter("@W", abW) };
+            int flag = new Helper.SQLHelper().ExecuteNonQuery(sql, paras, CommandType.Text);
+            if (flag > 0)
+                res = "true";
+            return res;
+        }
+
         public DataTable getnordata(string upperID)//获取列表
         {
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@upperID", upperID) };
@@ -99,6 +120,32 @@ namespace HangzhouPeiXun.DAL
             return dt;
         }
 
-       
+        public string postfin(string exeID)
+        {
+            string res = "false";
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@exeID", exeID) };
+            string sql = "UPDATE TB_Exercise SET Exe_Fin = 1 where Do_ExeID = @exeID";
+            int flag = new Helper.SQLHelper().ExecuteNonQuery(sql, paras, CommandType.Text);
+            if (flag>0)
+            {
+                res = "true";
+            }
+            return res;
+        }
+        #region 获取练习题ID
+        public DataTable getExercise(string TeacherID)//根据所属教师获取课堂练习
+        {
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@teacherID", TeacherID) };
+            string sql = "SELECT top 1 exe.*,I.I_96Date,U.U_96Date,W.W_96Date exe.Exe_Fin FROM TB_Exercise exe " +
+                            "inner join TB_Data data on data.Data_UpperID = exe.Exe_DataID " +
+                            "inner join TB_I I on data.Data_AbID = I.I_DataID " +
+                            "inner join TB_U U on data.Data_AbID = U.U_DataID " +
+                            "inner join TB_W W on data.Data_AbID = W.W_DataID " +
+                            "WHERE Exe_UserID = @teacherID ORDER BY Exe_ID DESC";
+            DataTable dt = new Helper.SQLHelper().ExcuteQuery(sql, paras, CommandType.Text);
+            return dt;
+        }
+        #endregion
+
     }
 }

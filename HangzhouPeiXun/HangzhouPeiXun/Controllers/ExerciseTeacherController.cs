@@ -40,7 +40,7 @@ namespace HangzhouPeiXun.Controllers
         }
 
         //获取异常数据曲线接口
-        public string getAbnormalData(string upperID, string AbType)//abType为json 异常类型，异常开始时间，异常结束时间
+        public string getAbnormalData(string upperID, string AbType,int story)//abType为json 异常类型，异常开始时间，异常结束时间  story 0为不存，1为存
         {
             string res = "error";//默认报错     
             DataTable data = DAL.ExerciseTeacher.MyExerciseTeacher.getnordata(upperID);           
@@ -52,7 +52,7 @@ namespace HangzhouPeiXun.Controllers
             DataTable dtW = new Helper.jstodt().ToDataTable(data.Rows[0]["W_96Date"].ToString());
             if (count != 0 && abcount != 0 )
             {
-                var ab = DAL.Examples.MyExamples.SetAbData(dtI, dtU, dtW, abtable, abcount);//异常叠加 
+                var ab = DAL.ExerciseTeacher.MyExerciseTeacher.SetAbData(dtI, dtU, dtW, abtable, abcount);//异常叠加 
                 dtI = ab.Item1;
                 dtU = ab.Item2;
                 dtW = ab.Item3;
@@ -60,6 +60,10 @@ namespace HangzhouPeiXun.Controllers
             string abNordataI = new Helper.jstodt().ToJson(dtI);//数据打成json返回
             string abNordataU = new Helper.jstodt().ToJson(dtU);//数据打成json返回
             string abNordataW = new Helper.jstodt().ToJson(dtW);//数据打成json返回
+            if (story == 1 )
+            {
+                DAL.ExerciseTeacher.MyExerciseTeacher.postabdata(abNordataI,abNordataU,abNordataW,upperID+"_1");//存入数据库
+            }
             #region 处理data数据
             DataTable dt = new DataTable();
             dt.Columns.Add("ID", Type.GetType("System.String"));
@@ -73,7 +77,7 @@ namespace HangzhouPeiXun.Controllers
             dt.Rows[0]["abDataW"] = abNordataW;
             #endregion
             res = new Helper.jstodt().ToJson(dt);
-            return res;//固定死正常数据            
+            return res;            
         }
 
         //出题
@@ -83,8 +87,25 @@ namespace HangzhouPeiXun.Controllers
             return res;
         }
 
-        //获取课堂测试结果
+        //获取试题数据
+        public string getExerciseID(string TeacherID)
+        {
+            string res;
+            DataTable dt = DAL.ExerciseTeacher.MyExerciseTeacher.getExercise(TeacherID);
+            res = new Helper.jstodt().ToJson(dt);
+            return res;
+        }
+
+        //获取课堂测试结果异步刷新
         public string getresult(string exeID)
+        {
+            DataTable dt = DAL.ExerciseTeacher.MyExerciseTeacher.getresult(exeID);
+            string res = new Helper.jstodt().ToJson(dt);
+            return res;
+        }
+
+        //结束测试
+        public string postfinexe(string exeID)
         {
             DataTable dt = DAL.ExerciseTeacher.MyExerciseTeacher.getresult(exeID);
             string res = new Helper.jstodt().ToJson(dt);

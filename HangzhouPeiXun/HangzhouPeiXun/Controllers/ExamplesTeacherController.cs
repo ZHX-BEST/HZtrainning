@@ -11,7 +11,7 @@ namespace HangzhouPeiXun.Controllers
     public class ExamplesTeacherController : ApiController
     {
         //获取正常数据曲线接口
-        public string getNormalData(string User_type)//注option必须为I，U，W,User_TYpe 为1-10
+        public string getNormalData(string User_type)//User_TYpe 为1-10
         {
             if (User_type != "01JCC" && User_type != "02CLC" &&
                 User_type != "03ZZC" && User_type != "04HGC" &&
@@ -21,9 +21,9 @@ namespace HangzhouPeiXun.Controllers
                 return "FalseUserType";//获取用户类别错误
             string res = "error";//默认报错
             string TB_Name = "TB_Data_" + User_type;
-            DataTable dtI = DAL.ExamplesTeacher.MyExampleTeacher.getNormalData(User_type, "I");
-            DataTable dtU = DAL.ExamplesTeacher.MyExampleTeacher.getNormalData(User_type, "U");
-            DataTable dtW = DAL.ExamplesTeacher.MyExampleTeacher.getNormalData(User_type, "W");
+            DataTable dtI = DAL.ExamplesTeacher.MyExampleTeacher.getNormalData(TB_Name, "I");
+            DataTable dtU = DAL.ExamplesTeacher.MyExampleTeacher.getNormalData(TB_Name, "U");
+            DataTable dtW = DAL.ExamplesTeacher.MyExampleTeacher.getNormalData(TB_Name, "W");
             string NordataI = new Helper.jstodt().ToJson(dtI);//数据打成json返回
             string NordataU = new Helper.jstodt().ToJson(dtU);//数据打成json返回
             string NordataW = new Helper.jstodt().ToJson(dtW);//数据打成json返回
@@ -44,7 +44,7 @@ namespace HangzhouPeiXun.Controllers
         }
 
         //获取异常数据曲线接口
-        public string getAbnormalData(string User_type, string AbType, string AbTime)
+        public string getAbnormalData(string User_type, string AbType)//abType为json 异常类型，异常开始时间，异常结束时间
         {
             if (User_type != "01JCC" && User_type != "02CLC" &&
                 User_type != "03ZZC" && User_type != "04HGC" &&
@@ -54,10 +54,15 @@ namespace HangzhouPeiXun.Controllers
                 return "FalseUserType";//获取用户类别错误
             string res = "error";//默认报错
             string TB_Name = "TB_Data_" + User_type;
-            DataTable dtI = DAL.ExamplesTeacher.MyExampleTeacher.getNormalData(User_type, "I");
-            DataTable dtU = DAL.ExamplesTeacher.MyExampleTeacher.getNormalData(User_type, "U");
-            DataTable dtW = DAL.ExamplesTeacher.MyExampleTeacher.getNormalData(User_type, "W");
-            var ab = DAL.ExamplesTeacher.MyExampleTeacher.SetAbData(dtI, dtU, dtW, AbTime, AbType);//异常叠加
+            DataTable dtI = DAL.ExamplesTeacher.MyExampleTeacher.getNormalData(TB_Name, "I");
+            DataTable dtU = DAL.ExamplesTeacher.MyExampleTeacher.getNormalData(TB_Name, "U");
+            DataTable dtW = DAL.ExamplesTeacher.MyExampleTeacher.getNormalData(TB_Name, "W");
+            DataTable abtable = new Helper.jstodt().ToDataTable(AbType);//异常表
+            int abcount = abtable.Rows.Count;
+            if (abcount != 0)
+            {
+                var ab = DAL.ExamplesTeacher.MyExampleTeacher.SetAbData(dtI, dtU, dtW, abtable, abcount);//异常叠加
+            }
             string abNordataI = new Helper.jstodt().ToJson(dtI);//数据打成json返回
             string abNordataU = new Helper.jstodt().ToJson(dtU);//数据打成json返回
             string abNordataW = new Helper.jstodt().ToJson(dtW);//数据打成json返回

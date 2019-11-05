@@ -23,33 +23,38 @@ namespace HangzhouPeiXun.Server
             string DataW = CreateW(UserType); 
             #endregion
 
-            string flag = ServerDAL.CreateDataDal.MyCreate.InsertIUW(NorID,DataI,DataU,DataW);
+            string flag = ServerDAL.CreateDataDal.MyCreate.InsertIUW(NorID,DataI,DataU,DataW);//插入生成的IUW
             return flag;
         }
         
         #region 生成曲线数据
         private string CreateI(string UserType)
         {
-            DataTable dt = DAL.Examples.MyExamples.getNormalData(UserType, "I");
+            DataTable dt = ServerDAL.CreateDataDal.MyCreate.getNormalData(UserType, "I");
             string Data = new Helper.jstodt().ToJson(dt);//数据打成json返回
             return Data;
         } 
          private string CreateU(string UserType)
         {
-            DataTable dt = DAL.Examples.MyExamples.getNormalData(UserType, "U");
+            DataTable dt = ServerDAL.CreateDataDal.MyCreate.getNormalData(UserType, "U");
             string Data = new Helper.jstodt().ToJson(dt);//数据打成json返回
             return Data;
         } 
          private string CreateW(string UserType)
         {
-            DataTable dt = DAL.Examples.MyExamples.getNormalData(UserType, "W");
+            DataTable dt = ServerDAL.CreateDataDal.MyCreate.getNormalData(UserType, "W");
             string Data = new Helper.jstodt().ToJson(dt);//数据打成json返回
             return Data;
         }
         #endregion
 
         #region 数据拟合
-
+        public DataTable Simulate(DataTable dt)
+        {
+            DataTable dtsim = dt;
+            //TODO:数据模拟
+            return dtsim;
+        }
         #endregion
 
 

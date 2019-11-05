@@ -26,32 +26,23 @@ namespace HangzhouPeiXun.DAL
         }
         #endregion
 
-        #region 开始作答生成答题卡
-        public string postTestCard(string testID, string userID)
-        {
-            string flag = "False";
-            SqlParameter[] para = new SqlParameter[] { new SqlParameter("@testID", testID),                                                        
-                                                        new SqlParameter("@userID", userID)};
-            string sql = "INSERT INTO TB_DoTest(DoTest_TestIDDoTest_UserID) VALUES (@testID, @userID)";
-            int res = new Helper.SQLHelper().ExecuteNonQuery(sql, para, CommandType.Text);
-            if (res > 0)
-                flag = "True";
-            return flag;
+       
 
-        }
-        #endregion
-
-        #region 获取试题
-        public DataTable getTestItem(string dataupperID, string option)
+        #region 获取练习题ID
+        public DataTable getproblem(string upperid)//根据所属教师获取课堂练习
         {
-            SqlParameter[] para = new SqlParameter[] { new SqlParameter("@dataupperID", dataupperID) };
-            string sql = "SELECT * FROM TB_Data INNER JOIN TB_" + option + " ON TB_Data.Data_AbID=TB_" + option + "." + option + "_DataID WHERE Data_UpperID = @dataupperID";
-            DataTable dt = new Helper.SQLHelper().ExcuteQuery(sql, para, CommandType.Text);
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@upperid", upperid) };
+            string sql = "select data.*,I.I_96Date,U.U_96Date,W.W_96Date from TB_Data data " +
+               "inner join TB_I I on nor.Nor_ID =I.I_DataID " +
+               "inner join TB_U U on nor.Nor_ID =U.U_DataID " +
+               "inner join TB_W W on nor.Nor_ID =W.W_DataID " +
+               "where data.Data_UpperID = @upperID";
+            DataTable dt = new Helper.SQLHelper().ExcuteQuery(sql, paras, CommandType.Text);
             return dt;
         }
         #endregion
 
-        #region 题目作答
+        #region 提交答题卡
         public string postTestCard(string testID, string result, string time,  string userID)
         {
             string flag = "False";

@@ -17,8 +17,7 @@ namespace HangzhouPeiXun.Helper
     public class SQLHelper
     {
         private SqlConnection conn = null;
-        private SqlCommand cmd = null;
-        private SqlDataReader sdr = null;
+        private SqlCommand cmd = null;        
 
         public SQLHelper()
         {//建立SQL链接          

@@ -12,10 +12,14 @@ namespace HangzhouPeiXun.Controllers
     {
 
         //获取试题数据
-        public string getExerciseID(string TeacherID)
+        public string getExerciseID(string TeacherID,string userID )
         {
             string res;
             DataTable dt = DAL.Exercise.MyExercise.getExercise(TeacherID);
+            DataTable result = DAL.Exercise.MyExercise.getExerciseres(dt.Rows[0]["Exe_ID"].ToString(),userID);//获取是否已作答数据
+            string exeresult = new Helper.jstodt().ToJson(result);
+            result.Columns.Add("res", Type.GetType("System.String"));
+            dt.Rows[0]["res"] = exeresult;
             res = new Helper.jstodt().ToJson(dt);
             return res;
         }

@@ -16,6 +16,14 @@ namespace HangzhouPeiXun.ServerDAL
         public static CreateDataDal MyCreate { get { return mycreate; } }
         public CreateDataDal() { }
 
+        /// <summary>
+        /// 插入生成的数据
+        /// </summary>
+        /// <param name="NorID"></param>
+        /// <param name="DataI"></param>
+        /// <param name="DataU"></param>
+        /// <param name="DataW"></param>
+        /// <returns></returns>
         public string InsertIUW(string NorID, string DataI, string DataU, string DataW)
         {
             string flag = "False"; //默认返回False         
@@ -30,26 +38,31 @@ namespace HangzhouPeiXun.ServerDAL
             return flag;
         }
 
-        #region 获取固定典型正常数据
-        public DataTable getNormalData(string TB_Name, string option)
+        #region 获取拟合源数据
+        /// <summary>
+        /// 获取拟合源数据
+        /// </summary>
+        /// <param name="TB_Name"></param>
+        /// <param name="option"></param>
+        /// <returns></returns>
+        public DataTable getNormalData(string usertype, string option)
         {
             string sql = "";
             switch (option)
             {
                 case "I":
-                    sql = "select 时间,A相电流,A相电流,C相电流 from @TBname";
+                    sql = "select 时间,A相电流,A相电流,C相电流 from TB_Data_"+ usertype;
                     break;
                 case "U":
-                    sql = "select 时间,A相电压,A相电压,C相电压 from @TBname";
+                    sql = "select 时间,A相电压,A相电压,C相电压 from TB_Data_" + usertype;
                     break;
                 case "W":
-                    sql = "select 时间,用电量,变压器容量,倍率 from @TBname where 用电量 is not NULL";
+                    sql = "select 时间,用电量,变压器容量,倍率 from TB_Data_" + usertype + " where 用电量 is not NULL";
                     break;
                 default:
                     break;
-            }
-            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@TBname", TB_Name) };
-            DataTable dt = new Helper.SQLHelper().ExcuteQuery(sql, paras, CommandType.Text);
+            }           
+            DataTable dt = new Helper.SQLHelper().ExcuteQuery(sql, CommandType.Text);
             return dt;
         }
         #endregion

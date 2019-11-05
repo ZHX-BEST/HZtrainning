@@ -23,27 +23,27 @@ namespace HangzhouPeiXun.DAL
             switch (option)
             {
                 case "I":
-                    sql = "select 时间,A相电流,A相电流,C相电流 from @TBname";
+                    sql = "select 时间,A相电流,A相电流,C相电流 from " + TB_Name;
                     break;
                 case "U":
-                    sql = "select 时间,A相电压,A相电压,C相电压 from @TBname";
+                    sql = "select 时间,A相电压,A相电压,C相电压 from " + TB_Name;
                     break;
                 case "W":
-                    sql = "select 时间,用电量,变压器容量,倍率 from @TBname where 用电量 is not NULL";
+                    sql = "select 时间,用电量,变压器容量,倍率 from " + TB_Name + " where 用电量 is not NULL";
                     break;
                 default:
                     break;
             }
-            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@TBname", TB_Name) };
-            DataTable dt = new Helper.SQLHelper().ExcuteQuery(sql, paras, CommandType.Text);
+            //SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@TBname", TB_Name) };
+            DataTable dt = new Helper.SQLHelper().ExcuteQuery(sql, CommandType.Text);
             return dt;
         }
         #endregion
 
         #region 获取异常数据
-        public Tuple<DataTable, DataTable, DataTable> SetAbData(DataTable dtI, DataTable dtU, DataTable dtW, string AbTime, string AbType)
+        public Tuple<DataTable, DataTable, DataTable> SetAbData(DataTable dtI, DataTable dtU, DataTable dtW, DataTable AbType, int abcount)
         {
-            var ab = Server.DataSet.MyData.SetAbData(dtI, dtU, dtW, AbTime, AbType);
+            var ab = Server.DataSet.MyData.SetStaticAbData(dtI, dtU, dtW, AbType, abcount);
             DataTable abdtI = ab.Item1;
             DataTable abdtU = ab.Item2;
             DataTable abdtW = ab.Item3;

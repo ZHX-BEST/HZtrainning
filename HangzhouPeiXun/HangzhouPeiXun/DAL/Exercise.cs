@@ -29,8 +29,16 @@ namespace HangzhouPeiXun.DAL
             DataTable dt = new Helper.SQLHelper().ExcuteQuery(sql, paras, CommandType.Text);
             return dt;
         }
+
+        public DataTable getExerciseres(string exeID,string userID)//根据所属教师获取课堂练习
+        {
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@exeID", exeID), new SqlParameter("@userID", userID) };
+            string sql = "SELECT * FROM TB_DoEXE WHERE Do_UserID = @userID AND Do_ExeID = @exeID ";
+            DataTable dt = new Helper.SQLHelper().ExcuteQuery(sql, paras, CommandType.Text);
+            return dt;
+        }
         #endregion
-  
+
 
         #region 提交答题卡
         public string postExerciseCard(string exeID, string time, string result, string userID)

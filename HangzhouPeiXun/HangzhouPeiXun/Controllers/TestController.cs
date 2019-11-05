@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web;
 
 namespace HangzhouPeiXun.Controllers
 {
@@ -20,14 +21,25 @@ namespace HangzhouPeiXun.Controllers
         }
 
         //获取试题
-        public string getTestItem(string dataupperID, string option)//注option必须为I，U，W
+        public string getproblem(string dataupperID)
         {
-            if (option != "I" && option != "U" && option != "W")
-                return "FalseOption";//获取选项错误
             string res;
-            DataTable dt = DAL.Test.MyTest.getTestItem(dataupperID, option);
+            DataTable dt = DAL.Test.MyTest.getproblem(dataupperID);
             res = new Helper.jstodt().ToJson(dt);
             return res;
+        }
+
+        public string postanswer(string time, string answer)
+        {
+            string timelast = HttpContext.Current.Session["Time"].ToString();
+            DateTime dtlast = Convert.ToDateTime(timelast);
+            DateTime dtthis = Convert.ToDateTime(time); 
+            if (DateTime.Compare(dtthis, dtlast) > 0)
+            {
+                HttpContext.Current.Session["Time"] = time;//时间戳
+                HttpContext.Current.Session["answer"] = answer;
+            }
+            return "true";
         }
 
         //提交答题卡

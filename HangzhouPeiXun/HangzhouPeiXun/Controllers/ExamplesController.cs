@@ -22,9 +22,9 @@ namespace HangzhouPeiXun.Controllers
                 return "FalseUserType";//获取用户类别错误
             string res = "error";//默认报错
             string TB_Name = "TB_Data_"+User_type;
-            DataTable dtI = DAL.Examples.MyExamples.getNormalData(User_type, "I");
-            DataTable dtU = DAL.Examples.MyExamples.getNormalData(User_type, "U");
-            DataTable dtW = DAL.Examples.MyExamples.getNormalData(User_type, "W");
+            DataTable dtI = DAL.Examples.MyExamples.getNormalData(TB_Name, "I");
+            DataTable dtU = DAL.Examples.MyExamples.getNormalData(TB_Name, "U");
+            DataTable dtW = DAL.Examples.MyExamples.getNormalData(TB_Name, "W");
             string NordataI = new Helper.jstodt().ToJson(dtI);//数据打成json返回
             string NordataU = new Helper.jstodt().ToJson(dtU);//数据打成json返回
             string NordataW = new Helper.jstodt().ToJson(dtW);//数据打成json返回
@@ -55,9 +55,9 @@ namespace HangzhouPeiXun.Controllers
                 return "FalseUserType";//获取用户类别错误
             string res = "error";//默认报错
             string TB_Name = "TB_Data_" + User_type;
-            DataTable dtI = DAL.Examples.MyExamples.getNormalData(User_type, "I");
-            DataTable dtU = DAL.Examples.MyExamples.getNormalData(User_type, "U");
-            DataTable dtW = DAL.Examples.MyExamples.getNormalData(User_type, "W");
+            DataTable dtI = DAL.Examples.MyExamples.getNormalData(TB_Name, "I");
+            DataTable dtU = DAL.Examples.MyExamples.getNormalData(TB_Name, "U");
+            DataTable dtW = DAL.Examples.MyExamples.getNormalData(TB_Name, "W");
             DataTable abtable = new Helper.jstodt().ToDataTable(AbType);//异常表
             int abcount = abtable.Rows.Count;
             if (abcount!=0)
