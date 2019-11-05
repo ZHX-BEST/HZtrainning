@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 
@@ -17,62 +18,40 @@ namespace HangzhouPeiXun.Server
         public string CreateNorData(string NorID,string UserType)
         {
             #region 生成曲线数据
-        	string DataI = CreateI(UserType);
+            string DataI = CreateI(UserType);
             string DataU = CreateU(UserType);
             string DataW = CreateW(UserType); 
             #endregion
 
-            string flag = DAL.CreateData.MyCreate.InsertIUW(NorID,DataI,DataU,DataW);
+            string flag = ServerDAL.CreateDataDal.MyCreate.InsertIUW(NorID,DataI,DataU,DataW);
             return flag;
         }
         
         #region 生成曲线数据
         private string CreateI(string UserType)
         {
-            string Data = "123";//TODO
+            DataTable dt = DAL.Examples.MyExamples.getNormalData(UserType, "I");
+            string Data = new Helper.jstodt().ToJson(dt);//数据打成json返回
             return Data;
         } 
          private string CreateU(string UserType)
         {
-            string Data = "123";//TODO
+            DataTable dt = DAL.Examples.MyExamples.getNormalData(UserType, "U");
+            string Data = new Helper.jstodt().ToJson(dt);//数据打成json返回
             return Data;
         } 
          private string CreateW(string UserType)
         {
-            string Data = "123";//TODO
+            DataTable dt = DAL.Examples.MyExamples.getNormalData(UserType, "W");
+            string Data = new Helper.jstodt().ToJson(dt);//数据打成json返回
             return Data;
         }
         #endregion
 
+        #region 数据拟合
 
-        public string CreateabNorData(string abNorID)
-        {
-            #region 生成曲线数据
-            string DataI = CreateI();
-            string DataU = CreateU();
-            string DataW = CreateW();
-            #endregion
-            
-            string flag = DAL.CreateData.MyCreate.InsertIUW(abNorID, DataI, DataU, DataW);
-            return flag;
-        }
-
-        #region 生成曲线数据
-        private string CreateI()
-        {
-            string Data = "123";//TODO
-            return Data;
-        }
-        private string CreateU()
-        {
-            string Data = "123";//TODO
-            return Data;
-        }
-        private string CreateW()
-        {
-            string Data = "123";//TODO
-            return Data;
-        }
         #endregion
+
+
     }
 }

@@ -17,12 +17,27 @@ namespace HangzhouPeiXun.DAL
         public Test() { }
 
         #region 获取试卷信息
-        public DataTable getTestInfo(string userID)
+        public DataTable getTestInfo(string teacherID)
         {
-            SqlParameter[] para = new SqlParameter[] { new SqlParameter("@userID", userID) };
-            string sql = "SELECT TB_Test.* FROM TB_Test INNER JOIN TB_User ON TB_Test.Test_User=TB_User.User_TeacherID WHERE User_ID=@userID";
+            SqlParameter[] para = new SqlParameter[] { new SqlParameter("@teacherID", teacherID) };
+            string sql = "SELECT Test_ID,Test_Date,Test_Time FROM TB_Test WHERE Test_User=@teacherID";
             DataTable dt = new Helper.SQLHelper().ExcuteQuery(sql, para, CommandType.Text);
             return dt;
+        }
+        #endregion
+
+        #region 开始作答生成答题卡
+        public string postTestCard(string testID, string userID)
+        {
+            string flag = "False";
+            SqlParameter[] para = new SqlParameter[] { new SqlParameter("@testID", testID),                                                        
+                                                        new SqlParameter("@userID", userID)};
+            string sql = "INSERT INTO TB_DoTest(DoTest_TestIDDoTest_UserID) VALUES (@testID, @userID)";
+            int res = new Helper.SQLHelper().ExecuteNonQuery(sql, para, CommandType.Text);
+            if (res > 0)
+                flag = "True";
+            return flag;
+
         }
         #endregion
 
@@ -36,17 +51,16 @@ namespace HangzhouPeiXun.DAL
         }
         #endregion
 
-        #region 提交答题卡
-        public string postTestCard(string testID, string result, string time, string point, string userID)
+        #region 题目作答
+        public string postTestCard(string testID, string result, string time,  string userID)
         {
             string flag = "False";
             SqlParameter[] para = new SqlParameter[] { new SqlParameter("@testID", testID),
                                                         new SqlParameter("@result", result),
-                                                        new SqlParameter("@time", time),
-                                                        new SqlParameter("@point", point),
+                                                        new SqlParameter("@time", time),//上传到达时间                                                       
                                                         new SqlParameter("@userID", userID)};
-            string sql = "INSERT INTO TB_DoTest(DoTest_TestID, DoTest_Result, DoTest_Time, DoTset_Point, DoTest_UserID) VALUES (@testID, @result, @time, @point, @userID)";
-            int res = new Helper.SQLHelper().ExecuteNonQuery(sql, para, CommandType.Text);
+            string sql = "INSERT INTO TB_DoTest(DoTest_TestID,DoTest_UserID,DoTest_Result,DoTest_Time) VALUES (@testID, @userID,@result,@time)";
+            int res = new Helper.SQLHelper().ExecuteNonQuery(sql, para, CommandType.StoredProcedure);
             if (res > 0)
                 flag = "True";
             return flag;

@@ -94,3 +94,7 @@ C:\Users\shen\Documents\GitHub\HZTraining\HangzhouPeiXun\HangzhouPeiXun\obj\Debu
 C:\Users\shen\Documents\GitHub\HZTraining\HangzhouPeiXun\HangzhouPeiXun\obj\Debug\HangzhouPeiXun.dll
 C:\Users\shen\Documents\GitHub\HZTraining\HangzhouPeiXun\HangzhouPeiXun\obj\Debug\HangzhouPeiXun.pdb
 C:\Users\shen\Documents\GitHub\HZTraining\HangzhouPeiXun\HangzhouPeiXun\obj\Debug\HangzhouPeiXun.csprojAssemblyReference.cache
+F:\项目\HangzhouPeiXun\HZTraining\HangzhouPeiXun\HangzhouPeiXun\obj\Debug\HangzhouPeiXun.csprojAssemblyReference.cache
+F:\项目\HangzhouPeiXun\HZTraining\HangzhouPeiXun\HangzhouPeiXun\obj\Debug\HangzhouPeiXun.csproj.CoreCompileInputs.cache
+F:\项目\HangzhouPeiXun\HZTraining\HangzhouPeiXun\HangzhouPeiXun\obj\Debug\HangzhouPeiXun.dll
+F:\项目\HangzhouPeiXun\HZTraining\HangzhouPeiXun\HangzhouPeiXun\obj\Debug\HangzhouPeiXun.pdb

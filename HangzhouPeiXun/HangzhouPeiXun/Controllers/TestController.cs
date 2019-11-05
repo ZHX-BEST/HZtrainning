@@ -31,9 +31,9 @@ namespace HangzhouPeiXun.Controllers
         }
 
         //提交答题卡
-        public string postTestCard(string testID, string result, string time, string point, string userID)
+        public string postTestCard(string testID, string result, string time,  string userID)
         {
-            string res = DAL.Test.MyTest.postTestCard(testID, result, time, point, userID);
+            string res = DAL.Test.MyTest.postTestCard(testID, result, time,  userID);
             return res;
         }
     }

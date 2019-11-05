@@ -16,23 +16,39 @@ namespace HangzhouPeiXun.DAL
         public static Examples MyExamples { get { return myexamples; } }
         public Examples() { }
 
-        #region 获取正常数据
-        public DataTable getNormalData(string NorID, string option)
-        {           
-            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@NorID", NorID) };
-            string sql = "select * from TB_"+ option +" where "+ option +"_DataID = @NorID";
-            DataTable dt = new Helper.SQLHelper().ExcuteQuery(sql, paras, CommandType.Text);
+        #region 获取固定典型正常数据
+        public DataTable getNormalData(string TB_Name, string option)
+        {
+            string sql = "";
+            switch (option)
+            {
+                case "I":
+                    sql = "select 时间,A相电流,A相电流,C相电流 from @TBname";
+                    break;
+                case "U":
+                    sql = "select 时间,A相电压,A相电压,C相电压 from @TBname";
+                    break;
+                case "W":
+                    sql = "select 时间,用电量,变压器容量,倍率 from @TBname where 用电量 is not NULL";
+                    break;
+                default:
+                    break;
+            }
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@TBname", TB_Name) };
+            DataTable dt = new Helper.SQLHelper().ExcuteQuery(sql, paras, CommandType.Text);            
             return dt;
         }
         #endregion
 
         #region 获取异常数据
-        public DataTable getAbnormalData(string AbID, string option)
-        {            
-            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@AbID", AbID) };
-            string sql = "select * from TB_"+ option +" where "+ option +"_DataID = @AbID";
-            DataTable dt = new Helper.SQLHelper().ExcuteQuery(sql, paras, CommandType.Text);
-            return dt;
+        public Tuple<DataTable, DataTable, DataTable> SetAbData(DataTable dtI, DataTable dtU, DataTable dtW, DataTable AbType,int abcount)
+        {
+            var ab = Server.DataSet.MyData.SetStaticAbData(dtI, dtU, dtW, AbType,abcount);
+            DataTable abdtI = ab.Item1;
+            DataTable abdtU = ab.Item2;
+            DataTable abdtW = ab.Item3;
+            Tuple<DataTable, DataTable, DataTable> tup = new Tuple<DataTable, DataTable, DataTable>(abdtI, abdtU, abdtW);
+            return tup;
         }
         #endregion
     }

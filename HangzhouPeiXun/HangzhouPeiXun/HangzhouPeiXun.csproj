@@ -171,8 +171,8 @@
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\TestTeacherController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
-    <Compile Include="DAL\CreateData.cs" />
-    <Compile Include="DAL\DataSet.cs" />
+    <Compile Include="ServerDAL\CreateDataDal.cs" />
+    <Compile Include="ServerDAL\DataSetDal.cs" />
     <Compile Include="DAL\Examples.cs" />
     <Compile Include="DAL\ExamplesTeacher.cs" />
     <Compile Include="DAL\Exercise.cs" />
