@@ -23,10 +23,10 @@ namespace HangzhouPeiXun.DAL
             switch (option)
             {
                 case "I":
-                    sql = "select 时间,A相电流,A相电流,C相电流 from "+TB_Name;
+                    sql = "select top 5760 时间,A相电流,B相电流,C相电流 from "+TB_Name+ " order by 时间 asc";
                     break;
                 case "U":
-                    sql = "select 时间,A相电压,A相电压,C相电压 from "+ TB_Name;
+                    sql = "select top 5760 时间,A相电压,B相电压,C相电压 from " + TB_Name + " order by 时间 asc";
                     break;
                 case "W":
                     sql = "select 时间,用电量,变压器容量,倍率 from "+ TB_Name + " where 用电量 is not NULL";

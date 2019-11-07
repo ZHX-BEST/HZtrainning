@@ -15,7 +15,7 @@ namespace HangzhouPeiXun.DAL
 
         public DataTable getvideolist()
         {
-            string sql = "select * from TB_Video order by Video_ID desc";
+            string sql = "select top 30 * from TB_Video  order by Video_ID desc";           
             DataTable dt = new Helper.SQLHelper().ExcuteQuery(sql, CommandType.Text);
             return dt;
         }
