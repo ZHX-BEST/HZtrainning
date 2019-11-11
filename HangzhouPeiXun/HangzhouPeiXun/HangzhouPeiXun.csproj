@@ -170,7 +170,9 @@
     <Compile Include="Controllers\SLoginController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\TestTeacherController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\VideosController.cs" />
+    <Compile Include="DAL\User.cs" />
     <Compile Include="DAL\Videos.cs" />
     <Compile Include="ServerDAL\CreateDataDal.cs" />
     <Compile Include="ServerDAL\DataSetDal.cs" />

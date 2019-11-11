@@ -10,8 +10,9 @@ namespace HangzhouPeiXun.Controllers
 {
     public class ExerciseTeacherController : ApiController
     {
-        //获取已生成正常数据曲线接口
-        public string getNormalData(string User_type)//User_TYpe 为1-10
+        #region 出题
+        //获取已生成正常数据曲线列表
+        public string getNormalDatalist(string User_type)//User_TYpe 为1-10
         {
             if (User_type != "01JCC" && User_type != "02CLC" &&
                 User_type != "03ZZC" && User_type != "04HGC" &&
@@ -21,6 +22,15 @@ namespace HangzhouPeiXun.Controllers
                 return "FalseUserType";//获取用户类别错误
             string res = "error";//默认报错
             DataTable dt = DAL.ExerciseTeacher.MyExerciseTeacher.getnorlist(User_type);          
+            res = new Helper.jstodt().ToJson(dt);
+            return res;
+        }
+
+        //获取已生成正常数据曲线数据
+        public string getNormalData(string Norid)//User_TYpe 为1-10
+        {            
+            string res = "error";//默认报错
+            DataTable dt = DAL.ExerciseTeacher.MyExerciseTeacher.getnordatabyid(Norid);
             res = new Helper.jstodt().ToJson(dt);
             return res;
         }
@@ -62,7 +72,7 @@ namespace HangzhouPeiXun.Controllers
             string abNordataW = new Helper.jstodt().ToJson(dtW);//数据打成json返回
             if (story == 1 )
             {
-                DAL.ExerciseTeacher.MyExerciseTeacher.postabdata(abNordataI,abNordataU,abNordataW,upperID+"_1");//存入数据库
+                DAL.ExerciseTeacher.MyExerciseTeacher.postabdata(upperID,abNordataI,abNordataU,abNordataW, AbType);//存入数据库
             }
             #region 处理data数据
             DataTable dt = new DataTable();
@@ -81,14 +91,15 @@ namespace HangzhouPeiXun.Controllers
         }
 
         //出题
-        public string postExercise(string upperID, string userID)
+        public string postExercise(string upperID, string TeacherID)
         {
-            string res = DAL.ExerciseTeacher.MyExerciseTeacher.postExercise(upperID, userID);
+            string res = DAL.ExerciseTeacher.MyExerciseTeacher.postExercise(upperID, TeacherID);
             return res;
         }
+        #endregion
 
-        //获取试题数据
-        public string getExerciseID(string TeacherID)
+        //获取试题数据列表
+        public string getExercise(string TeacherID)
         {
             string res;
             DataTable dt = DAL.ExerciseTeacher.MyExerciseTeacher.getExercise(TeacherID);
@@ -96,10 +107,19 @@ namespace HangzhouPeiXun.Controllers
             return res;
         }
 
-        //获取课堂测试结果异步刷新
-        public string getresult(string exeID)
+        //获取试题详情
+        public string getExercisebyID(string ExeID)
         {
-            DataTable dt = DAL.ExerciseTeacher.MyExerciseTeacher.getresult(exeID);
+            string res;
+            DataTable dt = DAL.ExerciseTeacher.MyExerciseTeacher.getExerciseByID(ExeID);
+            res = new Helper.jstodt().ToJson(dt);
+            return res;
+        }
+
+        //获取课堂测试结果异步刷新
+        public string getresult(string ExeID)
+        {
+            DataTable dt = DAL.ExerciseTeacher.MyExerciseTeacher.getresult(ExeID);
             string res = new Helper.jstodt().ToJson(dt);
             return res;
         }
@@ -107,8 +127,8 @@ namespace HangzhouPeiXun.Controllers
         //结束测试
         public string postfinexe(string exeID)
         {
-            DataTable dt = DAL.ExerciseTeacher.MyExerciseTeacher.getresult(exeID);
-            string res = new Helper.jstodt().ToJson(dt);
+            string res = DAL.ExerciseTeacher.MyExerciseTeacher.postfin(exeID);
+
             return res;
         }
     }

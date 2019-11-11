@@ -18,12 +18,21 @@ namespace HangzhouPeiXun.DAL
 
         public DataTable getnorlist(string usertype)//获取列表
         {
-            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("usertype", usertype) };
-            string sql = "select nor.*,I.I_96Date,U.U_96Date,W.W_96Date from TB_NorList nor " +
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@usertype", usertype) };
+            string sql = "select nor.*from TB_NorList nor " +
+                                "where Nor_UserType = @usertype order by Nor_ID desc";
+            DataTable dt = new Helper.SQLHelper().ExcuteQuery(sql, paras, CommandType.Text);
+            return dt;
+        }
+
+        public DataTable getnordatabyid(string id)//获取列表
+        {
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@id", id) };
+            string sql = "select nor.* ,I.I_96Date ,U.U_96Date ,W.W_96Date from TB_NorList nor " +
                 "inner join TB_I I on nor.Nor_ID =I.I_DataID " +
                 "inner join TB_U U on nor.Nor_ID =U.U_DataID " +
                 "inner join TB_W W on nor.Nor_ID =W.W_DataID " +
-                "where Nor_UserType = @usertype";
+                "where Nor_ID = @id";
             DataTable dt = new Helper.SQLHelper().ExcuteQuery(sql, paras, CommandType.Text);
             return dt;
         }
@@ -53,6 +62,14 @@ namespace HangzhouPeiXun.DAL
         public string getnewUpperID(string User_type)
         {
             string res = Server.DataSet.MyData.SetNorData(User_type);//调用数据仿真接口
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@upperID", res) };
+            string sql = "select data.*,I.I_96Date,U.U_96Date,W.W_96Date from TB_Data data " +
+                "inner join TB_I I on data.Data_NorID =I.I_DataID " +
+                "inner join TB_U U on data.Data_NorID =U.U_DataID " +
+                "inner join TB_W W on data.Data_NorID =W.W_DataID " +
+                "where data.Data_UpperID = @upperID";
+            DataTable dt = new Helper.SQLHelper().ExcuteQuery(sql, paras, CommandType.Text);
+            res = new Helper.jstodt().ToJson(dt);
             return res;
         }
 
@@ -64,13 +81,15 @@ namespace HangzhouPeiXun.DAL
         /// <param name="abU"></param>
         /// <param name="abW"></param>
         /// <returns></returns>
-        public string postabdata(string abID,string abI,string abU, string abW)
+        public string postabdata(string upperID,string abI,string abU, string abW,string AbType)
         {
             string res = "false";
-            string sql = "insert into TB_I (I_DataID,I_96Date) values(@id,@I); " +
-                "insert into TB_U (I_DataID,I_96Date) values(@id,@U); " +
-                "insert into TB_I (I_DataID,I_96Date) values(@id,@W); ";
-            SqlParameter[] paras = { new SqlParameter("@id", abID), new SqlParameter("@I", abI), new SqlParameter("@U", abU), new SqlParameter("@W", abW) };
+            string abID = upperID + "_1";
+            string sql = "update TB_I set I_96Date = @I  where I_DataID = @abid; " +
+                "update TB_U set U_96Date = @I  where U_DataID = @abid; " +
+                "update TB_W set W_96Date = @I  where W_DataID = @abid; " +
+                "update TB_Data set Data_AbTypeTime = @abtype where Data_UpperID = @id;";
+            SqlParameter[] paras = { new SqlParameter("@id", upperID), new SqlParameter("@abid", abID), new SqlParameter("@I", abI), new SqlParameter("@U", abU), new SqlParameter("@W", abW), new SqlParameter("@abtype", AbType) };
             int flag = new Helper.SQLHelper().ExecuteNonQuery(sql, paras, CommandType.Text);
             if (flag > 0)
                 res = "true";
@@ -81,9 +100,9 @@ namespace HangzhouPeiXun.DAL
         {
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@upperID", upperID) };
             string sql = "select data.*,I.I_96Date,U.U_96Date,W.W_96Date from TB_Data data " +
-                "inner join TB_I I on nor.Nor_ID =I.I_DataID " +
-                "inner join TB_U U on nor.Nor_ID =U.U_DataID " +
-                "inner join TB_W W on nor.Nor_ID =W.W_DataID " +
+                "inner join TB_I I on data.Data_NorID =I.I_DataID " +
+                "inner join TB_U U on data.Data_NorID =U.U_DataID " +
+                "inner join TB_W W on data.Data_NorID =W.W_DataID " +
                 "where data.Data_UpperID = @upperID";
             DataTable dt = new Helper.SQLHelper().ExcuteQuery(sql, paras, CommandType.Text);
             return dt;
@@ -124,7 +143,7 @@ namespace HangzhouPeiXun.DAL
         {
             string res = "false";
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@exeID", exeID) };
-            string sql = "UPDATE TB_Exercise SET Exe_Fin = 1 where Do_ExeID = @exeID";
+            string sql = "UPDATE TB_Exercise SET Exe_Fin = 1 where Exe_ID = @exeID";
             int flag = new Helper.SQLHelper().ExecuteNonQuery(sql, paras, CommandType.Text);
             if (flag>0)
             {
@@ -136,12 +155,21 @@ namespace HangzhouPeiXun.DAL
         public DataTable getExercise(string TeacherID)//根据所属教师获取课堂练习
         {
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@teacherID", TeacherID) };
-            string sql = "SELECT top 1 exe.*,I.I_96Date,U.U_96Date,W.W_96Date exe.Exe_Fin FROM TB_Exercise exe " +
+            string sql = "SELECT * FROM TB_Exercise exe " +
+                            "WHERE Exe_UserID = @teacherID ORDER BY Exe_ID DESC";
+            DataTable dt = new Helper.SQLHelper().ExcuteQuery(sql, paras, CommandType.Text);
+            return dt;
+        }
+
+        public DataTable getExerciseByID(string ExeID)//根据所属教师获取课堂练习
+        {
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@ExeID", ExeID) };
+            string sql = "SELECT exe.*,data.Data_AbTypeTime,I.I_96Date,U.U_96Date,W.W_96Date FROM TB_Exercise exe " +
                             "inner join TB_Data data on data.Data_UpperID = exe.Exe_DataID " +
                             "inner join TB_I I on data.Data_AbID = I.I_DataID " +
                             "inner join TB_U U on data.Data_AbID = U.U_DataID " +
                             "inner join TB_W W on data.Data_AbID = W.W_DataID " +
-                            "WHERE Exe_UserID = @teacherID ORDER BY Exe_ID DESC";
+                            "WHERE exe.Exe_ID = @ExeID ORDER BY Exe_ID DESC";
             DataTable dt = new Helper.SQLHelper().ExcuteQuery(sql, paras, CommandType.Text);
             return dt;
         }

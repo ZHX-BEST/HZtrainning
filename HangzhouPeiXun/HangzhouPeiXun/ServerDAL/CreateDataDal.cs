@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data;
 using System.Data.SqlClient;
+using System.Data.SqlClient;
 
 namespace HangzhouPeiXun.ServerDAL
 {
@@ -24,11 +25,11 @@ namespace HangzhouPeiXun.ServerDAL
         /// <param name="DataU"></param>
         /// <param name="DataW"></param>
         /// <returns></returns>
-        public string InsertIUW(string NorID, string DataI, string DataU, string DataW)
+        public string InsertIUW(string UpperID, string DataI, string DataU, string DataW)
         {
             string flag = "False"; //默认返回False         
             string sql = "InsertIUW";//插入数据存储过程
-            SqlParameter[] paras = { new SqlParameter("@NorID", NorID), 
+            SqlParameter[] paras = { new SqlParameter("@UpperID", UpperID), 
                                       new SqlParameter("@DataI", DataI), 
                                       new SqlParameter("@DataU", DataU), 
                                       new SqlParameter("@DataW", DataW) };//参数 NorID，电流96点Json，电压96点Json，电能96点Json，
@@ -45,24 +46,11 @@ namespace HangzhouPeiXun.ServerDAL
         /// <param name="TB_Name"></param>
         /// <param name="option"></param>
         /// <returns></returns>
-        public DataTable getNormalData(string usertype, string option)
+        public DataTable getNormalData(string usertype)
         {
-            string sql = "";
-            switch (option)
-            {
-                case "I":
-                    sql = "select 时间,A相电流,A相电流,C相电流 from TB_Data_"+ usertype;
-                    break;
-                case "U":
-                    sql = "select 时间,A相电压,A相电压,C相电压 from TB_Data_" + usertype;
-                    break;
-                case "W":
-                    sql = "select 时间,用电量,变压器容量,倍率 from TB_Data_" + usertype + " where 用电量 is not NULL";
-                    break;
-                default:
-                    break;
-            }           
-            DataTable dt = new Helper.SQLHelper().ExcuteQuery(sql, CommandType.Text);
+            string sql = "ProCreateNew";
+            SqlParameter[] paras = new SqlParameter[] {new SqlParameter("@tablename", "TB_Data_"+ usertype) };           
+            DataTable dt = new Helper.SQLHelper().ExcuteQuery(sql,paras, CommandType.StoredProcedure);
             return dt;
         }
         #endregion

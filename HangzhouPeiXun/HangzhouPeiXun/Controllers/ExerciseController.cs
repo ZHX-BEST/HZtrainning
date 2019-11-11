@@ -10,34 +10,45 @@ namespace HangzhouPeiXun.Controllers
 {
     public class ExerciseController : ApiController
     {
-
-        //获取试题数据
-        public string getExerciseID(string TeacherID,string userID )
+        //获取试题数据列表
+        public string getExerciseList(string TeacherID)
         {
             string res;
-            DataTable dt = DAL.Exercise.MyExercise.getExercise(TeacherID);
-            DataTable result = DAL.Exercise.MyExercise.getExerciseres(dt.Rows[0]["Exe_ID"].ToString(),userID);//获取是否已作答数据
+            DataTable dt = DAL.Exercise.MyExercise.getExercisetea(TeacherID);
+            res = new Helper.jstodt().ToJson(dt);
+            return res;
+        }
+
+        //获取试题答案
+        public string getExerciseRes(string ExeID)//若为fin1公布结果
+        {
+            string res;
+            DataTable dt = DAL.Exercise.MyExercise.getExerciseres(ExeID);
+            res = new Helper.jstodt().ToJson(dt);
+            return res;
+        }
+
+        //获取试题数据生成答题卡
+        public string getExerciseTodo(string ExeID,string userID )
+        {
+            string res;
+            DataTable dt = DAL.Exercise.MyExercise.getExercise(ExeID);
+            DataTable result = DAL.Exercise.MyExercise.getExerciseRes(ExeID, userID);//获取是否已作答数据
             string exeresult = new Helper.jstodt().ToJson(result);
-            result.Columns.Add("res", Type.GetType("System.String"));
+            dt.Columns.Add("res", Type.GetType("System.String"));
             dt.Rows[0]["res"] = exeresult;
             res = new Helper.jstodt().ToJson(dt);
             return res;
         }
         
         //做题
-        public string postExerciseCard(string exeID, string time, string result, string userID)
+        public string postExerciseCard(string ExeID, string result, string userID,string time)
         {
-            string res = DAL.Exercise.MyExercise.postExerciseCard(exeID, time, result, userID);
+            string res = DAL.Exercise.MyExercise.postExerciseCard(ExeID, result, userID,time);
             return res;
         }
 
-        //获取试题答案
-        public string getExerciseres(string EXEID)//若为fin1公布结果
-        {
-            string res;
-            DataTable dt = DAL.Exercise.MyExercise.getExerciseres(EXEID);
-            res = new Helper.jstodt().ToJson(dt);
-            return res;
-        }
+        
     }
 }
+

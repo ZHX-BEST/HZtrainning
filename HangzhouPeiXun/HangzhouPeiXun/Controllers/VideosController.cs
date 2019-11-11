@@ -56,8 +56,8 @@ namespace HangzhouPeiXun.Controllers
             {
                 Directory.CreateDirectory(strPath);//如文件夹不存在创建当日文件夹
             }
-            url = url + ymds + str0;
-            strPath += ymds + str0;
+            url = url + "/"+ymds + str0;
+            strPath += "/" + ymds + str0;
             try
             {
                 file0.SaveAs(strPath);

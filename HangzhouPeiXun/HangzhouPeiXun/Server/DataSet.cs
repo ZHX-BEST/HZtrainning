@@ -53,8 +53,8 @@ namespace HangzhouPeiXun.Server
         public string SetNorData(string UserType)
         {
             string UpperID = ServerDAL.DataSetDal.MyData.SetData(UserType);//插入Data一行，生成UpperID，NorID，AbID；
-            string NorID = UpperID + "_0";//NorID = UpperID+_0; AbID = UpperID + _1;
-            string flag = Server.CreateData.MyCreate.CreateNorData(NorID, UserType);//生成 I，U，W正常数据
+            
+            string flag = Server.CreateData.MyCreate.CreateNorData(UpperID, UserType);//生成 I，U，W正常数据
             return UpperID;
         }
 

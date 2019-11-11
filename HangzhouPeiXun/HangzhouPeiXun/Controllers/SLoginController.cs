@@ -14,8 +14,7 @@ namespace HangzhouPeiXun.Controllers
         {
             string res = "False";
             DataTable dt = new DAL.SLogin().getlogin(id, pwd);
-            if (dt.Rows.Count != 0)
-                res = "True";
+            res = new Helper.jstodt().ToJson(dt);
             return res;
         }
 
@@ -23,8 +22,7 @@ namespace HangzhouPeiXun.Controllers
         {
             string res = "False";
             DataTable dt = new DAL.SLogin().getteacherlogin(id, pwd);
-            if (dt.Rows.Count != 0)
-                res = "True";
+            res = new Helper.jstodt().ToJson(dt);
             return res;
         }
     }

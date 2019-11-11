@@ -8,45 +8,92 @@ using System.Web.Http;
 using System.Web;
 
 namespace HangzhouPeiXun.Controllers
-{
+{   
     public class TestController : ApiController
-    {
+    {        
         //获取试卷信息
-        public string getTestInfo(string userID)
+        public string getTestlist()
         {
             string res;
-            DataTable dt = DAL.Test.MyTest.getTestInfo(userID);
+            DataTable dt = DAL.Test.MyTest.getTestList();
             res = new Helper.jstodt().ToJson(dt);
             return res;
         }
 
+        /// <summary>
+        /// 获取试卷详情
+        /// </summary>
+        /// <param name="testID"></param>
+        /// <returns></returns>
+        public string gettest(string testID, string time)
+        {
+            HttpContext.Current.Session["Time"] = time;
+            string sessionid = HttpContext.Current.Session.SessionID;
+            DataTable dt = DAL.Test.MyTest.gettest(testID);
+            string res = new Helper.jstodt().ToJson(dt)+ "#ASP.NET_SessionId=" + sessionid;
+            return res;
+        }
         //获取试题
-        public string getproblem(string dataupperID)
+        public string getproblem(string upperID)
         {
             string res;
-            DataTable dt = DAL.Test.MyTest.getproblem(dataupperID);
+            DataTable dt = DAL.Test.MyTest.getproblem(upperID);
             res = new Helper.jstodt().ToJson(dt);
             return res;
         }
 
-        public string postanswer(string time, string answer)
+        
+        public string postanswer(string time)
         {
-            string timelast = HttpContext.Current.Session["Time"].ToString();
+            string answer = HttpContext.Current.Request["answer"].ToString();
+            string timelast = HttpContext.Current.Session["Time"].ToString();            
             DateTime dtlast = Convert.ToDateTime(timelast);
-            DateTime dtthis = Convert.ToDateTime(time); 
+            DateTime dtthis = Convert.ToDateTime(time);
             if (DateTime.Compare(dtthis, dtlast) > 0)
             {
                 HttpContext.Current.Session["Time"] = time;//时间戳
                 HttpContext.Current.Session["answer"] = answer;
             }
             return "true";
+            //return timelast;
         }
 
         //提交答题卡
-        public string postTestCard(string testID, string result, string time,  string userID)
+        public string postTestCard(string testID,  string time,  string userID)
         {
-            string res = DAL.Test.MyTest.postTestCard(testID, result, time,  userID);
+            string answer = HttpContext.Current.Request["answer"].ToString();
+            string res = DAL.Test.MyTest.postTestCard(testID, answer, time,  userID);
             return res;
+        }
+
+        //获取考试结果
+        public string getResult(string testID)
+        {
+            DataTable dt = DAL.TestTeacher.MyTestTeacher.getResult(testID);
+            string res = new Helper.jstodt().ToJson(dt);
+            return res;
+        }
+
+        public string getsetminutes(string minutes)
+        {
+            HttpContext.Current.Session["minutes"] = minutes;
+            return minutes;
+        }
+
+        public string getminutes()
+        {
+            string minutes = "0";
+            try
+            {
+                 minutes = HttpContext.Current.Session["minutes"].ToString();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
+            return minutes;
         }
     }
 }
