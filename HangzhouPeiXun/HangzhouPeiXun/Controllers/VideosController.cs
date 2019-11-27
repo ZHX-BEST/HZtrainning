@@ -49,8 +49,8 @@ namespace HangzhouPeiXun.Controllers
             string str0 = fi0.Substring(fi0.LastIndexOf("."), fi0.Length - fi0.LastIndexOf("."));//切出后缀
             string ymd = DateTime.Now.ToString("yyyy-MM-dd", DateTimeFormatInfo.InvariantInfo);//精确到日，用于文件夹名
             string ymds = DateTime.Now.ToString("yyyyMMddHHmmssffff", DateTimeFormatInfo.InvariantInfo);//精确到毫秒时间，用于文件名
-            string url = @"/Videos/" + ymd;
-            string strPath = HttpContext.Current.Server.MapPath(url);
+            string url = "Videos/" + ymd;
+            string strPath = HttpContext.Current.Server.MapPath("/"+url);
             string hash = "";//计算文件hash值
             if (!Directory.Exists(strPath))
             {

@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -63,6 +63,8 @@ namespace HangzhouPeiXun.Controllers
         {
             string answer = HttpContext.Current.Request["answer"].ToString();
             string res = DAL.Test.MyTest.postTestCard(testID, answer, time,  userID);
+            HttpContext.Current.Session["answer"] = "";
+            HttpContext.Current.Session["minutes"] = "0";
             return res;
         }
 
@@ -74,6 +76,14 @@ namespace HangzhouPeiXun.Controllers
             return res;
         }
 
+        public string getcleartest()
+        {
+            HttpContext.Current.Session["minutes"] = "0";
+            HttpContext.Current.Session["answer"] = "";
+            return "True";
+        }
+
+        [HttpGet]
         public string getsetminutes(string minutes)
         {
             HttpContext.Current.Session["minutes"] = minutes;
@@ -94,6 +104,21 @@ namespace HangzhouPeiXun.Controllers
             }
             
             return minutes;
+        }
+
+        public string getanswer()
+        {
+            string res = "NULL";
+            try
+            {
+                res = HttpContext.Current.Session["answer"].ToString();
+            }
+            catch (Exception)
+            {
+;
+            }
+            return res;
+   
         }
     }
 }

@@ -20,7 +20,7 @@ namespace HangzhouPeiXun.DAL
         public DataTable getExercise(string ExeID)//根据所属教师获取课堂练习
         {
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@ExeID", ExeID) };
-            string sql = "SELECT exe.Exe_ID,I.I_96Date,U.U_96Date,W.W_96Date,exe.Exe_Fin FROM TB_Exercise exe " + 
+            string sql = "SELECT exe.Exe_ID,I.I_96Date,U.U_96Date,W.W_96Date,exe.Exe_Fin,data.Data_AbTypeTime FROM TB_Exercise exe " + 
                             "inner join TB_Data data on data.Data_UpperID = exe.Exe_DataID "+
                             "inner join TB_I I on data.Data_AbID = I.I_DataID "+
                             "inner join TB_U U on data.Data_AbID = U.U_DataID "+

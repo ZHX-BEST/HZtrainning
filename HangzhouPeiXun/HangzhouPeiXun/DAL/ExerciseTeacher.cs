@@ -86,8 +86,8 @@ namespace HangzhouPeiXun.DAL
             string res = "false";
             string abID = upperID + "_1";
             string sql = "update TB_I set I_96Date = @I  where I_DataID = @abid; " +
-                "update TB_U set U_96Date = @I  where U_DataID = @abid; " +
-                "update TB_W set W_96Date = @I  where W_DataID = @abid; " +
+                "update TB_U set U_96Date = @U  where U_DataID = @abid; " +
+                "update TB_W set W_96Date = @W  where W_DataID = @abid; " +
                 "update TB_Data set Data_AbTypeTime = @abtype where Data_UpperID = @id;";
             SqlParameter[] paras = { new SqlParameter("@id", upperID), new SqlParameter("@abid", abID), new SqlParameter("@I", abI), new SqlParameter("@U", abU), new SqlParameter("@W", abW), new SqlParameter("@abtype", AbType) };
             int flag = new Helper.SQLHelper().ExecuteNonQuery(sql, paras, CommandType.Text);

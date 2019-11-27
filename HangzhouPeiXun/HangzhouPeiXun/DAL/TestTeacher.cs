@@ -234,5 +234,44 @@ namespace HangzhouPeiXun.DAL
             return res;
         }
 
+        public string getpoint(string testID,string point)
+        {
+            string res = "False";
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@testID", testID), new SqlParameter("@point", point) };
+            string sql = "update TB_Test set Test_Point = @point where Test_ID = @testID";
+            int flag = new Helper.SQLHelper().ExecuteNonQuery(sql, paras, CommandType.Text);
+            if (flag > 0)
+                res = "True";
+            return res;
+        }
+
+        public DataTable getandswer(string testID)//获取全部答题情况
+        {
+            string sql = "select * from TB_DoTest where DoTest_TestID = @testID";
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@testID", testID) };
+            DataTable dt = new Helper.SQLHelper().ExcuteQuery(sql, paras, CommandType.Text);
+            return dt;
+        }
+        public DataTable getquestionandswer(string testID)//获取试题的upperID
+        {
+            try
+            {
+                string sql = "select * from TB_Test where Test_ID = @testID";
+                SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@testID", testID) };
+                DataTable dt = new Helper.SQLHelper().ExcuteQuery(sql, paras, CommandType.Text);
+                string data = dt.Rows[0]["Test_Data"].ToString();
+                DataTable res0 = new Helper.jstodt().ToDataTable(data);
+                string restr0 = res0.Rows[0]["detail"].ToString();
+                DataTable resdetail = new Helper.jstodt().ToDataTable(restr0);
+                return resdetail;
+            }
+            catch (Exception)
+            {
+
+                return new DataTable();
+            }
+            
+            
+        }
     }
 }

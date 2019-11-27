@@ -201,8 +201,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="index.html" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
     <Content Include="Areas\HelpPage\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\ResourceModel.cshtml" />
@@ -222,13 +221,54 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
-    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="static\css\app.1db490f42b7173e37a1906bb088ac9da.css" />
+    <Content Include="static\css\app.405f85be8c33c9a2eee876a6c0d14c08.css" />
+    <Content Include="static\css\app.50c3cd099107661b0cc2691663241018.css" />
+    <Content Include="static\css\app.774e92a285a93209963f28504d4c62e2.css" />
+    <Content Include="static\css\app.7f8322833fc79740b2db728a751cebc8.css" />
+    <Content Include="static\css\app.aae1619e8000585ab444f32a2e58c12b.css" />
+    <Content Include="static\css\app.b6f5dd087afcd59269b07109c1f8ac0d.css" />
+    <Content Include="static\img\221524.68880e2.jpg" />
+    <Content Include="static\img\th.1c3e603.jpg" />
+    <Content Include="static\img\timg.54b4d12.jpg" />
+    <Content Include="static\img\video.975e892.jpg" />
+    <Content Include="static\js\app.04253b81deb3b37b3805.js" />
+    <Content Include="static\js\app.1c851f2624005d270e69.js" />
+    <Content Include="static\js\app.6bc5834b059b9d5076e4.js" />
+    <Content Include="static\js\app.7a8101bf1a28ae8d51c6.js" />
+    <Content Include="static\js\app.c97268e16e62270b1f98.js" />
+    <Content Include="static\js\app.e53d10e3ad980590ed2c.js" />
+    <Content Include="static\js\app.e657be2534cdc283d919.js" />
+    <Content Include="static\js\manifest.c671b31a6294c60d458b.js" />
+    <Content Include="Web\.postcssrc.js" />
+    <Content Include="Web\build\build.js" />
+    <Content Include="Web\build\check-versions.js" />
+    <Content Include="Web\build\logo.png" />
+    <Content Include="Web\build\utils.js" />
+    <Content Include="Web\build\vue-loader.conf.js" />
+    <Content Include="Web\build\webpack.base.conf.js" />
+    <Content Include="Web\build\webpack.dev.conf.js" />
+    <Content Include="Web\build\webpack.prod.conf.js" />
+    <Content Include="Web\config\dev.env.js" />
+    <Content Include="Web\config\index.js" />
+    <Content Include="Web\config\prod.env.js" />
+    <Content Include="Web\index.html" />
+    <Content Include="Web\src\assets\logo.png" />
+    <Content Include="Web\src\assets\th.jpg" />
+    <Content Include="Web\src\assets\timg.jpg" />
+    <Content Include="Web\src\main.js" />
+    <Content Include="Web\src\router\index.js" />
+    <Content Include="Web\test.txt" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -243,6 +283,45 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Web\.babelrc" />
+    <Content Include="Web\.editorconfig" />
+    <Content Include="Web\.gitignore" />
+    <Content Include="Web\dist.rar" />
+    <Content Include="Web\Interface.md" />
+    <Content Include="Web\package.json" />
+    <Content Include="Web\README.md" />
+    <Content Include="Web\src\App.vue" />
+    <Content Include="Web\src\components\common\error_choose.vue" />
+    <Content Include="Web\src\components\common\MYheader.vue" />
+    <Content Include="Web\src\components\common\table_footer.vue" />
+    <Content Include="Web\src\components\page\exam.vue" />
+    <Content Include="Web\src\components\page\exam_result.vue" />
+    <Content Include="Web\src\components\page\exam_result_clone.vue" />
+    <Content Include="Web\src\components\page\login.vue" />
+    <Content Include="Web\src\components\page\lssue.vue" />
+    <Content Include="Web\src\components\page\question_result.vue" />
+    <Content Include="Web\src\components\page\student_main.vue" />
+    <Content Include="Web\src\components\page\student_question.vue" />
+    <Content Include="Web\src\components\page\teacher_main.vue" />
+    <Content Include="Web\static\.gitkeep" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="static\css\app.1db490f42b7173e37a1906bb088ac9da.css.map" />
+    <Content Include="static\css\app.405f85be8c33c9a2eee876a6c0d14c08.css.map" />
+    <Content Include="static\css\app.50c3cd099107661b0cc2691663241018.css.map" />
+    <Content Include="static\css\app.774e92a285a93209963f28504d4c62e2.css.map" />
+    <Content Include="static\css\app.7f8322833fc79740b2db728a751cebc8.css.map" />
+    <Content Include="static\css\app.aae1619e8000585ab444f32a2e58c12b.css.map" />
+    <Content Include="static\css\app.b6f5dd087afcd59269b07109c1f8ac0d.css.map" />
+    <Content Include="static\fonts\element-icons.535877f.woff" />
+    <Content Include="static\fonts\element-icons.732389d.ttf" />
+    <Content Include="static\js\app.04253b81deb3b37b3805.js.map" />
+    <Content Include="static\js\app.1c851f2624005d270e69.js.map" />
+    <Content Include="static\js\app.6bc5834b059b9d5076e4.js.map" />
+    <Content Include="static\js\app.7a8101bf1a28ae8d51c6.js.map" />
+    <Content Include="static\js\app.c97268e16e62270b1f98.js.map" />
+    <Content Include="static\js\app.e53d10e3ad980590ed2c.js.map" />
+    <Content Include="static\js\app.e657be2534cdc283d919.js.map" />
+    <Content Include="static\js\manifest.c671b31a6294c60d458b.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -275,8 +354,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

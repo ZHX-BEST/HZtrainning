@@ -23,9 +23,9 @@ namespace HangzhouPeiXun.Controllers
             return res;
         }
 
-        public string postchangeuser(string name, string pwd, string teacher, string id)
+        public string postchangeuser(string name, string pwd, string teacher, string UserID)
         {
-            string res = DAL.User.MyUser.postchangeuser(name, pwd, teacher,id);
+            string res = DAL.User.MyUser.postchangeuser(name, pwd, teacher, UserID);
             return res;
         }
 

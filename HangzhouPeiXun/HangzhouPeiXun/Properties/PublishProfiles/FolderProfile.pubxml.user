@@ -79,10 +79,10 @@
       <publishTime>09/10/2013 16:29:20</publishTime>
     </File>
     <File Include="bin/HangzhouPeiXun.dll">
-      <publishTime>11/11/2019 22:05:10</publishTime>
+      <publishTime>11/27/2019 17:12:18</publishTime>
     </File>
     <File Include="bin/HangzhouPeiXun.pdb">
-      <publishTime>11/11/2019 22:05:10</publishTime>
+      <publishTime>11/27/2019 17:12:18</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.TelemetryCorrelation.dll">
       <publishTime>06/28/2017 15:05:26</publishTime>
@@ -348,6 +348,9 @@
     <File Include="Global.asax">
       <publishTime>08/19/2019 21:14:12</publishTime>
     </File>
+    <File Include="index.html">
+      <publishTime>11/27/2019 17:07:31</publishTime>
+    </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>08/19/2019 21:14:36</publishTime>
     </File>
@@ -375,6 +378,162 @@
     <File Include="Scripts/modernizr-2.8.3.js">
       <publishTime>08/19/2019 21:15:15</publishTime>
     </File>
+    <File Include="static/css/app.1db490f42b7173e37a1906bb088ac9da.css">
+      <publishTime>11/13/2019 20:23:32</publishTime>
+    </File>
+    <File Include="static/css/app.1db490f42b7173e37a1906bb088ac9da.css.map">
+      <publishTime>11/13/2019 20:23:32</publishTime>
+    </File>
+    <File Include="static/css/app.405f85be8c33c9a2eee876a6c0d14c08.css">
+      <publishTime>11/27/2019 17:07:32</publishTime>
+    </File>
+    <File Include="static/css/app.405f85be8c33c9a2eee876a6c0d14c08.css.map">
+      <publishTime>11/27/2019 17:07:32</publishTime>
+    </File>
+    <File Include="static/css/app.50c3cd099107661b0cc2691663241018.css">
+      <publishTime>11/13/2019 14:03:05</publishTime>
+    </File>
+    <File Include="static/css/app.50c3cd099107661b0cc2691663241018.css.map">
+      <publishTime>11/13/2019 09:06:57</publishTime>
+    </File>
+    <File Include="static/css/app.774e92a285a93209963f28504d4c62e2.css">
+      <publishTime>09/27/2019 16:37:51</publishTime>
+    </File>
+    <File Include="static/css/app.774e92a285a93209963f28504d4c62e2.css.map">
+      <publishTime>09/27/2019 16:37:50</publishTime>
+    </File>
+    <File Include="static/css/app.7f8322833fc79740b2db728a751cebc8.css">
+      <publishTime>11/14/2019 01:51:42</publishTime>
+    </File>
+    <File Include="static/css/app.7f8322833fc79740b2db728a751cebc8.css.map">
+      <publishTime>11/14/2019 01:51:42</publishTime>
+    </File>
+    <File Include="static/css/app.aae1619e8000585ab444f32a2e58c12b.css">
+      <publishTime>11/13/2019 20:16:14</publishTime>
+    </File>
+    <File Include="static/css/app.aae1619e8000585ab444f32a2e58c12b.css.map">
+      <publishTime>11/13/2019 20:16:14</publishTime>
+    </File>
+    <File Include="static/css/app.b6f5dd087afcd59269b07109c1f8ac0d.css">
+      <publishTime>11/12/2019 22:30:41</publishTime>
+    </File>
+    <File Include="static/css/app.b6f5dd087afcd59269b07109c1f8ac0d.css.map">
+      <publishTime>11/12/2019 22:30:41</publishTime>
+    </File>
+    <File Include="static/css/static/css/app.774e92a285a93209963f28504d4c62e2.css">
+      <publishTime>09/27/2019 16:37:51</publishTime>
+    </File>
+    <File Include="static/css/static/css/app.774e92a285a93209963f28504d4c62e2.css.map">
+      <publishTime>09/27/2019 16:37:50</publishTime>
+    </File>
+    <File Include="static/css/static/css/app.b6f5dd087afcd59269b07109c1f8ac0d.css">
+      <publishTime>11/12/2019 22:30:41</publishTime>
+    </File>
+    <File Include="static/css/static/css/app.b6f5dd087afcd59269b07109c1f8ac0d.css.map">
+      <publishTime>11/12/2019 22:30:41</publishTime>
+    </File>
+    <File Include="static/css/static/fonts/element-icons.535877f.woff">
+      <publishTime>11/12/2019 22:30:41</publishTime>
+    </File>
+    <File Include="static/css/static/fonts/element-icons.732389d.ttf">
+      <publishTime>11/12/2019 22:30:41</publishTime>
+    </File>
+    <File Include="static/css/static/img/221524.68880e2.jpg">
+      <publishTime>11/12/2019 22:30:41</publishTime>
+    </File>
+    <File Include="static/css/static/img/th.1c3e603.jpg">
+      <publishTime>11/12/2019 22:30:41</publishTime>
+    </File>
+    <File Include="static/css/static/img/timg.54b4d12.jpg">
+      <publishTime>11/12/2019 22:30:41</publishTime>
+    </File>
+    <File Include="static/css/static/img/video.975e892.jpg">
+      <publishTime>11/12/2019 22:30:41</publishTime>
+    </File>
+    <File Include="static/css/static/js/app.6bc5834b059b9d5076e4.js">
+      <publishTime>11/12/2019 22:30:41</publishTime>
+    </File>
+    <File Include="static/css/static/js/app.6bc5834b059b9d5076e4.js.map">
+      <publishTime>11/12/2019 22:30:41</publishTime>
+    </File>
+    <File Include="static/css/static/js/app.e657be2534cdc283d919.js">
+      <publishTime>09/27/2019 16:37:50</publishTime>
+    </File>
+    <File Include="static/css/static/js/app.e657be2534cdc283d919.js.map">
+      <publishTime>09/27/2019 16:37:50</publishTime>
+    </File>
+    <File Include="static/css/static/js/manifest.c671b31a6294c60d458b.js">
+      <publishTime>11/12/2019 22:30:41</publishTime>
+    </File>
+    <File Include="static/css/static/js/manifest.c671b31a6294c60d458b.js.map">
+      <publishTime>11/12/2019 22:30:41</publishTime>
+    </File>
+    <File Include="static/fonts/element-icons.535877f.woff">
+      <publishTime>11/27/2019 17:07:33</publishTime>
+    </File>
+    <File Include="static/fonts/element-icons.732389d.ttf">
+      <publishTime>11/27/2019 17:07:32</publishTime>
+    </File>
+    <File Include="static/img/221524.68880e2.jpg">
+      <publishTime>11/27/2019 17:07:32</publishTime>
+    </File>
+    <File Include="static/img/th.1c3e603.jpg">
+      <publishTime>11/27/2019 17:07:32</publishTime>
+    </File>
+    <File Include="static/img/timg.54b4d12.jpg">
+      <publishTime>11/27/2019 17:07:32</publishTime>
+    </File>
+    <File Include="static/img/video.975e892.jpg">
+      <publishTime>11/27/2019 17:07:32</publishTime>
+    </File>
+    <File Include="static/js/app.04253b81deb3b37b3805.js">
+      <publishTime>11/13/2019 20:23:32</publishTime>
+    </File>
+    <File Include="static/js/app.04253b81deb3b37b3805.js.map">
+      <publishTime>11/13/2019 20:23:32</publishTime>
+    </File>
+    <File Include="static/js/app.1c851f2624005d270e69.js">
+      <publishTime>11/27/2019 17:07:32</publishTime>
+    </File>
+    <File Include="static/js/app.1c851f2624005d270e69.js.map">
+      <publishTime>11/27/2019 17:07:32</publishTime>
+    </File>
+    <File Include="static/js/app.6bc5834b059b9d5076e4.js">
+      <publishTime>11/12/2019 22:30:41</publishTime>
+    </File>
+    <File Include="static/js/app.6bc5834b059b9d5076e4.js.map">
+      <publishTime>11/12/2019 22:30:41</publishTime>
+    </File>
+    <File Include="static/js/app.7a8101bf1a28ae8d51c6.js">
+      <publishTime>11/13/2019 09:06:57</publishTime>
+    </File>
+    <File Include="static/js/app.7a8101bf1a28ae8d51c6.js.map">
+      <publishTime>11/13/2019 09:06:57</publishTime>
+    </File>
+    <File Include="static/js/app.c97268e16e62270b1f98.js">
+      <publishTime>11/13/2019 20:16:14</publishTime>
+    </File>
+    <File Include="static/js/app.c97268e16e62270b1f98.js.map">
+      <publishTime>11/13/2019 20:16:14</publishTime>
+    </File>
+    <File Include="static/js/app.e53d10e3ad980590ed2c.js">
+      <publishTime>11/14/2019 01:51:42</publishTime>
+    </File>
+    <File Include="static/js/app.e53d10e3ad980590ed2c.js.map">
+      <publishTime>11/14/2019 01:51:42</publishTime>
+    </File>
+    <File Include="static/js/app.e657be2534cdc283d919.js">
+      <publishTime>09/27/2019 16:37:50</publishTime>
+    </File>
+    <File Include="static/js/app.e657be2534cdc283d919.js.map">
+      <publishTime>09/27/2019 16:37:50</publishTime>
+    </File>
+    <File Include="static/js/manifest.c671b31a6294c60d458b.js">
+      <publishTime>11/27/2019 17:07:33</publishTime>
+    </File>
+    <File Include="static/js/manifest.c671b31a6294c60d458b.js.map">
+      <publishTime>11/27/2019 17:07:32</publishTime>
+    </File>
     <File Include="Views/Home/Index.cshtml">
       <publishTime>08/19/2019 21:14:12</publishTime>
     </File>
@@ -391,7 +550,127 @@
       <publishTime>08/19/2019 21:14:12</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/11/2019 06:10:51</publishTime>
+      <publishTime>11/27/2019 11:51:12</publishTime>
+    </File>
+    <File Include="Web/.babelrc">
+      <publishTime>10/01/2019 16:09:41</publishTime>
+    </File>
+    <File Include="Web/.editorconfig">
+      <publishTime>10/01/2019 16:09:41</publishTime>
+    </File>
+    <File Include="Web/.gitignore">
+      <publishTime>10/01/2019 16:09:41</publishTime>
+    </File>
+    <File Include="Web/.postcssrc.js">
+      <publishTime>10/01/2019 16:09:41</publishTime>
+    </File>
+    <File Include="Web/build/build.js">
+      <publishTime>10/01/2019 16:09:41</publishTime>
+    </File>
+    <File Include="Web/build/check-versions.js">
+      <publishTime>10/01/2019 16:09:41</publishTime>
+    </File>
+    <File Include="Web/build/logo.png">
+      <publishTime>10/01/2019 16:09:41</publishTime>
+    </File>
+    <File Include="Web/build/utils.js">
+      <publishTime>10/01/2019 16:09:41</publishTime>
+    </File>
+    <File Include="Web/build/vue-loader.conf.js">
+      <publishTime>10/01/2019 16:09:41</publishTime>
+    </File>
+    <File Include="Web/build/webpack.base.conf.js">
+      <publishTime>10/01/2019 16:09:41</publishTime>
+    </File>
+    <File Include="Web/build/webpack.dev.conf.js">
+      <publishTime>10/01/2019 16:09:41</publishTime>
+    </File>
+    <File Include="Web/build/webpack.prod.conf.js">
+      <publishTime>10/01/2019 16:09:41</publishTime>
+    </File>
+    <File Include="Web/config/dev.env.js">
+      <publishTime>10/01/2019 16:09:41</publishTime>
+    </File>
+    <File Include="Web/config/index.js">
+      <publishTime>10/01/2019 16:09:41</publishTime>
+    </File>
+    <File Include="Web/config/prod.env.js">
+      <publishTime>10/01/2019 16:09:41</publishTime>
+    </File>
+    <File Include="Web/dist.rar">
+      <publishTime>10/01/2019 16:09:42</publishTime>
+    </File>
+    <File Include="Web/index.html">
+      <publishTime>10/01/2019 16:09:42</publishTime>
+    </File>
+    <File Include="Web/Interface.md">
+      <publishTime>10/01/2019 16:09:41</publishTime>
+    </File>
+    <File Include="Web/package.json">
+      <publishTime>10/01/2019 16:09:42</publishTime>
+    </File>
+    <File Include="Web/README.md">
+      <publishTime>10/01/2019 16:09:41</publishTime>
+    </File>
+    <File Include="Web/src/App.vue">
+      <publishTime>10/01/2019 16:09:42</publishTime>
+    </File>
+    <File Include="Web/src/assets/logo.png">
+      <publishTime>10/01/2019 16:09:42</publishTime>
+    </File>
+    <File Include="Web/src/assets/th.jpg">
+      <publishTime>10/01/2019 16:09:42</publishTime>
+    </File>
+    <File Include="Web/src/assets/timg.jpg">
+      <publishTime>10/01/2019 16:09:42</publishTime>
+    </File>
+    <File Include="Web/src/components/common/error_choose.vue">
+      <publishTime>10/01/2019 16:09:42</publishTime>
+    </File>
+    <File Include="Web/src/components/common/MYheader.vue">
+      <publishTime>10/21/2019 20:09:59</publishTime>
+    </File>
+    <File Include="Web/src/components/common/table_footer.vue">
+      <publishTime>10/01/2019 16:09:42</publishTime>
+    </File>
+    <File Include="Web/src/components/page/exam.vue">
+      <publishTime>10/01/2019 16:09:42</publishTime>
+    </File>
+    <File Include="Web/src/components/page/exam_result.vue">
+      <publishTime>10/21/2019 20:09:59</publishTime>
+    </File>
+    <File Include="Web/src/components/page/exam_result_clone.vue">
+      <publishTime>10/01/2019 16:09:42</publishTime>
+    </File>
+    <File Include="Web/src/components/page/login.vue">
+      <publishTime>10/01/2019 16:09:42</publishTime>
+    </File>
+    <File Include="Web/src/components/page/lssue.vue">
+      <publishTime>10/01/2019 16:09:42</publishTime>
+    </File>
+    <File Include="Web/src/components/page/question_result.vue">
+      <publishTime>10/01/2019 16:09:42</publishTime>
+    </File>
+    <File Include="Web/src/components/page/student_main.vue">
+      <publishTime>10/01/2019 16:09:42</publishTime>
+    </File>
+    <File Include="Web/src/components/page/student_question.vue">
+      <publishTime>10/01/2019 16:09:42</publishTime>
+    </File>
+    <File Include="Web/src/components/page/teacher_main.vue">
+      <publishTime>10/21/2019 20:10:00</publishTime>
+    </File>
+    <File Include="Web/src/main.js">
+      <publishTime>10/01/2019 16:09:42</publishTime>
+    </File>
+    <File Include="Web/src/router/index.js">
+      <publishTime>10/01/2019 16:09:42</publishTime>
+    </File>
+    <File Include="Web/static/.gitkeep">
+      <publishTime>10/01/2019 16:09:42</publishTime>
+    </File>
+    <File Include="Web/test.txt">
+      <publishTime>09/27/2019 21:36:06</publishTime>
     </File>
   </ItemGroup>
 </Project>

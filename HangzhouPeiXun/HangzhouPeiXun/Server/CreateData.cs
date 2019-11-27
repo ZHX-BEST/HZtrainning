@@ -33,6 +33,7 @@ namespace HangzhouPeiXun.Server
             DataTable DtW = new DataTable();
             DtW.Columns.Add("时间", Type.GetType("System.String"));
             DtW.Columns.Add("用电量", Type.GetType("System.String"));
+            DtW.Columns.Add("变压器容量", Type.GetType("System.String"));
             DtW.Columns.Add("倍率", Type.GetType("System.String"));
             #endregion
             int rowscpount = dt.Rows.Count;
@@ -54,6 +55,7 @@ namespace HangzhouPeiXun.Server
                     DtW.Rows.Add();
                     DtW.Rows[RW]["时间"] = dt.Rows[i]["时间"].ToString();
                     DtW.Rows[RW]["用电量"] = dt.Rows[i]["用电量"].ToString();
+                    DtW.Rows[RW]["变压器容量"] = dt.Rows[i]["变压器容量"].ToString();
                     DtW.Rows[RW]["倍率"] = dt.Rows[i]["倍率"].ToString();
                     RW++;
                 }

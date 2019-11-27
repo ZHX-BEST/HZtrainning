@@ -15,14 +15,14 @@ namespace HangzhouPeiXun.DAL
 
         public DataTable getvideolist()
         {
-            string sql = "select top 30 * from TB_Video  order by Video_ID desc";           
+            string sql = "select V.*,u.User_Name from TB_Video v inner join TB_User u on v.Video_User = u.User_ID  order by Video_ID desc";           
             DataTable dt = new Helper.SQLHelper().ExcuteQuery(sql, CommandType.Text);
             return dt;
         }
 
         public DataTable getvideo(string videoid)
         {
-            string sql = "select * from TB_Video where Video_ID = @id";
+            string sql = "select V.*,u.User_Name from TB_Video v inner join TB_User u on v.Video_User = u.User_ID where Video_ID = @id";
             SqlParameter[] paras = new SqlParameter[] {new SqlParameter("@id",videoid) };
             DataTable dt = new Helper.SQLHelper().ExcuteQuery(sql,paras ,CommandType.Text);
             return dt;

@@ -24,7 +24,8 @@ namespace HangzhouPeiXun.DAL
         /// <returns></returns>
         public DataTable getlogin(string ID,string pwd)
         {
-            string sql = "select * from TB_User where (User_ID = @ID or User_Name =@ID ) and User_PWD = @pwd and User_Teacher !=0";
+            //string sql = "select * from TB_User where (User_ID = @ID or User_Name =@ID ) and User_PWD = @pwd and User_Teacher !=0";
+            string sql = "select * from TB_User where (User_Name =@ID ) and User_PWD = @pwd and User_Teacher !=0";
             SqlParameter[] paras = {new SqlParameter("@ID",ID),new SqlParameter("@pwd",pwd) }; 
             DataTable dt = new Helper.SQLHelper().ExcuteQuery(sql, paras, CommandType.Text);
             return dt;
@@ -38,7 +39,7 @@ namespace HangzhouPeiXun.DAL
         /// <returns></returns>
         public DataTable getteacherlogin(string ID, string pwd)
         {
-            string sql = "select * from TB_User where (User_ID = @ID or User_Name =@ID) and User_PWD = @pwd and User_Teacher = 0";
+            string sql = "select * from TB_User where (User_Name =@ID) and User_PWD = @pwd and User_Teacher = 0";
             SqlParameter[] paras = { new SqlParameter("@ID", ID), new SqlParameter("@pwd", pwd) };
             DataTable dt = new Helper.SQLHelper().ExcuteQuery(sql, paras, CommandType.Text);
             return dt;

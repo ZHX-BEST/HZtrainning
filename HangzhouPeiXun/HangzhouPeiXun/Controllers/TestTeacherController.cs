@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Data;
 using System.Web;
+using System.Threading;
 
 namespace HangzhouPeiXun.Controllers
 {
@@ -138,8 +139,83 @@ namespace HangzhouPeiXun.Controllers
         public string getfin(string testID)
         {
             string res = DAL.TestTeacher.MyTestTeacher.getfin(testID);
+            Thread thread = new Thread(getpoint);//开启判分线程 向线程传参
+            //thread.Start(testID);
             return res;
         }
-               
+
+        private void getpoint()
+        {
+            string testID ="";//线程获取ID
+            try
+            {
+                #region 判卷
+                //TODO:判卷
+                //获取答案
+                DataTable result = DAL.TestTeacher.MyTestTeacher.getquestionandswer(testID);
+                //获取答题卡
+                DataTable dtanswer = DAL.TestTeacher.MyTestTeacher.getandswer(testID);
+                int answersCount = dtanswer.Rows.Count;
+                if (answersCount != 0)
+                {
+                    for (int i = 0; i < answersCount; i++)//判一张卷子
+                    {
+                        double rightcount = 0;
+                        string ansid = dtanswer.Rows[i]["DoTest_ID"].ToString();
+                        string answerstr = dtanswer.Rows[i]["DoTest_Result"].ToString();
+                        int ac = answerstr.LastIndexOf('#');
+                        string answer = answerstr.Substring(0, ac).TrimEnd('#');
+                        DataTable anstable = new Helper.jstodt().ToDataTable(answer);
+                        int questionCount = anstable.Rows.Count;//题目数量
+                        for (int j = 0; j < questionCount; j++)//对一道题进行处理
+                        {
+                            string rightanswer = result.Rows[j]["abType"].ToString();
+                            DataTable rightres = new Helper.jstodt().ToDataTable(rightanswer);
+                            int rightanswercount = rightres.Rows.Count;
+                            int thisRightCount = 0;//此题正确数
+                            string thisansstr = anstable.Rows[j]["abType"].ToString();
+                            DataTable thisans = new Helper.jstodt().ToDataTable(thisansstr);
+                            for (int k = 0; k < thisRightCount; k++)
+                            {
+                                thisans.PrimaryKey = new System.Data.DataColumn[] { thisans.Columns["abType"] };
+                                string st = rightres.Rows[k]["abType"].ToString();
+                                DataRow row = thisans.Rows.Find(st);
+                                if (row.IsNull("abType"))
+                                {
+                                    thisRightCount++;
+                                }
+                            }
+                            rightcount += (double)thisRightCount / thisRightCount;
+                        }
+
+                        //TODO保存的分
+                        double point = rightcount / questionCount * 100;
+                        string Point = point.ToString();
+                        DAL.TestTeacher.MyTestTeacher.getpoint(testID, Point);
+                    }
+
+                }
+                #endregion
+            }
+            catch (Exception)
+            {
+                
+            }
+        }
+
+        public string gettestcash()
+        {
+            string res = "NULL";
+            try
+            {
+                res = HttpContext.Current.Session["TestCash"].ToString();
+            }
+            catch (Exception)
+            {                
+            }
+            return res;
+            
+        }
+
     }
 }
