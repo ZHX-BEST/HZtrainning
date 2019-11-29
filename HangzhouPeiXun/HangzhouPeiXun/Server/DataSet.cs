@@ -52,6 +52,33 @@ namespace HangzhouPeiXun.Server
                     case "C相电流断相":
                         abdtI = CXDLDX(abdtI, timeStart, timeEnd);
                         break;
+                    case "A相电流串二极管":
+                        abdtU = AXDLEJG(abdtI, timeStart, timeEnd);
+                        break;
+                    case "B相电流串二极管":
+                        abdtU = BXDLEJG(abdtI, timeStart, timeEnd);
+                        break;
+                    case "C相电流串二极管":
+                        abdtU = CXDLEJG(abdtI, timeStart, timeEnd);
+                        break;
+                    case "A相电流串电阻":
+                        abdtU = AXDLDZ(abdtI, timeStart, timeEnd);
+                        break;
+                    case "B相电流串电阻":
+                        abdtU = BXDLDZ(abdtI, timeStart, timeEnd);
+                        break;
+                    case "C相电流串电阻":
+                        abdtU = CXDLDZ(abdtI, timeStart, timeEnd);
+                        break;
+                    case "A相电流反向":
+                        abdtU = AXDLFX(abdtI, timeStart, timeEnd);
+                        break;
+                    case "B相电流反向":
+                        abdtU = BXDLFX(abdtI, timeStart, timeEnd);
+                        break;
+                    case "C相电流反向":
+                        abdtU = CXDLFX(abdtI, timeStart, timeEnd);
+                        break;
                     case "A相电压断相":
                         abdtU = AXDYDX(abdtU, timeStart, timeEnd);
                         break;
@@ -60,6 +87,24 @@ namespace HangzhouPeiXun.Server
                         break;
                     case "C相电压断相":
                         abdtU = CXDYDX(abdtU, timeStart, timeEnd);
+                        break;
+                    case "A相电压串二极管":
+                        abdtU = AXDYEJG(abdtU, timeStart, timeEnd);
+                        break;
+                    case "B相电压串二极管":
+                        abdtU = BXDYEJG(abdtU, timeStart, timeEnd);
+                        break;
+                    case "C相电压串二极管":
+                        abdtU = CXDYEJG(abdtU, timeStart, timeEnd);
+                        break;
+                    case "A相电压串电阻":
+                        abdtU = AXDYDZ(abdtU, timeStart, timeEnd);
+                        break;
+                    case "B相电压串电阻":
+                        abdtU = BXDYDZ(abdtU, timeStart, timeEnd);
+                        break;
+                    case "C相电压串电阻":
+                        abdtU = CXDYDZ(abdtU, timeStart, timeEnd);
                         break;
                     default:
                         break;
@@ -192,6 +237,393 @@ namespace HangzhouPeiXun.Server
         }
 
         /// <summary>
+        /// A相电流二极管
+        /// </summary>
+        /// <param name="I"></param>
+        /// <param name="timeStart"></param>
+        /// <param name="TimeEnd"></param>
+        /// <returns></returns>
+        DataTable AXDLEJG(DataTable I, string timeStart, string TimeEnd)
+        {
+            int flagStart = 0;
+            int FlagEnd = I.Rows.Count;
+            int CountI = FlagEnd;
+            DateTime dtStart = Convert.ToDateTime(timeStart);
+            DateTime dtEnd = Convert.ToDateTime(TimeEnd);
+            dtStart = set15minute(dtStart);//设置分钟为15的整数倍
+            dtEnd = set15minute(dtEnd);
+            DateTime dtDataS = Convert.ToDateTime(I.Rows[0]["时间"].ToString());//数据开始时间
+            DateTime dtDataE = Convert.ToDateTime(I.Rows[CountI - 1]["时间"].ToString());//数据结束时间
+            if (DateTime.Compare(dtDataE, dtStart) < 0 || DateTime.Compare(dtEnd, dtDataS) < 0)//异常时间不在数据时间中间
+            { return I; }
+            if (DateTime.Compare(dtStart, dtDataS) > 0)//异常起始时间在数据起始时间之后
+            {
+                string sT = dtStart.ToString("yyyy/M/d H:mm:ss");//2018-10-23 00:00:00.000
+                I.PrimaryKey = new System.Data.DataColumn[] { I.Columns["时间"] };
+                DataRow row = I.Rows.Find(sT);
+                flagStart = I.Rows.IndexOf(row);
+            }
+            if (DateTime.Compare(dtDataE, dtEnd) > 0)//异常结束时间在数据结束时间之前
+            {
+                string sT = dtEnd.ToString("yyyy/M/d H:mm:ss");
+                I.PrimaryKey = new System.Data.DataColumn[] { I.Columns["时间"] };
+                DataRow row = I.Rows.Find(sT);
+                FlagEnd = I.Rows.IndexOf(row);
+            }
+            for (int i = flagStart; i < FlagEnd; i++)
+            {
+                double A = Convert.ToDouble(I.Rows[i]["A相电流"]);//二极管变成根号二分之一
+                A = A * 0.7071;
+                I.Rows[i]["A相电流"] = A.ToString("#0.000");
+            }
+            return I;
+        }
+
+        /// <summary>
+        /// B相电流二极管
+        /// </summary>
+        /// <param name="I"></param>
+        /// <param name="timeStart"></param>
+        /// <param name="TimeEnd"></param>
+        /// <returns></returns>
+        DataTable BXDLEJG(DataTable I, string timeStart, string TimeEnd)
+        {
+            int flagStart = 0;
+            int FlagEnd = I.Rows.Count;
+            int CountI = FlagEnd;
+            DateTime dtStart = Convert.ToDateTime(timeStart);
+            DateTime dtEnd = Convert.ToDateTime(TimeEnd);
+            dtStart = set15minute(dtStart);//设置分钟为15的整数倍
+            dtEnd = set15minute(dtEnd);
+            DateTime dtDataS = Convert.ToDateTime(I.Rows[0]["时间"].ToString());//数据开始时间
+            DateTime dtDataE = Convert.ToDateTime(I.Rows[CountI - 1]["时间"].ToString());//数据结束时间
+            if (DateTime.Compare(dtDataE, dtStart) < 0 || DateTime.Compare(dtEnd, dtDataS) < 0)//异常时间不在数据时间中间
+            { return I; }
+            if (DateTime.Compare(dtStart, dtDataS) > 0)//异常起始时间在数据起始时间之后
+            {
+                string sT = dtStart.ToString("yyyy/M/d H:mm:ss");//2018-10-23 00:00:00.000
+                I.PrimaryKey = new System.Data.DataColumn[] { I.Columns["时间"] };
+                DataRow row = I.Rows.Find(sT);
+                flagStart = I.Rows.IndexOf(row);
+            }
+            if (DateTime.Compare(dtDataE, dtEnd) > 0)//异常结束时间在数据结束时间之前
+            {
+                string sT = dtEnd.ToString("yyyy/M/d H:mm:ss");
+                I.PrimaryKey = new System.Data.DataColumn[] { I.Columns["时间"] };
+                DataRow row = I.Rows.Find(sT);
+                FlagEnd = I.Rows.IndexOf(row);
+            }
+            for (int i = flagStart; i < FlagEnd; i++)
+            {
+                double B = Convert.ToDouble(I.Rows[i]["B相电流"]);//二极管变成根号二分之一
+                B = B * 0.7071;
+                I.Rows[i]["B相电流"] = B.ToString("#0.000");
+            }
+            return I;
+        }
+
+        /// <summary>
+        /// C相电流二极管
+        /// </summary>
+        /// <param name="I"></param>
+        /// <param name="timeStart"></param>
+        /// <param name="TimeEnd"></param>
+        /// <returns></returns>
+        DataTable CXDLEJG(DataTable I, string timeStart, string TimeEnd)
+        {
+            int flagStart = 0;
+            int FlagEnd = I.Rows.Count;
+            int CountI = FlagEnd;
+            DateTime dtStart = Convert.ToDateTime(timeStart);
+            DateTime dtEnd = Convert.ToDateTime(TimeEnd);
+            dtStart = set15minute(dtStart);//设置分钟为15的整数倍
+            dtEnd = set15minute(dtEnd);
+            DateTime dtDataS = Convert.ToDateTime(I.Rows[0]["时间"].ToString());//数据开始时间
+            DateTime dtDataE = Convert.ToDateTime(I.Rows[CountI - 1]["时间"].ToString());//数据结束时间
+            if (DateTime.Compare(dtDataE, dtStart) < 0 || DateTime.Compare(dtEnd, dtDataS) < 0)//异常时间不在数据时间中间
+            { return I; }
+            if (DateTime.Compare(dtStart, dtDataS) > 0)//异常起始时间在数据起始时间之后
+            {
+                string sT = dtStart.ToString("yyyy/M/d H:mm:ss");//2018-10-23 00:00:00.000
+                I.PrimaryKey = new System.Data.DataColumn[] { I.Columns["时间"] };
+                DataRow row = I.Rows.Find(sT);
+                flagStart = I.Rows.IndexOf(row);
+            }
+            if (DateTime.Compare(dtDataE, dtEnd) > 0)//异常结束时间在数据结束时间之前
+            {
+                string sT = dtEnd.ToString("yyyy/M/d H:mm:ss");
+                I.PrimaryKey = new System.Data.DataColumn[] { I.Columns["时间"] };
+                DataRow row = I.Rows.Find(sT);
+                FlagEnd = I.Rows.IndexOf(row);
+            }
+            for (int i = flagStart; i < FlagEnd; i++)
+            {
+                double C = Convert.ToDouble(I.Rows[i]["C相电流"]);//二极管变成根号二分之一
+                C = C * 0.7071;
+                I.Rows[i]["C相电流"] = C.ToString("#0.000");
+            }
+            return I;
+        }
+
+        /// <summary>
+        /// A相电流电阻
+        /// </summary>
+        /// <param name="I"></param>
+        /// <param name="timeStart"></param>
+        /// <param name="TimeEnd"></param>
+        /// <returns></returns>
+        DataTable AXDLDZ(DataTable I, string timeStart, string TimeEnd)
+        {
+            int flagStart = 0;
+            int FlagEnd = I.Rows.Count;
+            int CountI = FlagEnd;
+            DateTime dtStart = Convert.ToDateTime(timeStart);
+            DateTime dtEnd = Convert.ToDateTime(TimeEnd);
+            dtStart = set15minute(dtStart);//设置分钟为15的整数倍
+            dtEnd = set15minute(dtEnd);
+            DateTime dtDataS = Convert.ToDateTime(I.Rows[0]["时间"].ToString());//数据开始时间
+            DateTime dtDataE = Convert.ToDateTime(I.Rows[CountI - 1]["时间"].ToString());//数据结束时间
+            if (DateTime.Compare(dtDataE, dtStart) < 0 || DateTime.Compare(dtEnd, dtDataS) < 0)//异常时间不在数据时间中间
+            { return I; }
+            if (DateTime.Compare(dtStart, dtDataS) > 0)//异常起始时间在数据起始时间之后
+            {
+                string sT = dtStart.ToString("yyyy/M/d H:mm:ss");//2018-10-23 00:00:00.000
+                I.PrimaryKey = new System.Data.DataColumn[] { I.Columns["时间"] };
+                DataRow row = I.Rows.Find(sT);
+                flagStart = I.Rows.IndexOf(row);
+            }
+            if (DateTime.Compare(dtDataE, dtEnd) > 0)//异常结束时间在数据结束时间之前
+            {
+                string sT = dtEnd.ToString("yyyy/M/d H:mm:ss");
+                I.PrimaryKey = new System.Data.DataColumn[] { I.Columns["时间"] };
+                DataRow row = I.Rows.Find(sT);
+                FlagEnd = I.Rows.IndexOf(row);
+            }
+            for (int i = flagStart; i < FlagEnd; i++)
+            {
+                double A = Convert.ToDouble(I.Rows[i]["A相电流"]);//二极管变成根号二分之一
+                A = A * 0.5;
+                I.Rows[i]["A相电流"] = A.ToString("#0.000");
+            }
+            return I;
+        }
+
+        /// <summary>
+        /// B相电流电阻
+        /// </summary>
+        /// <param name="I"></param>
+        /// <param name="timeStart"></param>
+        /// <param name="TimeEnd"></param>
+        /// <returns></returns>
+        DataTable BXDLDZ(DataTable I, string timeStart, string TimeEnd)
+        {
+            int flagStart = 0;
+            int FlagEnd = I.Rows.Count;
+            int CountI = FlagEnd;
+            DateTime dtStart = Convert.ToDateTime(timeStart);
+            DateTime dtEnd = Convert.ToDateTime(TimeEnd);
+            dtStart = set15minute(dtStart);//设置分钟为15的整数倍
+            dtEnd = set15minute(dtEnd);
+            DateTime dtDataS = Convert.ToDateTime(I.Rows[0]["时间"].ToString());//数据开始时间
+            DateTime dtDataE = Convert.ToDateTime(I.Rows[CountI - 1]["时间"].ToString());//数据结束时间
+            if (DateTime.Compare(dtDataE, dtStart) < 0 || DateTime.Compare(dtEnd, dtDataS) < 0)//异常时间不在数据时间中间
+            { return I; }
+            if (DateTime.Compare(dtStart, dtDataS) > 0)//异常起始时间在数据起始时间之后
+            {
+                string sT = dtStart.ToString("yyyy/M/d H:mm:ss");//2018-10-23 00:00:00.000
+                I.PrimaryKey = new System.Data.DataColumn[] { I.Columns["时间"] };
+                DataRow row = I.Rows.Find(sT);
+                flagStart = I.Rows.IndexOf(row);
+            }
+            if (DateTime.Compare(dtDataE, dtEnd) > 0)//异常结束时间在数据结束时间之前
+            {
+                string sT = dtEnd.ToString("yyyy/M/d H:mm:ss");
+                I.PrimaryKey = new System.Data.DataColumn[] { I.Columns["时间"] };
+                DataRow row = I.Rows.Find(sT);
+                FlagEnd = I.Rows.IndexOf(row);
+            }
+            for (int i = flagStart; i < FlagEnd; i++)
+            {
+                double B = Convert.ToDouble(I.Rows[i]["B相电流"]);//二极管变成根号二分之一
+                B = B * 0.5;
+                I.Rows[i]["B相电流"] = B.ToString("#0.000");
+            }
+            return I;
+        }
+
+        /// <summary>
+        /// C相电流电阻
+        /// </summary>
+        /// <param name="I"></param>
+        /// <param name="timeStart"></param>
+        /// <param name="TimeEnd"></param>
+        /// <returns></returns>
+        DataTable CXDLDZ(DataTable I, string timeStart, string TimeEnd)
+        {
+            int flagStart = 0;
+            int FlagEnd = I.Rows.Count;
+            int CountI = FlagEnd;
+            DateTime dtStart = Convert.ToDateTime(timeStart);
+            DateTime dtEnd = Convert.ToDateTime(TimeEnd);
+            dtStart = set15minute(dtStart);//设置分钟为15的整数倍
+            dtEnd = set15minute(dtEnd);
+            DateTime dtDataS = Convert.ToDateTime(I.Rows[0]["时间"].ToString());//数据开始时间
+            DateTime dtDataE = Convert.ToDateTime(I.Rows[CountI - 1]["时间"].ToString());//数据结束时间
+            if (DateTime.Compare(dtDataE, dtStart) < 0 || DateTime.Compare(dtEnd, dtDataS) < 0)//异常时间不在数据时间中间
+            { return I; }
+            if (DateTime.Compare(dtStart, dtDataS) > 0)//异常起始时间在数据起始时间之后
+            {
+                string sT = dtStart.ToString("yyyy/M/d H:mm:ss");//2018-10-23 00:00:00.000
+                I.PrimaryKey = new System.Data.DataColumn[] { I.Columns["时间"] };
+                DataRow row = I.Rows.Find(sT);
+                flagStart = I.Rows.IndexOf(row);
+            }
+            if (DateTime.Compare(dtDataE, dtEnd) > 0)//异常结束时间在数据结束时间之前
+            {
+                string sT = dtEnd.ToString("yyyy/M/d H:mm:ss");
+                I.PrimaryKey = new System.Data.DataColumn[] { I.Columns["时间"] };
+                DataRow row = I.Rows.Find(sT);
+                FlagEnd = I.Rows.IndexOf(row);
+            }
+            for (int i = flagStart; i < FlagEnd; i++)
+            {
+                double C = Convert.ToDouble(I.Rows[i]["C相电流"]);//二极管变成根号二分之一
+                C = C * 0.5;
+                I.Rows[i]["C相电流"] = C.ToString("#0.000");
+            }
+            return I;
+        }
+
+        /// <summary>
+        /// A相电流反向
+        /// </summary>
+        /// <param name="I"></param>
+        /// <param name="timeStart"></param>
+        /// <param name="TimeEnd"></param>
+        /// <returns></returns>
+        DataTable AXDLFX(DataTable I, string timeStart, string TimeEnd)
+        {
+            int flagStart = 0;
+            int FlagEnd = I.Rows.Count;
+            int CountI = FlagEnd;
+            DateTime dtStart = Convert.ToDateTime(timeStart);
+            DateTime dtEnd = Convert.ToDateTime(TimeEnd);
+            dtStart = set15minute(dtStart);//设置分钟为15的整数倍
+            dtEnd = set15minute(dtEnd);
+            DateTime dtDataS = Convert.ToDateTime(I.Rows[0]["时间"].ToString());//数据开始时间
+            DateTime dtDataE = Convert.ToDateTime(I.Rows[CountI - 1]["时间"].ToString());//数据结束时间
+            if (DateTime.Compare(dtDataE, dtStart) < 0 || DateTime.Compare(dtEnd, dtDataS) < 0)//异常时间不在数据时间中间
+            { return I; }
+            if (DateTime.Compare(dtStart, dtDataS) > 0)//异常起始时间在数据起始时间之后
+            {
+                string sT = dtStart.ToString("yyyy/M/d H:mm:ss");//2018-10-23 00:00:00.000
+                I.PrimaryKey = new System.Data.DataColumn[] { I.Columns["时间"] };
+                DataRow row = I.Rows.Find(sT);
+                flagStart = I.Rows.IndexOf(row);
+            }
+            if (DateTime.Compare(dtDataE, dtEnd) > 0)//异常结束时间在数据结束时间之前
+            {
+                string sT = dtEnd.ToString("yyyy/M/d H:mm:ss");
+                I.PrimaryKey = new System.Data.DataColumn[] { I.Columns["时间"] };
+                DataRow row = I.Rows.Find(sT);
+                FlagEnd = I.Rows.IndexOf(row);
+            }
+            for (int i = flagStart; i < FlagEnd; i++)
+            {
+                double A = Convert.ToDouble(I.Rows[i]["A相电流"]);//二极管变成根号二分之一
+                A = A * -1;
+                I.Rows[i]["A相电流"] = A.ToString("#0.000");
+            }
+            return I;
+        }
+
+        /// <summary>
+        /// B相电流反向
+        /// </summary>
+        /// <param name="I"></param>
+        /// <param name="timeStart"></param>
+        /// <param name="TimeEnd"></param>
+        /// <returns></returns>
+        DataTable BXDLFX(DataTable I, string timeStart, string TimeEnd)
+        {
+            int flagStart = 0;
+            int FlagEnd = I.Rows.Count;
+            int CountI = FlagEnd;
+            DateTime dtStart = Convert.ToDateTime(timeStart);
+            DateTime dtEnd = Convert.ToDateTime(TimeEnd);
+            dtStart = set15minute(dtStart);//设置分钟为15的整数倍
+            dtEnd = set15minute(dtEnd);
+            DateTime dtDataS = Convert.ToDateTime(I.Rows[0]["时间"].ToString());//数据开始时间
+            DateTime dtDataE = Convert.ToDateTime(I.Rows[CountI - 1]["时间"].ToString());//数据结束时间
+            if (DateTime.Compare(dtDataE, dtStart) < 0 || DateTime.Compare(dtEnd, dtDataS) < 0)//异常时间不在数据时间中间
+            { return I; }
+            if (DateTime.Compare(dtStart, dtDataS) > 0)//异常起始时间在数据起始时间之后
+            {
+                string sT = dtStart.ToString("yyyy/M/d H:mm:ss");//2018-10-23 00:00:00.000
+                I.PrimaryKey = new System.Data.DataColumn[] { I.Columns["时间"] };
+                DataRow row = I.Rows.Find(sT);
+                flagStart = I.Rows.IndexOf(row);
+            }
+            if (DateTime.Compare(dtDataE, dtEnd) > 0)//异常结束时间在数据结束时间之前
+            {
+                string sT = dtEnd.ToString("yyyy/M/d H:mm:ss");
+                I.PrimaryKey = new System.Data.DataColumn[] { I.Columns["时间"] };
+                DataRow row = I.Rows.Find(sT);
+                FlagEnd = I.Rows.IndexOf(row);
+            }
+            for (int i = flagStart; i < FlagEnd; i++)
+            {
+                double B = Convert.ToDouble(I.Rows[i]["B相电流"]);//二极管变成根号二分之一
+                B = B * -1;
+                I.Rows[i]["B相电流"] = B.ToString("#0.000");
+            }
+            return I;
+        }
+
+        /// <summary>
+        /// C相电流反向
+        /// </summary>
+        /// <param name="I"></param>
+        /// <param name="timeStart"></param>
+        /// <param name="TimeEnd"></param>
+        /// <returns></returns>
+        DataTable CXDLFX(DataTable I, string timeStart, string TimeEnd)
+        {
+            int flagStart = 0;
+            int FlagEnd = I.Rows.Count;
+            int CountI = FlagEnd;
+            DateTime dtStart = Convert.ToDateTime(timeStart);
+            DateTime dtEnd = Convert.ToDateTime(TimeEnd);
+            dtStart = set15minute(dtStart);//设置分钟为15的整数倍
+            dtEnd = set15minute(dtEnd);
+            DateTime dtDataS = Convert.ToDateTime(I.Rows[0]["时间"].ToString());//数据开始时间
+            DateTime dtDataE = Convert.ToDateTime(I.Rows[CountI - 1]["时间"].ToString());//数据结束时间
+            if (DateTime.Compare(dtDataE, dtStart) < 0 || DateTime.Compare(dtEnd, dtDataS) < 0)//异常时间不在数据时间中间
+            { return I; }
+            if (DateTime.Compare(dtStart, dtDataS) > 0)//异常起始时间在数据起始时间之后
+            {
+                string sT = dtStart.ToString("yyyy/M/d H:mm:ss");//2018-10-23 00:00:00.000
+                I.PrimaryKey = new System.Data.DataColumn[] { I.Columns["时间"] };
+                DataRow row = I.Rows.Find(sT);
+                flagStart = I.Rows.IndexOf(row);
+            }
+            if (DateTime.Compare(dtDataE, dtEnd) > 0)//异常结束时间在数据结束时间之前
+            {
+                string sT = dtEnd.ToString("yyyy/M/d H:mm:ss");
+                I.PrimaryKey = new System.Data.DataColumn[] { I.Columns["时间"] };
+                DataRow row = I.Rows.Find(sT);
+                FlagEnd = I.Rows.IndexOf(row);
+            }
+            for (int i = flagStart; i < FlagEnd; i++)
+            {
+                double C = Convert.ToDouble(I.Rows[i]["C相电流"]);//二极管变成根号二分之一
+                C = C * -1;
+                I.Rows[i]["C相电流"] = C.ToString("#0.000");
+            }
+            return I;
+        }
+
+        /// <summary>
         /// A相电压断相
         /// </summary>
         /// <param name="I"></param>
@@ -313,6 +745,262 @@ namespace HangzhouPeiXun.Server
             }
             return U;
         }
+        /// <summary>
+        /// A相电压二极管
+        /// </summary>
+        /// <param name="I"></param>
+        /// <param name="timeStart"></param>
+        /// <param name="TimeEnd"></param>
+        /// <returns></returns>
+        DataTable AXDYEJG(DataTable U, string timeStart, string TimeEnd)
+        {
+            int flagStart = 0;
+            int FlagEnd = U.Rows.Count;
+            int CountI = FlagEnd;
+            DateTime dtStart = Convert.ToDateTime(timeStart);
+            DateTime dtEnd = Convert.ToDateTime(TimeEnd);
+            dtStart = set15minute(dtStart);//设置分钟为15的整数倍
+            dtEnd = set15minute(dtEnd);
+            DateTime dtDataS = Convert.ToDateTime(U.Rows[0]["时间"].ToString());//数据开始时间
+            DateTime dtDataE = Convert.ToDateTime(U.Rows[CountI - 1]["时间"].ToString());//数据结束时间
+            if (DateTime.Compare(dtDataE, dtStart) < 0 || DateTime.Compare(dtEnd, dtDataS) < 0)//异常时间不在数据时间中间
+            { return U; }
+            if (DateTime.Compare(dtStart, dtDataS) > 0)//异常起始时间在数据起始时间之后
+            {
+                string sT = dtStart.ToString("yyyy/M/d H:mm:ss");//2018-10-23 00:00:00.000
+                U.PrimaryKey = new System.Data.DataColumn[] { U.Columns["时间"] };
+                DataRow row = U.Rows.Find(sT);
+                flagStart = U.Rows.IndexOf(row);
+            }
+            if (DateTime.Compare(dtDataE, dtEnd) > 0)//异常结束时间在数据结束时间之前
+            {
+                string sT = dtEnd.ToString("yyyy/M/d H:mm:ss");
+                U.PrimaryKey = new System.Data.DataColumn[] { U.Columns["时间"] };
+                DataRow row = U.Rows.Find(sT);
+                FlagEnd = U.Rows.IndexOf(row);
+            }
+            for (int i = flagStart; i < FlagEnd; i++)
+            {
+                double A = Convert.ToDouble(U.Rows[i]["A相电压"]);//二极管变成根号二分之一
+                A = A * 0.7071;
+                U.Rows[i]["A相电压"] = A.ToString("#0.000");
+            }
+            return U;
+        }
+
+        /// <summary>
+        /// B相电压二极管
+        /// </summary>
+        /// <param name="I"></param>
+        /// <param name="timeStart"></param>
+        /// <param name="TimeEnd"></param>
+        /// <returns></returns>
+        DataTable BXDYEJG(DataTable U, string timeStart, string TimeEnd)
+        {
+            int flagStart = 0;
+            int FlagEnd = U.Rows.Count;
+            int CountI = FlagEnd;
+            DateTime dtStart = Convert.ToDateTime(timeStart);
+            DateTime dtEnd = Convert.ToDateTime(TimeEnd);
+            dtStart = set15minute(dtStart);//设置分钟为15的整数倍
+            dtEnd = set15minute(dtEnd);
+            DateTime dtDataS = Convert.ToDateTime(U.Rows[0]["时间"].ToString());//数据开始时间
+            DateTime dtDataE = Convert.ToDateTime(U.Rows[CountI - 1]["时间"].ToString());//数据结束时间
+            if (DateTime.Compare(dtDataE, dtStart) < 0 || DateTime.Compare(dtEnd, dtDataS) < 0)//异常时间不在数据时间中间
+            { return U; }
+            if (DateTime.Compare(dtStart, dtDataS) > 0)//异常起始时间在数据起始时间之后
+            {
+                string sT = dtStart.ToString("yyyy/M/d H:mm:ss");//2018-10-23 00:00:00.000
+                U.PrimaryKey = new System.Data.DataColumn[] { U.Columns["时间"] };
+                DataRow row = U.Rows.Find(sT);
+                flagStart = U.Rows.IndexOf(row);
+            }
+            if (DateTime.Compare(dtDataE, dtEnd) > 0)//异常结束时间在数据结束时间之前
+            {
+                string sT = dtEnd.ToString("yyyy/M/d H:mm:ss");
+                U.PrimaryKey = new System.Data.DataColumn[] { U.Columns["时间"] };
+                DataRow row = U.Rows.Find(sT);
+                FlagEnd = U.Rows.IndexOf(row);
+            }
+            for (int i = flagStart; i < FlagEnd; i++)
+            {
+                double B = Convert.ToDouble(U.Rows[i]["B相电压"]);//二极管变成根号二分之一
+                B = B * 0.7071;
+                U.Rows[i]["B相电压"] = B.ToString("#0.000");
+            }
+            return U;
+        }
+
+        /// <summary>
+        /// C相电压二极管
+        /// </summary>
+        /// <param name="I"></param>
+        /// <param name="timeStart"></param>
+        /// <param name="TimeEnd"></param>
+        /// <returns></returns>
+        DataTable CXDYEJG(DataTable U, string timeStart, string TimeEnd)
+        {
+            int flagStart = 0;
+            int FlagEnd = U.Rows.Count;
+            int CountI = FlagEnd;
+            DateTime dtStart = Convert.ToDateTime(timeStart);
+            DateTime dtEnd = Convert.ToDateTime(TimeEnd);
+            dtStart = set15minute(dtStart);//设置分钟为15的整数倍
+            dtEnd = set15minute(dtEnd);
+            DateTime dtDataS = Convert.ToDateTime(U.Rows[0]["时间"].ToString());//数据开始时间
+            DateTime dtDataE = Convert.ToDateTime(U.Rows[CountI - 1]["时间"].ToString());//数据结束时间
+            if (DateTime.Compare(dtDataE, dtStart) < 0 || DateTime.Compare(dtEnd, dtDataS) < 0)//异常时间不在数据时间中间
+            { return U; }
+            if (DateTime.Compare(dtStart, dtDataS) > 0)//异常起始时间在数据起始时间之后
+            {
+                string sT = dtStart.ToString("yyyy/M/d H:mm:ss");//2018-10-23 00:00:00.000
+                U.PrimaryKey = new System.Data.DataColumn[] { U.Columns["时间"] };
+                DataRow row = U.Rows.Find(sT);
+                flagStart = U.Rows.IndexOf(row);
+            }
+            if (DateTime.Compare(dtDataE, dtEnd) > 0)//异常结束时间在数据结束时间之前
+            {
+                string sT = dtEnd.ToString("yyyy/M/d H:mm:ss");
+                U.PrimaryKey = new System.Data.DataColumn[] { U.Columns["时间"] };
+                DataRow row = U.Rows.Find(sT);
+                FlagEnd = U.Rows.IndexOf(row);
+            }
+            for (int i = flagStart; i < FlagEnd; i++)
+            {
+                double C = Convert.ToDouble(U.Rows[i]["C相电压"]);//二极管变成根号二分之一
+                C = C * 0.7071;
+                U.Rows[i]["C相电压"] = C.ToString("#0.000");
+            }
+            return U;
+        }
+        /// <summary>
+        /// A相电压电阻
+        /// </summary>
+        /// <param name="I"></param>
+        /// <param name="timeStart"></param>
+        /// <param name="TimeEnd"></param>
+        /// <returns></returns>
+        DataTable AXDYDZ(DataTable U, string timeStart, string TimeEnd)
+        {
+            int flagStart = 0;
+            int FlagEnd = U.Rows.Count;
+            int CountI = FlagEnd;
+            DateTime dtStart = Convert.ToDateTime(timeStart);
+            DateTime dtEnd = Convert.ToDateTime(TimeEnd);
+            dtStart = set15minute(dtStart);//设置分钟为15的整数倍
+            dtEnd = set15minute(dtEnd);
+            DateTime dtDataS = Convert.ToDateTime(U.Rows[0]["时间"].ToString());//数据开始时间
+            DateTime dtDataE = Convert.ToDateTime(U.Rows[CountI - 1]["时间"].ToString());//数据结束时间
+            if (DateTime.Compare(dtDataE, dtStart) < 0 || DateTime.Compare(dtEnd, dtDataS) < 0)//异常时间不在数据时间中间
+            { return U; }
+            if (DateTime.Compare(dtStart, dtDataS) > 0)//异常起始时间在数据起始时间之后
+            {
+                string sT = dtStart.ToString("yyyy/M/d H:mm:ss");//2018-10-23 00:00:00.000
+                U.PrimaryKey = new System.Data.DataColumn[] { U.Columns["时间"] };
+                DataRow row = U.Rows.Find(sT);
+                flagStart = U.Rows.IndexOf(row);
+            }
+            if (DateTime.Compare(dtDataE, dtEnd) > 0)//异常结束时间在数据结束时间之前
+            {
+                string sT = dtEnd.ToString("yyyy/M/d H:mm:ss");
+                U.PrimaryKey = new System.Data.DataColumn[] { U.Columns["时间"] };
+                DataRow row = U.Rows.Find(sT);
+                FlagEnd = U.Rows.IndexOf(row);
+            }
+            for (int i = flagStart; i < FlagEnd; i++)
+            {
+                double A = Convert.ToDouble(U.Rows[i]["A相电压"]);//二极管变成根号二分之一
+                A = A * 0.5;
+                U.Rows[i]["A相电压"] = A.ToString("#0.000");
+            }
+            return U;
+        }
+
+        /// <summary>
+        /// B相电压电阻
+        /// </summary>
+        /// <param name="I"></param>
+        /// <param name="timeStart"></param>
+        /// <param name="TimeEnd"></param>
+        /// <returns></returns>
+        DataTable BXDYDZ(DataTable U, string timeStart, string TimeEnd)
+        {
+            int flagStart = 0;
+            int FlagEnd = U.Rows.Count;
+            int CountI = FlagEnd;
+            DateTime dtStart = Convert.ToDateTime(timeStart);
+            DateTime dtEnd = Convert.ToDateTime(TimeEnd);
+            dtStart = set15minute(dtStart);//设置分钟为15的整数倍
+            dtEnd = set15minute(dtEnd);
+            DateTime dtDataS = Convert.ToDateTime(U.Rows[0]["时间"].ToString());//数据开始时间
+            DateTime dtDataE = Convert.ToDateTime(U.Rows[CountI - 1]["时间"].ToString());//数据结束时间
+            if (DateTime.Compare(dtDataE, dtStart) < 0 || DateTime.Compare(dtEnd, dtDataS) < 0)//异常时间不在数据时间中间
+            { return U; }
+            if (DateTime.Compare(dtStart, dtDataS) > 0)//异常起始时间在数据起始时间之后
+            {
+                string sT = dtStart.ToString("yyyy/M/d H:mm:ss");//2018-10-23 00:00:00.000
+                U.PrimaryKey = new System.Data.DataColumn[] { U.Columns["时间"] };
+                DataRow row = U.Rows.Find(sT);
+                flagStart = U.Rows.IndexOf(row);
+            }
+            if (DateTime.Compare(dtDataE, dtEnd) > 0)//异常结束时间在数据结束时间之前
+            {
+                string sT = dtEnd.ToString("yyyy/M/d H:mm:ss");
+                U.PrimaryKey = new System.Data.DataColumn[] { U.Columns["时间"] };
+                DataRow row = U.Rows.Find(sT);
+                FlagEnd = U.Rows.IndexOf(row);
+            }
+            for (int i = flagStart; i < FlagEnd; i++)
+            {
+                double B = Convert.ToDouble(U.Rows[i]["B相电压"]);//二极管变成根号二分之一
+                B = B * 0.5;
+                U.Rows[i]["B相电压"] = B.ToString("#0.000");
+            }
+            return U;
+        }
+
+        /// <summary>
+        /// C相电压电阻
+        /// </summary>
+        /// <param name="I"></param>
+        /// <param name="timeStart"></param>
+        /// <param name="TimeEnd"></param>
+        /// <returns></returns>
+        DataTable CXDYDZ(DataTable U, string timeStart, string TimeEnd)
+        {
+            int flagStart = 0;
+            int FlagEnd = U.Rows.Count;
+            int CountI = FlagEnd;
+            DateTime dtStart = Convert.ToDateTime(timeStart);
+            DateTime dtEnd = Convert.ToDateTime(TimeEnd);
+            dtStart = set15minute(dtStart);//设置分钟为15的整数倍
+            dtEnd = set15minute(dtEnd);
+            DateTime dtDataS = Convert.ToDateTime(U.Rows[0]["时间"].ToString());//数据开始时间
+            DateTime dtDataE = Convert.ToDateTime(U.Rows[CountI - 1]["时间"].ToString());//数据结束时间
+            if (DateTime.Compare(dtDataE, dtStart) < 0 || DateTime.Compare(dtEnd, dtDataS) < 0)//异常时间不在数据时间中间
+            { return U; }
+            if (DateTime.Compare(dtStart, dtDataS) > 0)//异常起始时间在数据起始时间之后
+            {
+                string sT = dtStart.ToString("yyyy/M/d H:mm:ss");//2018-10-23 00:00:00.000
+                U.PrimaryKey = new System.Data.DataColumn[] { U.Columns["时间"] };
+                DataRow row = U.Rows.Find(sT);
+                flagStart = U.Rows.IndexOf(row);
+            }
+            if (DateTime.Compare(dtDataE, dtEnd) > 0)//异常结束时间在数据结束时间之前
+            {
+                string sT = dtEnd.ToString("yyyy/M/d H:mm:ss");
+                U.PrimaryKey = new System.Data.DataColumn[] { U.Columns["时间"] };
+                DataRow row = U.Rows.Find(sT);
+                FlagEnd = U.Rows.IndexOf(row);
+            }
+            for (int i = flagStart; i < FlagEnd; i++)
+            {
+                double C = Convert.ToDouble(U.Rows[i]["C相电压"]);//二极管变成根号二分之一
+                C = C * 0.5;
+                U.Rows[i]["C相电压"] = C.ToString("#0.000");
+            }
+            return U;
+        }
         #endregion
         #endregion
 
@@ -348,6 +1036,33 @@ namespace HangzhouPeiXun.Server
                     case "C相电流断相":
                         abdtI = CXDLDX1(abdtI, timeStart, timeEnd);
                         break;
+                    case "A相电流串二极管":
+                        abdtU = AXDLEJG1(abdtI, timeStart, timeEnd);
+                        break;
+                    case "B相电流串二极管":
+                        abdtU = BXDLEJG1(abdtI, timeStart, timeEnd);
+                        break;
+                    case "C相电流串二极管":
+                        abdtU = CXDLEJG1(abdtI, timeStart, timeEnd);
+                        break;
+                    case "A相电流串电阻":
+                        abdtU = AXDLDZ1(abdtI, timeStart, timeEnd);
+                        break;
+                    case "B相电流串电阻":
+                        abdtU = BXDLDZ1(abdtI, timeStart, timeEnd);
+                        break;
+                    case "C相电流串电阻":
+                        abdtU = CXDLDZ1(abdtI, timeStart, timeEnd);
+                        break;
+                    case "A相电流反向":
+                        abdtU = AXDLFX1(abdtI, timeStart, timeEnd);
+                        break;
+                    case "B相电流反向":
+                        abdtU = BXDLFX1(abdtI, timeStart, timeEnd);
+                        break;
+                    case "C相电流反向":
+                        abdtU = CXDLFX1(abdtI, timeStart, timeEnd);
+                        break;
                     case "A相电压断相":
                         abdtU = AXDYDX1(abdtU, timeStart, timeEnd);
                         break;
@@ -356,6 +1071,24 @@ namespace HangzhouPeiXun.Server
                         break;
                     case "C相电压断相":
                         abdtU = CXDYDX1(abdtU, timeStart, timeEnd);
+                        break;
+                    case "A相电压串二极管":
+                        abdtU = AXDYEJG1(abdtU, timeStart, timeEnd);
+                        break;
+                    case "B相电压串二极管":
+                        abdtU = BXDYEJG1(abdtU, timeStart, timeEnd);
+                        break;
+                    case "C相电压串二极管":
+                        abdtU = CXDYEJG1(abdtU, timeStart, timeEnd);
+                        break;
+                    case "A相电压串电阻":
+                        abdtU = AXDYDZ1(abdtU, timeStart, timeEnd);
+                        break;
+                    case "B相电压串电阻":
+                        abdtU = BXDYDZ1(abdtU, timeStart, timeEnd);
+                        break;
+                    case "C相电压串电阻":
+                        abdtU = CXDYDZ1(abdtU, timeStart, timeEnd);
                         break;
                     default:
                         break;
@@ -488,6 +1221,393 @@ namespace HangzhouPeiXun.Server
         }
 
         /// <summary>
+        /// A相电流二极管
+        /// </summary>
+        /// <param name="I"></param>
+        /// <param name="timeStart"></param>
+        /// <param name="TimeEnd"></param>
+        /// <returns></returns>
+        DataTable AXDLEJG1(DataTable I, string timeStart, string TimeEnd)
+        {
+            int flagStart = 0;
+            int FlagEnd = I.Rows.Count;
+            int CountI = FlagEnd;
+            DateTime dtStart = Convert.ToDateTime(timeStart);
+            DateTime dtEnd = Convert.ToDateTime(TimeEnd);
+            dtStart = set15minute(dtStart);//设置分钟为15的整数倍
+            dtEnd = set15minute(dtEnd);
+            DateTime dtDataS = Convert.ToDateTime(I.Rows[0]["时间"].ToString());//数据开始时间
+            DateTime dtDataE = Convert.ToDateTime(I.Rows[CountI - 1]["时间"].ToString());//数据结束时间
+            if (DateTime.Compare(dtDataE, dtStart) < 0 || DateTime.Compare(dtEnd, dtDataS) < 0)//异常时间不在数据时间中间
+            { return I; }
+            if (DateTime.Compare(dtStart, dtDataS) > 0)//异常起始时间在数据起始时间之后
+            {
+                string sT = dtStart.ToString("yyyy/M/d H:mm:ss");//2018-10-23 00:00:00.000
+                I.PrimaryKey = new System.Data.DataColumn[] { I.Columns["时间"] };
+                DataRow row = I.Rows.Find(sT);
+                flagStart = I.Rows.IndexOf(row);
+            }
+            if (DateTime.Compare(dtDataE, dtEnd) > 0)//异常结束时间在数据结束时间之前
+            {
+                string sT = dtEnd.ToString("yyyy/M/d H:mm:ss");
+                I.PrimaryKey = new System.Data.DataColumn[] { I.Columns["时间"] };
+                DataRow row = I.Rows.Find(sT);
+                FlagEnd = I.Rows.IndexOf(row);
+            }
+            for (int i = flagStart; i < FlagEnd; i++)
+            {
+                double A = Convert.ToDouble(I.Rows[i]["A相电流"]);//二极管变成根号二分之一
+                A = A * 0.7071;
+                I.Rows[i]["A相电流"] = A.ToString("#0.000");
+            }
+            return I;
+        }
+
+        /// <summary>
+        /// B相电流二极管
+        /// </summary>
+        /// <param name="I"></param>
+        /// <param name="timeStart"></param>
+        /// <param name="TimeEnd"></param>
+        /// <returns></returns>
+        DataTable BXDLEJG1(DataTable I, string timeStart, string TimeEnd)
+        {
+            int flagStart = 0;
+            int FlagEnd = I.Rows.Count;
+            int CountI = FlagEnd;
+            DateTime dtStart = Convert.ToDateTime(timeStart);
+            DateTime dtEnd = Convert.ToDateTime(TimeEnd);
+            dtStart = set15minute(dtStart);//设置分钟为15的整数倍
+            dtEnd = set15minute(dtEnd);
+            DateTime dtDataS = Convert.ToDateTime(I.Rows[0]["时间"].ToString());//数据开始时间
+            DateTime dtDataE = Convert.ToDateTime(I.Rows[CountI - 1]["时间"].ToString());//数据结束时间
+            if (DateTime.Compare(dtDataE, dtStart) < 0 || DateTime.Compare(dtEnd, dtDataS) < 0)//异常时间不在数据时间中间
+            { return I; }
+            if (DateTime.Compare(dtStart, dtDataS) > 0)//异常起始时间在数据起始时间之后
+            {
+                string sT = dtStart.ToString("yyyy/M/d H:mm:ss");//2018-10-23 00:00:00.000
+                I.PrimaryKey = new System.Data.DataColumn[] { I.Columns["时间"] };
+                DataRow row = I.Rows.Find(sT);
+                flagStart = I.Rows.IndexOf(row);
+            }
+            if (DateTime.Compare(dtDataE, dtEnd) > 0)//异常结束时间在数据结束时间之前
+            {
+                string sT = dtEnd.ToString("yyyy/M/d H:mm:ss");
+                I.PrimaryKey = new System.Data.DataColumn[] { I.Columns["时间"] };
+                DataRow row = I.Rows.Find(sT);
+                FlagEnd = I.Rows.IndexOf(row);
+            }
+            for (int i = flagStart; i < FlagEnd; i++)
+            {
+                double B = Convert.ToDouble(I.Rows[i]["B相电流"]);//二极管变成根号二分之一
+                B = B * 0.7071;
+                I.Rows[i]["B相电流"] = B.ToString("#0.000");
+            }
+            return I;
+        }
+
+        /// <summary>
+        /// C相电流二极管
+        /// </summary>
+        /// <param name="I"></param>
+        /// <param name="timeStart"></param>
+        /// <param name="TimeEnd"></param>
+        /// <returns></returns>
+        DataTable CXDLEJG1(DataTable I, string timeStart, string TimeEnd)
+        {
+            int flagStart = 0;
+            int FlagEnd = I.Rows.Count;
+            int CountI = FlagEnd;
+            DateTime dtStart = Convert.ToDateTime(timeStart);
+            DateTime dtEnd = Convert.ToDateTime(TimeEnd);
+            dtStart = set15minute(dtStart);//设置分钟为15的整数倍
+            dtEnd = set15minute(dtEnd);
+            DateTime dtDataS = Convert.ToDateTime(I.Rows[0]["时间"].ToString());//数据开始时间
+            DateTime dtDataE = Convert.ToDateTime(I.Rows[CountI - 1]["时间"].ToString());//数据结束时间
+            if (DateTime.Compare(dtDataE, dtStart) < 0 || DateTime.Compare(dtEnd, dtDataS) < 0)//异常时间不在数据时间中间
+            { return I; }
+            if (DateTime.Compare(dtStart, dtDataS) > 0)//异常起始时间在数据起始时间之后
+            {
+                string sT = dtStart.ToString("yyyy/M/d H:mm:ss");//2018-10-23 00:00:00.000
+                I.PrimaryKey = new System.Data.DataColumn[] { I.Columns["时间"] };
+                DataRow row = I.Rows.Find(sT);
+                flagStart = I.Rows.IndexOf(row);
+            }
+            if (DateTime.Compare(dtDataE, dtEnd) > 0)//异常结束时间在数据结束时间之前
+            {
+                string sT = dtEnd.ToString("yyyy/M/d H:mm:ss");
+                I.PrimaryKey = new System.Data.DataColumn[] { I.Columns["时间"] };
+                DataRow row = I.Rows.Find(sT);
+                FlagEnd = I.Rows.IndexOf(row);
+            }
+            for (int i = flagStart; i < FlagEnd; i++)
+            {
+                double C = Convert.ToDouble(I.Rows[i]["C相电流"]);//二极管变成根号二分之一
+                C = C * 0.7071;
+                I.Rows[i]["C相电流"] = C.ToString("#0.000");
+            }
+            return I;
+        }
+
+        /// <summary>
+        /// A相电流电阻
+        /// </summary>
+        /// <param name="I"></param>
+        /// <param name="timeStart"></param>
+        /// <param name="TimeEnd"></param>
+        /// <returns></returns>
+        DataTable AXDLDZ1(DataTable I, string timeStart, string TimeEnd)
+        {
+            int flagStart = 0;
+            int FlagEnd = I.Rows.Count;
+            int CountI = FlagEnd;
+            DateTime dtStart = Convert.ToDateTime(timeStart);
+            DateTime dtEnd = Convert.ToDateTime(TimeEnd);
+            dtStart = set15minute(dtStart);//设置分钟为15的整数倍
+            dtEnd = set15minute(dtEnd);
+            DateTime dtDataS = Convert.ToDateTime(I.Rows[0]["时间"].ToString());//数据开始时间
+            DateTime dtDataE = Convert.ToDateTime(I.Rows[CountI - 1]["时间"].ToString());//数据结束时间
+            if (DateTime.Compare(dtDataE, dtStart) < 0 || DateTime.Compare(dtEnd, dtDataS) < 0)//异常时间不在数据时间中间
+            { return I; }
+            if (DateTime.Compare(dtStart, dtDataS) > 0)//异常起始时间在数据起始时间之后
+            {
+                string sT = dtStart.ToString("yyyy/M/d H:mm:ss");//2018-10-23 00:00:00.000
+                I.PrimaryKey = new System.Data.DataColumn[] { I.Columns["时间"] };
+                DataRow row = I.Rows.Find(sT);
+                flagStart = I.Rows.IndexOf(row);
+            }
+            if (DateTime.Compare(dtDataE, dtEnd) > 0)//异常结束时间在数据结束时间之前
+            {
+                string sT = dtEnd.ToString("yyyy/M/d H:mm:ss");
+                I.PrimaryKey = new System.Data.DataColumn[] { I.Columns["时间"] };
+                DataRow row = I.Rows.Find(sT);
+                FlagEnd = I.Rows.IndexOf(row);
+            }
+            for (int i = flagStart; i < FlagEnd; i++)
+            {
+                double A = Convert.ToDouble(I.Rows[i]["A相电流"]);//二极管变成根号二分之一
+                A = A * 0.5;
+                I.Rows[i]["A相电流"] = A.ToString("#0.000");
+            }
+            return I;
+        }
+
+        /// <summary>
+        /// B相电流电阻
+        /// </summary>
+        /// <param name="I"></param>
+        /// <param name="timeStart"></param>
+        /// <param name="TimeEnd"></param>
+        /// <returns></returns>
+        DataTable BXDLDZ1(DataTable I, string timeStart, string TimeEnd)
+        {
+            int flagStart = 0;
+            int FlagEnd = I.Rows.Count;
+            int CountI = FlagEnd;
+            DateTime dtStart = Convert.ToDateTime(timeStart);
+            DateTime dtEnd = Convert.ToDateTime(TimeEnd);
+            dtStart = set15minute(dtStart);//设置分钟为15的整数倍
+            dtEnd = set15minute(dtEnd);
+            DateTime dtDataS = Convert.ToDateTime(I.Rows[0]["时间"].ToString());//数据开始时间
+            DateTime dtDataE = Convert.ToDateTime(I.Rows[CountI - 1]["时间"].ToString());//数据结束时间
+            if (DateTime.Compare(dtDataE, dtStart) < 0 || DateTime.Compare(dtEnd, dtDataS) < 0)//异常时间不在数据时间中间
+            { return I; }
+            if (DateTime.Compare(dtStart, dtDataS) > 0)//异常起始时间在数据起始时间之后
+            {
+                string sT = dtStart.ToString("yyyy/M/d H:mm:ss");//2018-10-23 00:00:00.000
+                I.PrimaryKey = new System.Data.DataColumn[] { I.Columns["时间"] };
+                DataRow row = I.Rows.Find(sT);
+                flagStart = I.Rows.IndexOf(row);
+            }
+            if (DateTime.Compare(dtDataE, dtEnd) > 0)//异常结束时间在数据结束时间之前
+            {
+                string sT = dtEnd.ToString("yyyy/M/d H:mm:ss");
+                I.PrimaryKey = new System.Data.DataColumn[] { I.Columns["时间"] };
+                DataRow row = I.Rows.Find(sT);
+                FlagEnd = I.Rows.IndexOf(row);
+            }
+            for (int i = flagStart; i < FlagEnd; i++)
+            {
+                double B = Convert.ToDouble(I.Rows[i]["B相电流"]);//二极管变成根号二分之一
+                B = B * 0.5;
+                I.Rows[i]["B相电流"] = B.ToString("#0.000");
+            }
+            return I;
+        }
+
+        /// <summary>
+        /// C相电流电阻
+        /// </summary>
+        /// <param name="I"></param>
+        /// <param name="timeStart"></param>
+        /// <param name="TimeEnd"></param>
+        /// <returns></returns>
+        DataTable CXDLDZ1(DataTable I, string timeStart, string TimeEnd)
+        {
+            int flagStart = 0;
+            int FlagEnd = I.Rows.Count;
+            int CountI = FlagEnd;
+            DateTime dtStart = Convert.ToDateTime(timeStart);
+            DateTime dtEnd = Convert.ToDateTime(TimeEnd);
+            dtStart = set15minute(dtStart);//设置分钟为15的整数倍
+            dtEnd = set15minute(dtEnd);
+            DateTime dtDataS = Convert.ToDateTime(I.Rows[0]["时间"].ToString());//数据开始时间
+            DateTime dtDataE = Convert.ToDateTime(I.Rows[CountI - 1]["时间"].ToString());//数据结束时间
+            if (DateTime.Compare(dtDataE, dtStart) < 0 || DateTime.Compare(dtEnd, dtDataS) < 0)//异常时间不在数据时间中间
+            { return I; }
+            if (DateTime.Compare(dtStart, dtDataS) > 0)//异常起始时间在数据起始时间之后
+            {
+                string sT = dtStart.ToString("yyyy/M/d H:mm:ss");//2018-10-23 00:00:00.000
+                I.PrimaryKey = new System.Data.DataColumn[] { I.Columns["时间"] };
+                DataRow row = I.Rows.Find(sT);
+                flagStart = I.Rows.IndexOf(row);
+            }
+            if (DateTime.Compare(dtDataE, dtEnd) > 0)//异常结束时间在数据结束时间之前
+            {
+                string sT = dtEnd.ToString("yyyy/M/d H:mm:ss");
+                I.PrimaryKey = new System.Data.DataColumn[] { I.Columns["时间"] };
+                DataRow row = I.Rows.Find(sT);
+                FlagEnd = I.Rows.IndexOf(row);
+            }
+            for (int i = flagStart; i < FlagEnd; i++)
+            {
+                double C = Convert.ToDouble(I.Rows[i]["C相电流"]);//二极管变成根号二分之一
+                C = C * 0.5;
+                I.Rows[i]["C相电流"] = C.ToString("#0.000");
+            }
+            return I;
+        }
+
+        /// <summary>
+        /// A相电流反向
+        /// </summary>
+        /// <param name="I"></param>
+        /// <param name="timeStart"></param>
+        /// <param name="TimeEnd"></param>
+        /// <returns></returns>
+        DataTable AXDLFX1(DataTable I, string timeStart, string TimeEnd)
+        {
+            int flagStart = 0;
+            int FlagEnd = I.Rows.Count;
+            int CountI = FlagEnd;
+            DateTime dtStart = Convert.ToDateTime(timeStart);
+            DateTime dtEnd = Convert.ToDateTime(TimeEnd);
+            dtStart = set15minute(dtStart);//设置分钟为15的整数倍
+            dtEnd = set15minute(dtEnd);
+            DateTime dtDataS = Convert.ToDateTime(I.Rows[0]["时间"].ToString());//数据开始时间
+            DateTime dtDataE = Convert.ToDateTime(I.Rows[CountI - 1]["时间"].ToString());//数据结束时间
+            if (DateTime.Compare(dtDataE, dtStart) < 0 || DateTime.Compare(dtEnd, dtDataS) < 0)//异常时间不在数据时间中间
+            { return I; }
+            if (DateTime.Compare(dtStart, dtDataS) > 0)//异常起始时间在数据起始时间之后
+            {
+                string sT = dtStart.ToString("yyyy/M/d H:mm:ss");//2018-10-23 00:00:00.000
+                I.PrimaryKey = new System.Data.DataColumn[] { I.Columns["时间"] };
+                DataRow row = I.Rows.Find(sT);
+                flagStart = I.Rows.IndexOf(row);
+            }
+            if (DateTime.Compare(dtDataE, dtEnd) > 0)//异常结束时间在数据结束时间之前
+            {
+                string sT = dtEnd.ToString("yyyy/M/d H:mm:ss");
+                I.PrimaryKey = new System.Data.DataColumn[] { I.Columns["时间"] };
+                DataRow row = I.Rows.Find(sT);
+                FlagEnd = I.Rows.IndexOf(row);
+            }
+            for (int i = flagStart; i < FlagEnd; i++)
+            {
+                double A = Convert.ToDouble(I.Rows[i]["A相电流"]);//二极管变成根号二分之一
+                A = A * -1;
+                I.Rows[i]["A相电流"] = A.ToString("#0.000");
+            }
+            return I;
+        }
+
+        /// <summary>
+        /// B相电流反向
+        /// </summary>
+        /// <param name="I"></param>
+        /// <param name="timeStart"></param>
+        /// <param name="TimeEnd"></param>
+        /// <returns></returns>
+        DataTable BXDLFX1(DataTable I, string timeStart, string TimeEnd)
+        {
+            int flagStart = 0;
+            int FlagEnd = I.Rows.Count;
+            int CountI = FlagEnd;
+            DateTime dtStart = Convert.ToDateTime(timeStart);
+            DateTime dtEnd = Convert.ToDateTime(TimeEnd);
+            dtStart = set15minute(dtStart);//设置分钟为15的整数倍
+            dtEnd = set15minute(dtEnd);
+            DateTime dtDataS = Convert.ToDateTime(I.Rows[0]["时间"].ToString());//数据开始时间
+            DateTime dtDataE = Convert.ToDateTime(I.Rows[CountI - 1]["时间"].ToString());//数据结束时间
+            if (DateTime.Compare(dtDataE, dtStart) < 0 || DateTime.Compare(dtEnd, dtDataS) < 0)//异常时间不在数据时间中间
+            { return I; }
+            if (DateTime.Compare(dtStart, dtDataS) > 0)//异常起始时间在数据起始时间之后
+            {
+                string sT = dtStart.ToString("yyyy/M/d H:mm:ss");//2018-10-23 00:00:00.000
+                I.PrimaryKey = new System.Data.DataColumn[] { I.Columns["时间"] };
+                DataRow row = I.Rows.Find(sT);
+                flagStart = I.Rows.IndexOf(row);
+            }
+            if (DateTime.Compare(dtDataE, dtEnd) > 0)//异常结束时间在数据结束时间之前
+            {
+                string sT = dtEnd.ToString("yyyy/M/d H:mm:ss");
+                I.PrimaryKey = new System.Data.DataColumn[] { I.Columns["时间"] };
+                DataRow row = I.Rows.Find(sT);
+                FlagEnd = I.Rows.IndexOf(row);
+            }
+            for (int i = flagStart; i < FlagEnd; i++)
+            {
+                double B = Convert.ToDouble(I.Rows[i]["B相电流"]);//二极管变成根号二分之一
+                B = B * -1;
+                I.Rows[i]["B相电流"] = B.ToString("#0.000");
+            }
+            return I;
+        }
+
+        /// <summary>
+        /// C相电流反向
+        /// </summary>
+        /// <param name="I"></param>
+        /// <param name="timeStart"></param>
+        /// <param name="TimeEnd"></param>
+        /// <returns></returns>
+        DataTable CXDLFX1(DataTable I, string timeStart, string TimeEnd)
+        {
+            int flagStart = 0;
+            int FlagEnd = I.Rows.Count;
+            int CountI = FlagEnd;
+            DateTime dtStart = Convert.ToDateTime(timeStart);
+            DateTime dtEnd = Convert.ToDateTime(TimeEnd);
+            dtStart = set15minute(dtStart);//设置分钟为15的整数倍
+            dtEnd = set15minute(dtEnd);
+            DateTime dtDataS = Convert.ToDateTime(I.Rows[0]["时间"].ToString());//数据开始时间
+            DateTime dtDataE = Convert.ToDateTime(I.Rows[CountI - 1]["时间"].ToString());//数据结束时间
+            if (DateTime.Compare(dtDataE, dtStart) < 0 || DateTime.Compare(dtEnd, dtDataS) < 0)//异常时间不在数据时间中间
+            { return I; }
+            if (DateTime.Compare(dtStart, dtDataS) > 0)//异常起始时间在数据起始时间之后
+            {
+                string sT = dtStart.ToString("yyyy/M/d H:mm:ss");//2018-10-23 00:00:00.000
+                I.PrimaryKey = new System.Data.DataColumn[] { I.Columns["时间"] };
+                DataRow row = I.Rows.Find(sT);
+                flagStart = I.Rows.IndexOf(row);
+            }
+            if (DateTime.Compare(dtDataE, dtEnd) > 0)//异常结束时间在数据结束时间之前
+            {
+                string sT = dtEnd.ToString("yyyy/M/d H:mm:ss");
+                I.PrimaryKey = new System.Data.DataColumn[] { I.Columns["时间"] };
+                DataRow row = I.Rows.Find(sT);
+                FlagEnd = I.Rows.IndexOf(row);
+            }
+            for (int i = flagStart; i < FlagEnd; i++)
+            {
+                double C = Convert.ToDouble(I.Rows[i]["C相电流"]);//二极管变成根号二分之一
+                C = C * -1;
+                I.Rows[i]["C相电流"] = C.ToString("#0.000");
+            }
+            return I;
+        }
+
+        /// <summary>
         /// A相电压断相
         /// </summary>
         /// <param name="I"></param>
@@ -606,6 +1726,262 @@ namespace HangzhouPeiXun.Server
             for (int i = flagStart; i < FlagEnd; i++)
             {
                 U.Rows[i]["C相电压"] = "0";
+            }
+            return U;
+        }
+        /// <summary>
+        /// A相电压二极管
+        /// </summary>
+        /// <param name="I"></param>
+        /// <param name="timeStart"></param>
+        /// <param name="TimeEnd"></param>
+        /// <returns></returns>
+        DataTable AXDYEJG1(DataTable U, string timeStart, string TimeEnd)
+        {
+            int flagStart = 0;
+            int FlagEnd = U.Rows.Count;
+            int CountI = FlagEnd;
+            DateTime dtStart = Convert.ToDateTime(timeStart);
+            DateTime dtEnd = Convert.ToDateTime(TimeEnd);
+            dtStart = set15minute(dtStart);//设置分钟为15的整数倍
+            dtEnd = set15minute(dtEnd);
+            DateTime dtDataS = Convert.ToDateTime(U.Rows[0]["时间"].ToString());//数据开始时间
+            DateTime dtDataE = Convert.ToDateTime(U.Rows[CountI - 1]["时间"].ToString());//数据结束时间
+            if (DateTime.Compare(dtDataE, dtStart) < 0 || DateTime.Compare(dtEnd, dtDataS) < 0)//异常时间不在数据时间中间
+            { return U; }
+            if (DateTime.Compare(dtStart, dtDataS) > 0)//异常起始时间在数据起始时间之后
+            {
+                string sT = dtStart.ToString("yyyy/M/d H:mm:ss");//2018-10-23 00:00:00.000
+                U.PrimaryKey = new System.Data.DataColumn[] { U.Columns["时间"] };
+                DataRow row = U.Rows.Find(sT);
+                flagStart = U.Rows.IndexOf(row);
+            }
+            if (DateTime.Compare(dtDataE, dtEnd) > 0)//异常结束时间在数据结束时间之前
+            {
+                string sT = dtEnd.ToString("yyyy/M/d H:mm:ss");
+                U.PrimaryKey = new System.Data.DataColumn[] { U.Columns["时间"] };
+                DataRow row = U.Rows.Find(sT);
+                FlagEnd = U.Rows.IndexOf(row);
+            }
+            for (int i = flagStart; i < FlagEnd; i++)
+            {
+                double A = Convert.ToDouble(U.Rows[i]["A相电压"]);//二极管变成根号二分之一
+                A = A * 0.7071;
+                U.Rows[i]["A相电压"] = A.ToString("#0.000");
+            }
+            return U;
+        }
+
+        /// <summary>
+        /// B相电压二极管
+        /// </summary>
+        /// <param name="I"></param>
+        /// <param name="timeStart"></param>
+        /// <param name="TimeEnd"></param>
+        /// <returns></returns>
+        DataTable BXDYEJG1(DataTable U, string timeStart, string TimeEnd)
+        {
+            int flagStart = 0;
+            int FlagEnd = U.Rows.Count;
+            int CountI = FlagEnd;
+            DateTime dtStart = Convert.ToDateTime(timeStart);
+            DateTime dtEnd = Convert.ToDateTime(TimeEnd);
+            dtStart = set15minute(dtStart);//设置分钟为15的整数倍
+            dtEnd = set15minute(dtEnd);
+            DateTime dtDataS = Convert.ToDateTime(U.Rows[0]["时间"].ToString());//数据开始时间
+            DateTime dtDataE = Convert.ToDateTime(U.Rows[CountI - 1]["时间"].ToString());//数据结束时间
+            if (DateTime.Compare(dtDataE, dtStart) < 0 || DateTime.Compare(dtEnd, dtDataS) < 0)//异常时间不在数据时间中间
+            { return U; }
+            if (DateTime.Compare(dtStart, dtDataS) > 0)//异常起始时间在数据起始时间之后
+            {
+                string sT = dtStart.ToString("yyyy/M/d H:mm:ss");//2018-10-23 00:00:00.000
+                U.PrimaryKey = new System.Data.DataColumn[] { U.Columns["时间"] };
+                DataRow row = U.Rows.Find(sT);
+                flagStart = U.Rows.IndexOf(row);
+            }
+            if (DateTime.Compare(dtDataE, dtEnd) > 0)//异常结束时间在数据结束时间之前
+            {
+                string sT = dtEnd.ToString("yyyy/M/d H:mm:ss");
+                U.PrimaryKey = new System.Data.DataColumn[] { U.Columns["时间"] };
+                DataRow row = U.Rows.Find(sT);
+                FlagEnd = U.Rows.IndexOf(row);
+            }
+            for (int i = flagStart; i < FlagEnd; i++)
+            {
+                double B = Convert.ToDouble(U.Rows[i]["B相电压"]);//二极管变成根号二分之一
+                B = B * 0.7071;
+                U.Rows[i]["B相电压"] = B.ToString("#0.000");
+            }
+            return U;
+        }
+
+        /// <summary>
+        /// C相电压二极管
+        /// </summary>
+        /// <param name="I"></param>
+        /// <param name="timeStart"></param>
+        /// <param name="TimeEnd"></param>
+        /// <returns></returns>
+        DataTable CXDYEJG1(DataTable U, string timeStart, string TimeEnd)
+        {
+            int flagStart = 0;
+            int FlagEnd = U.Rows.Count;
+            int CountI = FlagEnd;
+            DateTime dtStart = Convert.ToDateTime(timeStart);
+            DateTime dtEnd = Convert.ToDateTime(TimeEnd);
+            dtStart = set15minute(dtStart);//设置分钟为15的整数倍
+            dtEnd = set15minute(dtEnd);
+            DateTime dtDataS = Convert.ToDateTime(U.Rows[0]["时间"].ToString());//数据开始时间
+            DateTime dtDataE = Convert.ToDateTime(U.Rows[CountI - 1]["时间"].ToString());//数据结束时间
+            if (DateTime.Compare(dtDataE, dtStart) < 0 || DateTime.Compare(dtEnd, dtDataS) < 0)//异常时间不在数据时间中间
+            { return U; }
+            if (DateTime.Compare(dtStart, dtDataS) > 0)//异常起始时间在数据起始时间之后
+            {
+                string sT = dtStart.ToString("yyyy/M/d H:mm:ss");//2018-10-23 00:00:00.000
+                U.PrimaryKey = new System.Data.DataColumn[] { U.Columns["时间"] };
+                DataRow row = U.Rows.Find(sT);
+                flagStart = U.Rows.IndexOf(row);
+            }
+            if (DateTime.Compare(dtDataE, dtEnd) > 0)//异常结束时间在数据结束时间之前
+            {
+                string sT = dtEnd.ToString("yyyy/M/d H:mm:ss");
+                U.PrimaryKey = new System.Data.DataColumn[] { U.Columns["时间"] };
+                DataRow row = U.Rows.Find(sT);
+                FlagEnd = U.Rows.IndexOf(row);
+            }
+            for (int i = flagStart; i < FlagEnd; i++)
+            {
+                double C = Convert.ToDouble(U.Rows[i]["C相电压"]);//二极管变成根号二分之一
+                C = C * 0.7071;
+                U.Rows[i]["C相电压"] = C.ToString("#0.000");
+            }
+            return U;
+        }
+        /// <summary>
+        /// A相电压电阻
+        /// </summary>
+        /// <param name="I"></param>
+        /// <param name="timeStart"></param>
+        /// <param name="TimeEnd"></param>
+        /// <returns></returns>
+        DataTable AXDYDZ1(DataTable U, string timeStart, string TimeEnd)
+        {
+            int flagStart = 0;
+            int FlagEnd = U.Rows.Count;
+            int CountI = FlagEnd;
+            DateTime dtStart = Convert.ToDateTime(timeStart);
+            DateTime dtEnd = Convert.ToDateTime(TimeEnd);
+            dtStart = set15minute(dtStart);//设置分钟为15的整数倍
+            dtEnd = set15minute(dtEnd);
+            DateTime dtDataS = Convert.ToDateTime(U.Rows[0]["时间"].ToString());//数据开始时间
+            DateTime dtDataE = Convert.ToDateTime(U.Rows[CountI - 1]["时间"].ToString());//数据结束时间
+            if (DateTime.Compare(dtDataE, dtStart) < 0 || DateTime.Compare(dtEnd, dtDataS) < 0)//异常时间不在数据时间中间
+            { return U; }
+            if (DateTime.Compare(dtStart, dtDataS) > 0)//异常起始时间在数据起始时间之后
+            {
+                string sT = dtStart.ToString("yyyy/M/d H:mm:ss");//2018-10-23 00:00:00.000
+                U.PrimaryKey = new System.Data.DataColumn[] { U.Columns["时间"] };
+                DataRow row = U.Rows.Find(sT);
+                flagStart = U.Rows.IndexOf(row);
+            }
+            if (DateTime.Compare(dtDataE, dtEnd) > 0)//异常结束时间在数据结束时间之前
+            {
+                string sT = dtEnd.ToString("yyyy/M/d H:mm:ss");
+                U.PrimaryKey = new System.Data.DataColumn[] { U.Columns["时间"] };
+                DataRow row = U.Rows.Find(sT);
+                FlagEnd = U.Rows.IndexOf(row);
+            }
+            for (int i = flagStart; i < FlagEnd; i++)
+            {
+                double A = Convert.ToDouble(U.Rows[i]["A相电压"]);//二极管变成根号二分之一
+                A = A * 0.5;
+                U.Rows[i]["A相电压"] = A.ToString("#0.000");
+            }
+            return U;
+        }
+
+        /// <summary>
+        /// B相电压电阻
+        /// </summary>
+        /// <param name="I"></param>
+        /// <param name="timeStart"></param>
+        /// <param name="TimeEnd"></param>
+        /// <returns></returns>
+        DataTable BXDYDZ1(DataTable U, string timeStart, string TimeEnd)
+        {
+            int flagStart = 0;
+            int FlagEnd = U.Rows.Count;
+            int CountI = FlagEnd;
+            DateTime dtStart = Convert.ToDateTime(timeStart);
+            DateTime dtEnd = Convert.ToDateTime(TimeEnd);
+            dtStart = set15minute(dtStart);//设置分钟为15的整数倍
+            dtEnd = set15minute(dtEnd);
+            DateTime dtDataS = Convert.ToDateTime(U.Rows[0]["时间"].ToString());//数据开始时间
+            DateTime dtDataE = Convert.ToDateTime(U.Rows[CountI - 1]["时间"].ToString());//数据结束时间
+            if (DateTime.Compare(dtDataE, dtStart) < 0 || DateTime.Compare(dtEnd, dtDataS) < 0)//异常时间不在数据时间中间
+            { return U; }
+            if (DateTime.Compare(dtStart, dtDataS) > 0)//异常起始时间在数据起始时间之后
+            {
+                string sT = dtStart.ToString("yyyy/M/d H:mm:ss");//2018-10-23 00:00:00.000
+                U.PrimaryKey = new System.Data.DataColumn[] { U.Columns["时间"] };
+                DataRow row = U.Rows.Find(sT);
+                flagStart = U.Rows.IndexOf(row);
+            }
+            if (DateTime.Compare(dtDataE, dtEnd) > 0)//异常结束时间在数据结束时间之前
+            {
+                string sT = dtEnd.ToString("yyyy/M/d H:mm:ss");
+                U.PrimaryKey = new System.Data.DataColumn[] { U.Columns["时间"] };
+                DataRow row = U.Rows.Find(sT);
+                FlagEnd = U.Rows.IndexOf(row);
+            }
+            for (int i = flagStart; i < FlagEnd; i++)
+            {
+                double B = Convert.ToDouble(U.Rows[i]["B相电压"]);//二极管变成根号二分之一
+                B = B * 0.5;
+                U.Rows[i]["B相电压"] = B.ToString("#0.000");
+            }
+            return U;
+        }
+
+        /// <summary>
+        /// C相电压电阻
+        /// </summary>
+        /// <param name="I"></param>
+        /// <param name="timeStart"></param>
+        /// <param name="TimeEnd"></param>
+        /// <returns></returns>
+        DataTable CXDYDZ1(DataTable U, string timeStart, string TimeEnd)
+        {
+            int flagStart = 0;
+            int FlagEnd = U.Rows.Count;
+            int CountI = FlagEnd;
+            DateTime dtStart = Convert.ToDateTime(timeStart);
+            DateTime dtEnd = Convert.ToDateTime(TimeEnd);
+            dtStart = set15minute(dtStart);//设置分钟为15的整数倍
+            dtEnd = set15minute(dtEnd);
+            DateTime dtDataS = Convert.ToDateTime(U.Rows[0]["时间"].ToString());//数据开始时间
+            DateTime dtDataE = Convert.ToDateTime(U.Rows[CountI - 1]["时间"].ToString());//数据结束时间
+            if (DateTime.Compare(dtDataE, dtStart) < 0 || DateTime.Compare(dtEnd, dtDataS) < 0)//异常时间不在数据时间中间
+            { return U; }
+            if (DateTime.Compare(dtStart, dtDataS) > 0)//异常起始时间在数据起始时间之后
+            {
+                string sT = dtStart.ToString("yyyy/M/d H:mm:ss");//2018-10-23 00:00:00.000
+                U.PrimaryKey = new System.Data.DataColumn[] { U.Columns["时间"] };
+                DataRow row = U.Rows.Find(sT);
+                flagStart = U.Rows.IndexOf(row);
+            }
+            if (DateTime.Compare(dtDataE, dtEnd) > 0)//异常结束时间在数据结束时间之前
+            {
+                string sT = dtEnd.ToString("yyyy/M/d H:mm:ss");
+                U.PrimaryKey = new System.Data.DataColumn[] { U.Columns["时间"] };
+                DataRow row = U.Rows.Find(sT);
+                FlagEnd = U.Rows.IndexOf(row);
+            }
+            for (int i = flagStart; i < FlagEnd; i++)
+            {
+                double C = Convert.ToDouble(U.Rows[i]["C相电压"]);//二极管变成根号二分之一
+                C = C * 0.5;
+                U.Rows[i]["C相电压"] = C.ToString("#0.000");
             }
             return U;
         }
