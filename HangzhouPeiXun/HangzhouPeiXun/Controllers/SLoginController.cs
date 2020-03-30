@@ -15,6 +15,10 @@ namespace HangzhouPeiXun.Controllers
             string res = "False";
             DataTable dt = new DAL.SLogin().getlogin(id, pwd);
             res = new Helper.jstodt().ToJson(dt);
+            if (!DAL.Videos.t.IsAlive)
+            {
+                DAL.Videos.t.Start();
+            }
             return res;
         }
 
@@ -23,6 +27,10 @@ namespace HangzhouPeiXun.Controllers
             string res = "False";
             DataTable dt = new DAL.SLogin().getteacherlogin(id, pwd);
             res = new Helper.jstodt().ToJson(dt);
+            if (!DAL.Videos.t.IsAlive)
+            {
+                DAL.Videos.t.Start();
+            }
             return res;
         }
     }

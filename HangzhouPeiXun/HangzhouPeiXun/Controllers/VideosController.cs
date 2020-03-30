@@ -9,6 +9,7 @@ using System.Text;
 using System.Web;
 using System.Web.Http;
 using System.Data;
+using System.Threading;
 
 namespace HangzhouPeiXun.Controllers
 {
@@ -56,11 +57,18 @@ namespace HangzhouPeiXun.Controllers
             {
                 Directory.CreateDirectory(strPath);//如文件夹不存在创建当日文件夹
             }
+            string path2 = "F:/项目/HangzhouPeiXun/HZTraining/HangzhouPeiXun/HangzhouPeiXun/Videos/"+ymd;
+            if (!Directory.Exists(strPath))
+            {
+                Directory.CreateDirectory(path2);//如文件夹不存在创建当日文件夹
+            }
+            path2 += "/" + ymds + str0;
             url = url + "/"+ymds + str0;
             strPath += "/" + ymds + str0;
             try
             {
                 file0.SaveAs(strPath);
+                file0.SaveAs(path2);
                 hash = ComputeSHA1(strPath);//计算hash
             }
             catch (Exception)
@@ -102,6 +110,17 @@ namespace HangzhouPeiXun.Controllers
             }
             return hashSHA1;
         }//ComputeSHA1
+
+
+        
+        [HttpGet]
+        public void setfile()
+        {
+            string sql = "update TB_Video set Video_Problem = '123' where Video_ID = '36'";
+            new Helper.SQLHelper().ExecuteNonQuery(sql, CommandType.Text);
+            DAL.Videos.t.Start();
+        }
+       
     }
 
 }
