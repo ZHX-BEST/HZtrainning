@@ -20,7 +20,7 @@ namespace HangzhouPeiXun.Controllers
                 User_type != "09CKC" && User_type != "10SC")
                 return "FalseUserType";//获取用户类别错误
             string res = "error";//默认报错
-            string TB_Name = "TB_Data_" + User_type;
+            string TB_Name = "class" + User_type;
             DataTable dtI = DAL.ExamplesTeacher.MyExampleTeacher.getNormalData(TB_Name, "I");
             DataTable dtU = DAL.ExamplesTeacher.MyExampleTeacher.getNormalData(TB_Name, "U");
             DataTable dtW = DAL.ExamplesTeacher.MyExampleTeacher.getNormalData(TB_Name, "W");
@@ -53,7 +53,7 @@ namespace HangzhouPeiXun.Controllers
                 User_type != "09CKC" && User_type != "10SC")
                 return "FalseUserType";//获取用户类别错误
             string res = "error";//默认报错
-            string TB_Name = "TB_Data_" + User_type;
+            string TB_Name = "class" + User_type;
             DataTable dtI = DAL.ExamplesTeacher.MyExampleTeacher.getNormalData(TB_Name, "I");
             DataTable dtU = DAL.ExamplesTeacher.MyExampleTeacher.getNormalData(TB_Name, "U");
             DataTable dtW = DAL.ExamplesTeacher.MyExampleTeacher.getNormalData(TB_Name, "W");

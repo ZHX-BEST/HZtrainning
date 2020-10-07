@@ -10,7 +10,7 @@
                 </el-select>
                 <span>错误时间：</span>
                 <el-time-select class="errorTime" v-model="timeStart" :picker-options="{start: '00:00',step: '01:00',end: '23:00'}" placeholder="选择时间">
-                </el-time-select>~~~
+                </el-time-select>
                 <el-time-select class="errorTime" v-model="timeEnd" :picker-options="{start: '00:00',step: '01:00',end: '23:00'}" placeholder="选择时间">
                 </el-time-select>
                 <el-button type="">选择</el-button>
@@ -90,7 +90,7 @@ export default {
 <style>
 .error_cancel{
   position: absolute;
-  right: 10px;;
+  right: 10px;
   z-index: 100
 
 }

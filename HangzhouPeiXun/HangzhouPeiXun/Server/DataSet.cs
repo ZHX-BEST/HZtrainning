@@ -1006,13 +1006,13 @@ namespace HangzhouPeiXun.Server
 
         #region Exercise Test
         //生成新的正常数据接口
-        public string SetNorData(string UserType)
-        {
-            string UpperID = ServerDAL.DataSetDal.MyData.SetData(UserType);//插入Data一行，生成UpperID，NorID，AbID；
-            
-            string flag = Server.CreateData.MyCreate.CreateNorData(UpperID, UserType);//生成 I，U，W正常数据
-            return UpperID;
-        }
+        //public string SetNorData(string UserType)
+        //{
+        //    string UpperID = ServerDAL.DataSetDal.MyData.SetData(UserType);//插入Data一行，生成UpperID，NorID，AbID；
+
+        //    string flag = Server.CreateData.MyCreate.CreateNorData(UpperID, UserType);//生成 I，U，W正常数据
+        //    return UpperID;
+        //}
 
 
         //异常数据叠加接口       

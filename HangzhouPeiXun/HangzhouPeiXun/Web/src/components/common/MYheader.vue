@@ -2,7 +2,7 @@
     <div>
         <div class="top_nav">
             <img src="@/assets/th.jpg" />
-            <h2>防窃电培训平台{{the_title}}</h2>
+            <h2>平？{{the_title}}</h2>
         </div>
         <div class="button_nav">
             <div class="nav_button" v-for=" (term,index) in nav_buttons" :key="index" @click="Jump(index)">
@@ -16,12 +16,7 @@ export default {
     name:"MYheader",
     data(){
         return{
-            nav_buttons:[
-                "典型曲线",
-                "课堂练习",
-                "在线考试",
-                "成绩查询"
-            ],
+            
             route:[],
             the_title:"",
             type:null,

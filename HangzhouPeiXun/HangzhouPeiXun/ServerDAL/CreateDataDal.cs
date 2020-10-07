@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data;
 using System.Data.SqlClient;
-using System.Data.SqlClient;
+
 
 namespace HangzhouPeiXun.ServerDAL
 {
@@ -49,7 +49,7 @@ namespace HangzhouPeiXun.ServerDAL
         public DataTable getNormalData(string usertype)
         {
             string sql = "ProCreateNew";
-            SqlParameter[] paras = new SqlParameter[] {new SqlParameter("@tablename", "TB_Data_"+ usertype) };           
+            SqlParameter[] paras = new SqlParameter[] {new SqlParameter("@tablename", "class"+ usertype) };           
             DataTable dt = new Helper.SQLHelper().ExcuteQuery(sql,paras, CommandType.StoredProcedure);
             return dt;
         }

@@ -23,34 +23,34 @@ namespace HangzhouPeiXun.DAL
             int tableflag = 0;
             switch (TB_Name)
             {
-                case "TB_Data_01JCC":
+                case "class01JCC":
                     tableflag = 0;
                     break;
-                case "TB_Data_02CLC":
+                case "class02CLC":
                     tableflag = 1;
                     break;
-                case "TB_Data_03ZZC":
+                case "class03ZZC":
                     tableflag = 2;
                     break;
-                case "TB_Data_04HGC":
+                case "class04HGC":
                     tableflag = 3;
                     break;
-                case "TB_Data_05ZGC":
+                case "class05ZGC":
                     tableflag = 4;
                     break;
-                case "TB_Data_06Hospital":
+                case "class06Hospital":
                     tableflag = 5;
                     break;
-                case "TB_Data_07ZJDX":
+                case "class07ZJDX":
                     tableflag = 6;
                     break;
-                case "TB_Data_08FZC":
+                case "class08FZC":
                     tableflag = 7;
                     break;
-                case "TB_Data_09CKC":
+                case "class09CKC":
                     tableflag = 8;
                     break;
-                case "TB_Data_10SC":
+                case "class10SC":
                     tableflag = 9;
                     break;
 

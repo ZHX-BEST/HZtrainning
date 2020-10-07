@@ -33,7 +33,7 @@ namespace HangzhouPeiXun.ServerDAL
                 res = dt.Rows[0]["Data_UpperID"].ToString();
             }catch{
                 return res;//报错返回False
-            }
+            } 
             if(UpperID == "")//若为获取UpperID返回False
                 UpperID = res;
             return UpperID;

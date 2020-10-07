@@ -21,7 +21,7 @@ namespace HangzhouPeiXun.Controllers
                 User_type != "09CKC" && User_type != "10SC")
                 return "FalseUserType";//获取用户类别错误
             string res = "error";//默认报错
-            string TB_Name = "TB_Data_"+User_type;
+            string TB_Name = "class"+User_type;
             DataTable dtI = DAL.Examples.MyExamples.getNormalData(TB_Name, "I");
             DataTable dtU = DAL.Examples.MyExamples.getNormalData(TB_Name, "U");
             DataTable dtW = DAL.Examples.MyExamples.getNormalData(TB_Name, "W");
@@ -41,6 +41,7 @@ namespace HangzhouPeiXun.Controllers
             dt.Rows[0]["DataW"] = NordataW;
             #endregion
             res = new Helper.jstodt().ToJson(dt);
+            
             return res;//固定死正常数据
         }
 
@@ -54,7 +55,7 @@ namespace HangzhouPeiXun.Controllers
                 User_type != "09CKC" && User_type != "10SC")
                 return "FalseUserType";//获取用户类别错误
             string res = "error";//默认报错
-            string TB_Name = "TB_Data_" + User_type;
+            string TB_Name = "class" + User_type;
             DataTable dtI = DAL.Examples.MyExamples.getNormalData(TB_Name, "I");
             DataTable dtU = DAL.Examples.MyExamples.getNormalData(TB_Name, "U");
             DataTable dtW = DAL.Examples.MyExamples.getNormalData(TB_Name, "W");
