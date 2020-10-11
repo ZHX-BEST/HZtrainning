@@ -165,13 +165,14 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Controllers\ExamplesController.cs" />
+    <Compile Include="Controllers\AbExamplesController.cs" />
     <Compile Include="Controllers\ExamplesTeacherController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JudgeResultController.cs" />
     <Compile Include="Controllers\SLoginController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\VideosController.cs" />
-    <Compile Include="DAL\ReadRes.cs" />
+    <Compile Include="DAL\AbExamples.cs" />
+    <Compile Include="DAL\JudgeResult.cs" />
     <Compile Include="DAL\SLogin.cs" />
     <Compile Include="DAL\User.cs" />
     <Compile Include="DAL\Videos.cs" />
@@ -179,7 +180,6 @@
     <Compile Include="Models\Data.cs" />
     <Compile Include="ServerDAL\CreateDataDal.cs" />
     <Compile Include="ServerDAL\DataSetDal.cs" />
-    <Compile Include="DAL\Examples.cs" />
     <Compile Include="DAL\ExamplesTeacher.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -23605,6 +23605,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Videos\" />
+    <Folder Include="Views\AbExamples\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

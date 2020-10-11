@@ -26,7 +26,7 @@ namespace HangzhouPeiXun.Helper
             string result = "";
             try
             {
-                if (format == "")
+                if(format == "")
                 {
                     result = s.ToString();
                 }
@@ -56,24 +56,24 @@ namespace HangzhouPeiXun.Helper
                 JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
                 javaScriptSerializer.MaxJsonLength = Int32.MaxValue; //取得最大数值
                 ArrayList arrayList = javaScriptSerializer.Deserialize<ArrayList>(json);
-                if (arrayList.Count > 0)
+                if(arrayList.Count > 0)
                 {
-                    foreach (Dictionary<string, object> dictionary in arrayList)
+                    foreach(Dictionary<string, object> dictionary in arrayList)
                     {
-                        if (dictionary.Keys.Count<string>() == 0)
+                        if(dictionary.Keys.Count<string>() == 0)
                         {
                             result = dataTable;
                             return result;
                         }
-                        if (dataTable.Columns.Count == 0)
+                        if(dataTable.Columns.Count == 0)
                         {
-                            foreach (string current in dictionary.Keys)
+                            foreach(string current in dictionary.Keys)
                             {
                                 dataTable.Columns.Add(current, dictionary[current].GetType());
                             }
                         }
                         DataRow dataRow = dataTable.NewRow();
-                        foreach (string current in dictionary.Keys)
+                        foreach(string current in dictionary.Keys)
                         {
                             dataRow[current] = dictionary[current];
                         }
@@ -100,10 +100,10 @@ namespace HangzhouPeiXun.Helper
             JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
             javaScriptSerializer.MaxJsonLength = Int32.MaxValue; //取得最大数值
             ArrayList arrayList = new ArrayList();
-            foreach (DataRow dataRow in dt.Rows)
+            foreach(DataRow dataRow in dt.Rows)
             {
                 Dictionary<string, object> dictionary = new Dictionary<string, object>();  //实例化一个参数集合
-                foreach (DataColumn dataColumn in dt.Columns)
+                foreach(DataColumn dataColumn in dt.Columns)
                 {
                     string aa = ToStr(dataRow[dataColumn.ColumnName]);
                     dictionary.Add(dataColumn.ColumnName, aa);
@@ -112,6 +112,34 @@ namespace HangzhouPeiXun.Helper
             }
 
             return javaScriptSerializer.Serialize(arrayList);  //返回一个json字符串
+        }
+        #endregion
+        #region resultArray转Json
+        public string rAtoJs(string[] result)
+        {
+            string resultJson = "[";
+            int length = result.Length;
+            if(length > 0)
+            {
+                for(int i = 0; i < length; i++)
+                {
+                    result[i] = "{result" + i.ToString() + ":" + result[i] + "}";
+                }
+                for(int i = 0; i < length - 1; i++)
+                {
+                    resultJson = resultJson + result[i] + ",";
+                }
+                resultJson = resultJson + result[length - 1] + "]";
+            }
+            if(resultJson.Length > 2)
+            {
+                return resultJson;
+            }
+            else
+            {
+                return resultJson+"{result:true}]";
+            }
+
         }
         #endregion
     }

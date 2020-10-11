@@ -285,4 +285,3 @@ D:\AronZhang\HZTraining\HangzhouPeiXun\HangzhouPeiXun\obj\Debug\HangzhouPeiXun.c
 D:\AronZhang\HZTraining\HangzhouPeiXun\HangzhouPeiXun\obj\Debug\HangzhouPeiXun.csproj.CopyComplete
 D:\AronZhang\HZTraining\HangzhouPeiXun\HangzhouPeiXun\obj\Debug\HangzhouPeiXun.dll
 D:\AronZhang\HZTraining\HangzhouPeiXun\HangzhouPeiXun\obj\Debug\HangzhouPeiXun.pdb
-D:\AronZhang\HZTraining\HangzhouPeiXun\HangzhouPeiXun\obj\Debug\HangzhouPeiXun.csprojAssemblyReference.cache

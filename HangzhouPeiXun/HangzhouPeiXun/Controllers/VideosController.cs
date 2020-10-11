@@ -57,7 +57,7 @@ namespace HangzhouPeiXun.Controllers
             {
                 Directory.CreateDirectory(strPath);//如文件夹不存在创建当日文件夹
             }
-            string path2 = "F:/项目/HangzhouPeiXun/HZTraining/HangzhouPeiXun/HangzhouPeiXun/Videos/"+ymd;
+            string path2 = "D:/AronZhang/HZTraining/HangzhouPeiXun/HangzhouPeiXun/Videos/"+ymd;
             if (!Directory.Exists(strPath))
             {
                 Directory.CreateDirectory(path2);//如文件夹不存在创建当日文件夹
