@@ -114,7 +114,12 @@ namespace HangzhouPeiXun.Helper
             return javaScriptSerializer.Serialize(arrayList);  //返回一个json字符串
         }
         #endregion
-        #region resultArray转Json
+        #region 数组转Json
+        /// <summary>
+        /// 字符串数组转json
+        /// </summary>
+        /// <param name="result">字符串数组</param>
+        /// <returns></returns>
         public string rAtoJs(string[] result)
         {
             string resultJson = "[";
