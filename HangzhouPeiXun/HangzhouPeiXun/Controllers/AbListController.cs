@@ -10,6 +10,10 @@ namespace HangzhouPeiXun.Controllers
 {
     public class AbListController : ApiController
     {
+        public string Options()
+        {
+            return null;
+        }
         /// <summary>
         /// 获取异常列表
         /// </summary>

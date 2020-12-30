@@ -13,8 +13,13 @@ using System.Threading;
 
 namespace HangzhouPeiXun.Controllers
 {
+    
     public class VideosController : ApiController
     {
+        public string Options()
+        {
+            return null;
+        }
         /// <summary>
         /// 获取视频列表
         /// </summary>

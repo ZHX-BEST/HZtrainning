@@ -12,6 +12,10 @@ namespace HangzhouPeiXun.Controllers
 {
     public class JudgeResultController : ApiController
     {
+        public string Options()
+        {
+            return null;
+        }
         /// <summary>
         /// 将结果数组转为Json并返回 
         /// </summary>

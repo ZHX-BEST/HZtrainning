@@ -11,6 +11,10 @@ namespace HangzhouPeiXun.Controllers
 {
     public class AbExamplesController : ApiController
     {
+        public string Options()
+        {
+            return null;
+        }
         // GET: AbExamples
         //获取正常数据曲线接口
         public string getNormalData(string User_type)//User_TYpe 为1-10

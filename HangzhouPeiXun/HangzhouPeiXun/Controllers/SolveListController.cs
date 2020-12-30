@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security;
 using System.Web.Http;
 
 using HangzhouPeiXun.DAL;
@@ -13,6 +14,10 @@ namespace HangzhouPeiXun.Controllers
 {
     public class SolveListController : ApiController
     {
+        public string Options()
+        {
+            return null;
+        }
         /// <summary>
         /// 获取工单列表
         /// </summary>
@@ -56,8 +61,8 @@ namespace HangzhouPeiXun.Controllers
         /// <param name="json">表单json</param>
         /// <returns></returns>
         public string InsertSolve([FromBody]Solve solve)
+        //public string InsertSolve([FromBody] string Json)
         {
-            
             //string abId = dataRow["AbId"].ToString();
             //string voltage = dataRow["Voltage"].ToString();
             //string electricity = dataRow["Eletricity"].ToString();

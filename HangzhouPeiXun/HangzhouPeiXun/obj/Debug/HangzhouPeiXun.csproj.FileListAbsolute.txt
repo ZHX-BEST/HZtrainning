@@ -94,3 +94,6 @@ D:\AronZhang\Fanqiedian\HangzhouPeiXun\HangzhouPeiXun\obj\Debug\HangzhouPeiXun.c
 D:\AronZhang\Fanqiedian\HangzhouPeiXun\HangzhouPeiXun\obj\Debug\HangzhouPeiXun.dll
 D:\AronZhang\Fanqiedian\HangzhouPeiXun\HangzhouPeiXun\obj\Debug\HangzhouPeiXun.pdb
 D:\AronZhang\Fanqiedian\HangzhouPeiXun\HangzhouPeiXun\obj\Debug\HangzhouPeiXun.csprojAssemblyReference.cache
+D:\AronZhang\Fanqiedian\HangzhouPeiXun\HangzhouPeiXun\bin\System.Web.Cors.dll
+D:\AronZhang\Fanqiedian\HangzhouPeiXun\HangzhouPeiXun\bin\System.Web.Http.Cors.dll
+D:\AronZhang\Fanqiedian\HangzhouPeiXun\HangzhouPeiXun\bin\System.Web.Http.Cors.xml

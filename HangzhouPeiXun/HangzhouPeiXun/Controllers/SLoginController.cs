@@ -10,6 +10,10 @@ namespace HangzhouPeiXun.Controllers
 {
     public class SLoginController : ApiController
     {
+        public string Options()
+        {
+            return null;
+        }
         public string getlogin(string id, string pwd)
         {
             string res = "False";

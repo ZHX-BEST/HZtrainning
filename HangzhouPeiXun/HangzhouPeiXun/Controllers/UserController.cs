@@ -10,6 +10,10 @@ namespace HangzhouPeiXun.Controllers
 {
     public class UserController : ApiController
     {
+        public string Options()
+        {
+            return null;
+        }
         public string getUsers(string teacherID)
         {
             DataTable dt = DAL.User.MyUser.getUsers(teacherID);

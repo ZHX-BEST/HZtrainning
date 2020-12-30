@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.WebHost;
 using System.Web.Routing;
 using System.Web.SessionState;
@@ -13,6 +14,9 @@ namespace HangzhouPeiXun
     {
         public static void Register(HttpConfiguration config)
         {
+
+            config.EnableCors(new EnableCorsAttribute("*", "*", "*"));
+
             // Web API 配置和服务
 
             // Web API 路由
